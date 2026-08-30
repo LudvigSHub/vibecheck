@@ -113,6 +113,15 @@ public class VibeCheckDbContext
         // QUESTION SYSTEM
         // ============================================================
 
+        // Question primary key
+        modelBuilder.Entity<Question>()
+            .HasKey(q => q.QuestionID);
+
+        modelBuilder.Entity<Question>()
+            .Property(q => q.QuestionID)
+            .ValueGeneratedOnAdd()
+            .UseIdentityColumn();
+
         // Question -> QuestionType
         modelBuilder.Entity<Question>()
             .HasOne(q => q.QuestionType)
@@ -138,11 +147,11 @@ public class VibeCheckDbContext
             .HasForeignKey(qa => qa.QuestionID)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // QuestionAlternative -> Word
-        modelBuilder.Entity<QuestionAlternative>()
-            .HasOne(qa => qa.Word)
+        // Question -> CorrectAlternative
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.CorrectAlternative)
             .WithMany()
-            .HasForeignKey(qa => qa.WordID)
+            .HasForeignKey(q => q.CorrectAlternativeID)
             .OnDelete(DeleteBehavior.Restrict);
 
         // One AlternativeID per QuestionID
@@ -217,7 +226,7 @@ public class VibeCheckDbContext
             .HasOne(qa => qa.Quiz)
             .WithMany(q => q.QuizAttempts)
             .HasForeignKey(qa => qa.QuizID)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         // QuizAttemptAnswer -> QuizAttempt
         modelBuilder.Entity<QuizAttemptAnswer>()

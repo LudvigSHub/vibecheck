@@ -279,7 +279,7 @@ namespace VibeCheck.Data.Migrations
                         column: x => x.QuizID,
                         principalTable: "Quizzes",
                         principalColumn: "QuizID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -360,25 +360,20 @@ namespace VibeCheck.Data.Migrations
                     AlternativeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionID = table.Column<int>(type: "int", nullable: false),
-                    WordID = table.Column<int>(type: "int", nullable: false)
+                    AlternativeText = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_QuestionAlternatives", x => x.AlternativeID);
                     table.UniqueConstraint("AK_QuestionAlternatives_QuestionID_AlternativeID", x => new { x.QuestionID, x.AlternativeID });
-                    table.ForeignKey(
-                        name: "FK_QuestionAlternatives_Words_WordID",
-                        column: x => x.WordID,
-                        principalTable: "Words",
-                        principalColumn: "WordID",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Questions",
                 columns: table => new
                 {
-                    QuestionID = table.Column<int>(type: "int", nullable: false),
+                    QuestionID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuestionTypeID = table.Column<int>(type: "int", nullable: false),
                     DifficultyID = table.Column<int>(type: "int", nullable: false),
@@ -392,6 +387,12 @@ namespace VibeCheck.Data.Migrations
                         column: x => x.DifficultyID,
                         principalTable: "Difficulties",
                         principalColumn: "DifficultyID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Questions_QuestionAlternatives_CorrectAlternativeID",
+                        column: x => x.CorrectAlternativeID,
+                        principalTable: "QuestionAlternatives",
+                        principalColumn: "AlternativeID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Questions_QuestionAlternatives_QuestionID_CorrectAlternativeID",
@@ -525,9 +526,9 @@ namespace VibeCheck.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestionAlternatives_WordID",
-                table: "QuestionAlternatives",
-                column: "WordID");
+                name: "IX_Questions_CorrectAlternativeID",
+                table: "Questions",
+                column: "CorrectAlternativeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_DifficultyID",
@@ -687,10 +688,16 @@ namespace VibeCheck.Data.Migrations
                 name: "Tags");
 
             migrationBuilder.DropTable(
+                name: "Words");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Quizzes");
+
+            migrationBuilder.DropTable(
+                name: "Meanings");
 
             migrationBuilder.DropTable(
                 name: "Questions");
@@ -703,12 +710,6 @@ namespace VibeCheck.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "QuestionTypes");
-
-            migrationBuilder.DropTable(
-                name: "Words");
-
-            migrationBuilder.DropTable(
-                name: "Meanings");
         }
     }
 }

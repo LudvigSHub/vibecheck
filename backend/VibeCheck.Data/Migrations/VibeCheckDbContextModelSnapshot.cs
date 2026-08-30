@@ -198,7 +198,10 @@ namespace VibeCheck.Data.Migrations
             modelBuilder.Entity("VibeCheck.Data.Models.Question", b =>
                 {
                     b.Property<int>("QuestionID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionID"));
 
                     b.Property<int?>("CorrectAlternativeID")
                         .HasColumnType("int");
@@ -214,6 +217,8 @@ namespace VibeCheck.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("QuestionID");
+
+                    b.HasIndex("CorrectAlternativeID");
 
                     b.HasIndex("DifficultyID");
 
@@ -232,15 +237,14 @@ namespace VibeCheck.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlternativeID"));
 
+                    b.Property<string>("AlternativeText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("QuestionID")
                         .HasColumnType("int");
 
-                    b.Property<int>("WordID")
-                        .HasColumnType("int");
-
                     b.HasKey("AlternativeID");
-
-                    b.HasIndex("WordID");
 
                     b.HasIndex("QuestionID", "AlternativeID")
                         .IsUnique();
@@ -619,6 +623,11 @@ namespace VibeCheck.Data.Migrations
 
             modelBuilder.Entity("VibeCheck.Data.Models.Question", b =>
                 {
+                    b.HasOne("VibeCheck.Data.Models.QuestionAlternative", "CorrectAlternative")
+                        .WithMany()
+                        .HasForeignKey("CorrectAlternativeID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("VibeCheck.Data.Models.Difficulty", "Difficulty")
                         .WithMany("Questions")
                         .HasForeignKey("DifficultyID")
@@ -637,6 +646,8 @@ namespace VibeCheck.Data.Migrations
                         .HasPrincipalKey("QuestionID", "AlternativeID")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.Navigation("CorrectAlternative");
+
                     b.Navigation("Difficulty");
 
                     b.Navigation("QuestionType");
@@ -650,15 +661,7 @@ namespace VibeCheck.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VibeCheck.Data.Models.Word", "Word")
-                        .WithMany()
-                        .HasForeignKey("WordID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Question");
-
-                    b.Navigation("Word");
                 });
 
             modelBuilder.Entity("VibeCheck.Data.Models.Quiz", b =>
@@ -677,7 +680,7 @@ namespace VibeCheck.Data.Migrations
                     b.HasOne("VibeCheck.Data.Models.Quiz", "Quiz")
                         .WithMany("QuizAttempts")
                         .HasForeignKey("QuizID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("VibeCheck.Data.Models.User", "User")

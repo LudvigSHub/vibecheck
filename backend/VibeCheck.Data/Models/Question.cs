@@ -17,6 +17,8 @@ public class Question
 
     public Difficulty Difficulty { get; set; } = null!;
 
+    public QuestionAlternative? CorrectAlternative { get; set; }
+
     public ICollection<QuestionAlternative> QuestionAlternatives { get; set; }
         = new List<QuestionAlternative>();
 
