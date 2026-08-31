@@ -19,6 +19,7 @@ builder.Services.AddDbContext<VibeCheckDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services
     .AddIdentityCore<User>()
+    .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<VibeCheckDbContext>();
 
 builder.Services.AddControllers();
@@ -95,10 +96,13 @@ using (var scope = app.Services.CreateScope())
     var userManager = scope.ServiceProvider
         .GetRequiredService<UserManager<User>>();
 
+    var roleManager = scope.ServiceProvider
+        .GetRequiredService<RoleManager<IdentityRole<int>>>();
+
     // Make sure the database is up to date
     await context.Database.MigrateAsync();
 
-    await DbInitializer.InitializeAsync(context, userManager);
+    await DbInitializer.InitializeAsync(context, userManager, roleManager);
 }
 
 // Configure the HTTP request pipeline.
