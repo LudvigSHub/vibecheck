@@ -8,10 +8,12 @@ public static class DbInitializer
 {
     public static async Task InitializeAsync(
         VibeCheckDbContext context,
-        UserManager<User> userManager)
+        UserManager<User> userManager,
+        RoleManager<IdentityRole<int>> roleManager)
     {
 
         // Seed data
+        await SeedRolesAsync(roleManager);
         await SeedUsersAsync(userManager);
         await SeedMeaningsAsync(context);
         await SeedWordsAsync(context);
@@ -34,6 +36,18 @@ public static class DbInitializer
     // USERS
     // ============================================================
 
+    //Skapar "admin" och "user" roller (om de inte redan finns i RoleManager)
+    private static async Task SeedRolesAsync(RoleManager<IdentityRole<int>> roleManager)
+    {
+        foreach(var role in new[] { "admin", "user" })
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole<int>(role));
+            }
+        }
+    }
+
     private static async Task SeedUsersAsync(
         UserManager<User> userManager)
     {
@@ -43,8 +57,7 @@ public static class DbInitializer
             var admin = new User
             {
                 UserName = "admin",
-                Email = "admin@vibecheck.local",
-                IsAdmin = true
+                Email = "admin@vibecheck.local"
             };
 
             var result = await userManager.CreateAsync(
@@ -59,6 +72,8 @@ public static class DbInitializer
                         ", ",
                         result.Errors.Select(e => e.Description)));
             }
+
+            await userManager.AddToRoleAsync(admin, "Admin");
         }
 
         // Normal user
@@ -68,7 +83,6 @@ public static class DbInitializer
             {
                 UserName = "user",
                 Email = "user@vibecheck.local",
-                IsAdmin = false
             };
 
             var result = await userManager.CreateAsync(
@@ -83,6 +97,7 @@ public static class DbInitializer
                         ", ",
                         result.Errors.Select(e => e.Description)));
             }
+            await userManager.AddToRoleAsync(user, "User");
         }
     }
 
