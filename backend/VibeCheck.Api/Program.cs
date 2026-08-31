@@ -1,6 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using VibeCheck.Data.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using VibeCheck.Api.Services;
+using VibeCheck.Data.Data;
 using VibeCheck.Data.Models;
 
 
@@ -23,6 +24,16 @@ builder.Services
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddScoped<PingService>();
+
+// Tillåter frontendes adress och anrop
+const string CorsPolicy = "frontend";
+
+builder.Services.AddCors(options =>
+    options.AddPolicy(CorsPolicy, policy => policy
+        .WithOrigins("http://localhost:5173")
+        .AllowAnyHeader()
+        .AllowAnyMethod()));
 
 // ---------------------------------------------------------------------------
 // JWT
@@ -84,6 +95,9 @@ using (var scope = app.Services.CreateScope())
     var userManager = scope.ServiceProvider
         .GetRequiredService<UserManager<User>>();
 
+    // Make sure the database is up to date
+    await context.Database.MigrateAsync();
+
     await DbInitializer.InitializeAsync(context, userManager);
 }
 
@@ -94,6 +108,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(CorsPolicy);
 
 // Ordningen spelar roll. UseAuthentication svarar på "vem är du" och fyller i
 // uppgifterna om användaren, UseAuthorization svarar på "får du". Man måste veta

@@ -10,8 +10,6 @@ public static class DbInitializer
         VibeCheckDbContext context,
         UserManager<User> userManager)
     {
-        // Make sure the database is up to date
-        await context.Database.MigrateAsync();
 
         // Seed data
         await SeedUsersAsync(userManager);
