@@ -40,6 +40,9 @@ using (var scope = app.Services.CreateScope())
     var userManager = scope.ServiceProvider
         .GetRequiredService<UserManager<User>>();
 
+    // Make sure the database is up to date
+    await context.Database.MigrateAsync();
+
     await DbInitializer.InitializeAsync(context, userManager);
 }
 
