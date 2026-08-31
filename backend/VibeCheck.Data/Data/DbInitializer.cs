@@ -48,56 +48,50 @@ public static class DbInitializer
         }
     }
 
-    private static async Task SeedUsersAsync(
-        UserManager<User> userManager)
+    private static async Task SeedUsersAsync(UserManager<User> userManager)
     {
         // Admin user
-        if (await userManager.FindByNameAsync("admin") == null)
+        var admin = await userManager.FindByNameAsync("admin");
+        if (admin == null)
         {
-            var admin = new User
+            admin = new User
             {
                 UserName = "admin",
                 Email = "admin@vibecheck.local"
             };
-
-            var result = await userManager.CreateAsync(
-                admin,
-                "Admin123!");
-
+            var result = await userManager.CreateAsync(admin, "Admin123!");
             if (!result.Succeeded)
             {
                 throw new Exception(
                     "Failed to create admin user: " +
-                    string.Join(
-                        ", ",
-                        result.Errors.Select(e => e.Description)));
+                    string.Join(", ", result.Errors.Select(e => e.Description)));
             }
-
-            await userManager.AddToRoleAsync(admin, "Admin");
+        }
+        if (!await userManager.IsInRoleAsync(admin, "admin"))
+        {
+            await userManager.AddToRoleAsync(admin, "admin");
         }
 
         // Normal user
-        if (await userManager.FindByNameAsync("user") == null)
+        var user = await userManager.FindByNameAsync("user");
+        if (user == null)
         {
-            var user = new User
+            user = new User
             {
                 UserName = "user",
                 Email = "user@vibecheck.local",
             };
-
-            var result = await userManager.CreateAsync(
-                user,
-                "User123!");
-
+            var result = await userManager.CreateAsync(user, "User123!");
             if (!result.Succeeded)
             {
                 throw new Exception(
                     "Failed to create normal user: " +
-                    string.Join(
-                        ", ",
-                        result.Errors.Select(e => e.Description)));
+                    string.Join(", ", result.Errors.Select(e => e.Description)));
             }
-            await userManager.AddToRoleAsync(user, "User");
+        }
+        if (!await userManager.IsInRoleAsync(user, "user"))
+        {
+            await userManager.AddToRoleAsync(user, "user");
         }
     }
 
