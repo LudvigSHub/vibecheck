@@ -1,6 +1,10 @@
-@VibeCheck.Api_HostAddress = http://localhost:5101
+@VibeCheck.Api_HostAddress = https://localhost:7226
 
-GET {{VibeCheck.Api_HostAddress}}/weatherforecast/
+# Kollar att api:et svarar. Ska ge tillbaka JSON som beskriver
+# vilka endpoints som finns. Tomt innehåll är ok så länge vi inte
+# har några controllers än, huvudsaken är att vi får 200 och inte
+# ett anslutningsfel.
+GET {{VibeCheck.Api_HostAddress}}/openapi/v1.json
 Accept: application/json
 
 ###
