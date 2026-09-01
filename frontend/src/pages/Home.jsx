@@ -1,7 +1,12 @@
+import Ping from "../components/Ping";
+
 function Home() {
-    return (
-        <h1>Test, ser ni mig?</h1>
-    );
+  return (
+    <div>
+      <h1>Test, ser ni mig?</h1>
+      <Ping />
+    </div>
+  );
 }
 
 export default Home;

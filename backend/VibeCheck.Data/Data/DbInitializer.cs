@@ -8,12 +8,12 @@ public static class DbInitializer
 {
     public static async Task InitializeAsync(
         VibeCheckDbContext context,
-        UserManager<User> userManager)
+        UserManager<User> userManager,
+        RoleManager<IdentityRole<int>> roleManager)
     {
-        // Make sure the database is up to date
-        await context.Database.MigrateAsync();
 
         // Seed data
+        await SeedRolesAsync(roleManager);
         await SeedUsersAsync(userManager);
         await SeedMeaningsAsync(context);
         await SeedWordsAsync(context);
@@ -36,55 +36,62 @@ public static class DbInitializer
     // USERS
     // ============================================================
 
-    private static async Task SeedUsersAsync(
-        UserManager<User> userManager)
+    //Skapar "admin" och "user" roller (om de inte redan finns i RoleManager)
+    private static async Task SeedRolesAsync(RoleManager<IdentityRole<int>> roleManager)
+    {
+        foreach(var role in new[] { "admin", "user" })
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole<int>(role));
+            }
+        }
+    }
+
+    private static async Task SeedUsersAsync(UserManager<User> userManager)
     {
         // Admin user
-        if (await userManager.FindByNameAsync("admin") == null)
+        var admin = await userManager.FindByNameAsync("admin");
+        if (admin == null)
         {
-            var admin = new User
+            admin = new User
             {
                 UserName = "admin",
-                Email = "admin@vibecheck.local",
-                IsAdmin = true
+                Email = "admin@vibecheck.local"
             };
-
-            var result = await userManager.CreateAsync(
-                admin,
-                "Admin123!");
-
+            var result = await userManager.CreateAsync(admin, "Admin123!");
             if (!result.Succeeded)
             {
                 throw new Exception(
                     "Failed to create admin user: " +
-                    string.Join(
-                        ", ",
-                        result.Errors.Select(e => e.Description)));
+                    string.Join(", ", result.Errors.Select(e => e.Description)));
             }
+        }
+        if (!await userManager.IsInRoleAsync(admin, "admin"))
+        {
+            await userManager.AddToRoleAsync(admin, "admin");
         }
 
         // Normal user
-        if (await userManager.FindByNameAsync("user") == null)
+        var user = await userManager.FindByNameAsync("user");
+        if (user == null)
         {
-            var user = new User
+            user = new User
             {
                 UserName = "user",
                 Email = "user@vibecheck.local",
-                IsAdmin = false
             };
-
-            var result = await userManager.CreateAsync(
-                user,
-                "User123!");
-
+            var result = await userManager.CreateAsync(user, "User123!");
             if (!result.Succeeded)
             {
                 throw new Exception(
                     "Failed to create normal user: " +
-                    string.Join(
-                        ", ",
-                        result.Errors.Select(e => e.Description)));
+                    string.Join(", ", result.Errors.Select(e => e.Description)));
             }
+        }
+        if (!await userManager.IsInRoleAsync(user, "user"))
+        {
+            await userManager.AddToRoleAsync(user, "user");
         }
     }
 

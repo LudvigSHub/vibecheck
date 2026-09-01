@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VibeCheck.Data.Data;
 
@@ -11,9 +12,11 @@ using VibeCheck.Data.Data;
 namespace VibeCheck.Data.Migrations
 {
     [DbContext(typeof(VibeCheckDbContext))]
-    partial class VibeCheckDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260831125916_SyncModelWithRoles")]
+    partial class SyncModelWithRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
