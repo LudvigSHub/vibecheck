@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using VibeCheck.Api.DTOs;
 using VibeCheck.Api.Services;
 
@@ -43,6 +45,28 @@ public class AuthController : ControllerBase
         }
 
         return Ok(result.Response);
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public ActionResult<CurrentUserDTO> Me()
+    {
+        var userName = User.Identity?.Name;
+
+        if (userName is null)
+        {
+            return Unauthorized();
+        }
+
+        var roles = User
+            .FindAll(ClaimTypes.Role)
+            .Select(claim => claim.Value);
+
+        return Ok(new CurrentUserDTO
+        {
+            UserName = userName,
+            Roles = roles
+        });
     }
 
 
