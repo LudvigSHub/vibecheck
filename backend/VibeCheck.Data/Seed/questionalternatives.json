@@ -1,0 +1,98 @@
+[
+  {
+    "Question": "What does the slang term 'fire' usually mean?",
+    "AlternativeText": "Amazing or very good",
+    "IsCorrect": true
+  },
+  {
+    "Question": "What does the slang term 'fire' usually mean?",
+    "AlternativeText": "Something dangerous",
+    "IsCorrect": false
+  },
+  {
+    "Question": "What does the slang term 'fire' usually mean?",
+    "AlternativeText": "Something old-fashioned",
+    "IsCorrect": false
+  },
+  {
+    "Question": "What does the slang term 'fire' usually mean?",
+    "AlternativeText": "Something boring",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Is 'sus' commonly used to describe something suspicious?",
+    "AlternativeText": "True",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Is 'sus' commonly used to describe something suspicious?",
+    "AlternativeText": "False",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Which slang term is associated with something embarrassing?",
+    "AlternativeText": "Cringe",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Which slang term is associated with something embarrassing?",
+    "AlternativeText": "Fire",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Which slang term is associated with something embarrassing?",
+    "AlternativeText": "Based",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Which slang term is associated with something embarrassing?",
+    "AlternativeText": "W",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Which slang term can describe something suspicious or questionable?",
+    "AlternativeText": "Sus",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Which slang term can describe something suspicious or questionable?",
+    "AlternativeText": "Fire",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Which slang term can describe something suspicious or questionable?",
+    "AlternativeText": "Based",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Which slang term can describe something suspicious or questionable?",
+    "AlternativeText": "W",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Which slang term would best describe an extremely funny situation?",
+    "AlternativeText": "Hilarious",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Which slang term would best describe an extremely funny situation?",
+    "AlternativeText": "Cringe",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Which slang term would best describe an extremely funny situation?",
+    "AlternativeText": "Sus",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Which slang term would best describe an extremely funny situation?",
+    "AlternativeText": "L",
+    "IsCorrect": false
+  }
+
+
+]

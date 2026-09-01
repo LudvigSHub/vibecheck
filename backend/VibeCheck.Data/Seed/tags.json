@@ -1,0 +1,17 @@
+[
+  {
+    "TagName": "positive"
+  },
+  {
+    "TagName": "negative"
+  },
+  {
+    "TagName": "popular"
+  },
+  {
+    "TagName": "funny"
+  },
+  {
+    "TagName": "suspicious"
+  }
+]

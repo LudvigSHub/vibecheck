@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VibeCheck.Data.Models;
+using System.Text.Json;
+using VibeCheck.Data.Seed;
 
 namespace VibeCheck.Data.Data;
 
@@ -25,7 +27,6 @@ public static class DbInitializer
         await SeedDifficultiesAsync(context);
         await SeedQuestionsAsync(context);
         await SeedQuestionAlternativesAsync(context);
-        await SetCorrectAlternativesAsync(context);
         await SeedQuizzesAsync(context);
         await SeedQuizQuestionsAsync(context);
         await SeedQuizAttemptsAsync(context, userManager);
@@ -106,33 +107,16 @@ public static class DbInitializer
         if (await context.Meanings.AnyAsync())
             return;
 
-        var meanings = new List<Meaning>
+        var json = await File.ReadAllTextAsync(
+            Path.Combine(AppContext.BaseDirectory, "Seed", "meanings.json"));
+
+        var seedMeanings = JsonSerializer.Deserialize<List<MeaningSeed>>(json)
+            ?? throw new Exception("Failed to deserialize meanings.json.");
+
+        var meanings = seedMeanings.Select(seed => new Meaning
         {
-            new()
-            {
-                MeaningText = "Very good or impressive"
-            },
-
-            new()
-            {
-                MeaningText = "Annoying or frustrating"
-            },
-
-            new()
-            {
-                MeaningText = "Suspicious or questionable"
-            },
-
-            new()
-            {
-                MeaningText = "Something embarrassing"
-            },
-
-            new()
-            {
-                MeaningText = "Something extremely funny"
-            }
-        };
+            MeaningText = seed.MeaningText
+        }).ToList();
 
         await context.Meanings.AddRangeAsync(meanings);
         await context.SaveChangesAsync();
@@ -150,71 +134,34 @@ public static class DbInitializer
         if (await context.Words.AnyAsync())
             return;
 
+        var json = await File.ReadAllTextAsync(
+            Path.Combine(AppContext.BaseDirectory, "Seed", "words.json"));
+
+        var seedWords = JsonSerializer.Deserialize<List<WordSeed>>(json)
+            ?? throw new Exception("Failed to deserialize words.json.");
+
         // Get meanings by their text so we don't rely
         // on hardcoded MeaningID values.
         var meanings = await context.Meanings
             .ToDictionaryAsync(m => m.MeaningText);
 
-        var words = new List<Word>
+        var words = new List<Word>();
+
+        foreach (var seedWord in seedWords)
         {
-            new()
+            if (!meanings.TryGetValue(seedWord.Meaning, out var meaning))
             {
-                WordDesc = "fire",
-                MeaningID =
-                    meanings["Very good or impressive"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "lit",
-                MeaningID =
-                    meanings["Very good or impressive"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "cringe",
-                MeaningID =
-                    meanings["Something embarrassing"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "embarrassing",
-                MeaningID =
-                    meanings["Something embarrassing"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "sus",
-                MeaningID =
-                    meanings["Suspicious or questionable"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "sketchy",
-                MeaningID =
-                    meanings["Suspicious or questionable"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "annoying",
-                MeaningID =
-                    meanings["Annoying or frustrating"].MeaningID
-            },
-
-            new()
-            {
-                WordDesc = "hilarious",
-                MeaningID =
-                    meanings["Something extremely funny"].MeaningID
+                throw new Exception(
+                    $"Meaning '{seedWord.Meaning}' referenced by word " +
+                    $"'{seedWord.WordDesc}' was not found.");
             }
-        };
 
-
+            words.Add(new Word
+            {
+                WordDesc = seedWord.WordDesc,
+                MeaningID = meaning.MeaningID
+            });
+        }
 
         await context.Words.AddRangeAsync(words);
         await context.SaveChangesAsync();
@@ -225,58 +172,42 @@ public static class DbInitializer
     // WORDEXAMPLES
     // ============================================================
     private static async Task SeedWordExamplesAsync(
-    VibeCheckDbContext context)
+        VibeCheckDbContext context)
     {
         if (await context.WordExamples.AnyAsync())
             return;
 
+        var jsonPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Seed",
+            "wordexamples.json");
+
+        var json = await File.ReadAllTextAsync(jsonPath);
+
+        var seedExamples =
+            JsonSerializer.Deserialize<List<WordExampleSeed>>(json)
+            ?? throw new Exception(
+                "Failed to deserialize wordexamples.json.");
+
         var words = await context.Words
             .ToDictionaryAsync(w => w.WordDesc);
 
-        var examples = new List<WordExample>
-    {
-        new()
-        {
-            WordID = words["fire"].WordID,
-            ExampleText = "That new song is fire."
-        },
+        var examples = new List<WordExample>();
 
-        new()
+        foreach (var seed in seedExamples)
         {
-            WordID = words["fire"].WordID,
-            ExampleText = "Your new outfit is absolutely fire."
-        },
+            if (!words.TryGetValue(seed.Word, out var word))
+            {
+                throw new Exception(
+                    $"Word '{seed.Word}' referenced in wordexamples.json was not found.");
+            }
 
-        new()
-        {
-            WordID = words["lit"].WordID,
-            ExampleText = "The party was lit last night."
-        },
-
-        new()
-        {
-            WordID = words["cringe"].WordID,
-            ExampleText = "That video was so cringe."
-        },
-
-        new()
-        {
-            WordID = words["sus"].WordID,
-            ExampleText = "That guy is acting kinda sus."
-        },
-
-        new()
-        {
-            WordID = words["sus"].WordID,
-            ExampleText = "This website looks pretty sus."
-        },
-
-        new()
-        {
-            WordID = words["hilarious"].WordID,
-            ExampleText = "That was absolutely hilarious."
+            examples.Add(new WordExample
+            {
+                WordID = word.WordID,
+                ExampleText = seed.ExampleText
+            });
         }
-    };
 
         await context.WordExamples.AddRangeAsync(examples);
         await context.SaveChangesAsync();
@@ -287,38 +218,27 @@ public static class DbInitializer
     // TAGS
     // ============================================================
     private static async Task SeedTagsAsync(
-    VibeCheckDbContext context)
+        VibeCheckDbContext context)
     {
         if (await context.Tags.AnyAsync())
             return;
 
-        var tags = new List<Tag>
-    {
-        new()
-        {
-            TagName = "positive"
-        },
+        var jsonPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Seed",
+            "tags.json");
 
-        new()
-        {
-            TagName = "negative"
-        },
+        var json = await File.ReadAllTextAsync(jsonPath);
 
-        new()
-        {
-            TagName = "popular"
-        },
+        var seedTags =
+            JsonSerializer.Deserialize<List<TagSeed>>(json)
+            ?? throw new Exception(
+                "Failed to deserialize tags.json.");
 
-        new()
+        var tags = seedTags.Select(seed => new Tag
         {
-            TagName = "funny"
-        },
-
-        new()
-        {
-            TagName = "suspicious"
-        }
-    };
+            TagName = seed.TagName
+        }).ToList();
 
         await context.Tags.AddRangeAsync(tags);
         await context.SaveChangesAsync();
@@ -330,10 +250,22 @@ public static class DbInitializer
     // WORDTAGS
     // ============================================================
     private static async Task SeedWordTagsAsync(
-    VibeCheckDbContext context)
+        VibeCheckDbContext context)
     {
         if (await context.WordTags.AnyAsync())
             return;
+
+        var jsonPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Seed",
+            "wordtags.json");
+
+        var json = await File.ReadAllTextAsync(jsonPath);
+
+        var seedWordTags =
+            JsonSerializer.Deserialize<List<WordTagSeed>>(json)
+            ?? throw new Exception(
+                "Failed to deserialize wordtags.json.");
 
         var words = await context.Words
             .ToDictionaryAsync(w => w.WordDesc);
@@ -341,80 +273,28 @@ public static class DbInitializer
         var tags = await context.Tags
             .ToDictionaryAsync(t => t.TagName);
 
-        var wordTags = new List<WordTag>
-    {
-        // fire
-        new()
-        {
-            WordID = words["fire"].WordID,
-            TagID = tags["positive"].TagID
-        },
+        var wordTags = new List<WordTag>();
 
-        new()
+        foreach (var seed in seedWordTags)
         {
-            WordID = words["fire"].WordID,
-            TagID = tags["popular"].TagID
-        },
+            if (!words.TryGetValue(seed.Word, out var word))
+            {
+                throw new Exception(
+                    $"Word '{seed.Word}' referenced in wordtags.json was not found.");
+            }
 
-        // lit
-        new()
-        {
-            WordID = words["lit"].WordID,
-            TagID = tags["positive"].TagID
-        },
+            if (!tags.TryGetValue(seed.Tag, out var tag))
+            {
+                throw new Exception(
+                    $"Tag '{seed.Tag}' referenced in wordtags.json was not found.");
+            }
 
-        new()
-        {
-            WordID = words["lit"].WordID,
-            TagID = tags["popular"].TagID
-        },
-
-        // cringe
-        new()
-        {
-            WordID = words["cringe"].WordID,
-            TagID = tags["negative"].TagID
-        },
-
-        new()
-        {
-            WordID = words["cringe"].WordID,
-            TagID = tags["funny"].TagID
-        },
-
-        // sus
-        new()
-        {
-            WordID = words["sus"].WordID,
-            TagID = tags["suspicious"].TagID
-        },
-
-        new()
-        {
-            WordID = words["sus"].WordID,
-            TagID = tags["negative"].TagID
-        },
-
-        // sketchy
-        new()
-        {
-            WordID = words["sketchy"].WordID,
-            TagID = tags["suspicious"].TagID
-        },
-
-        new()
-        {
-            WordID = words["sketchy"].WordID,
-            TagID = tags["negative"].TagID
-        },
-
-        // hilarious
-        new()
-        {
-            WordID = words["hilarious"].WordID,
-            TagID = tags["funny"].TagID
+            wordTags.Add(new WordTag
+            {
+                WordID = word.WordID,
+                TagID = tag.TagID
+            });
         }
-    };
 
         await context.WordTags.AddRangeAsync(wordTags);
         await context.SaveChangesAsync();
@@ -555,59 +435,51 @@ public static class DbInitializer
         if (await context.Questions.AnyAsync())
             return;
 
+        var jsonPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Seed",
+            "questions.json");
+
+        var json = await File.ReadAllTextAsync(jsonPath);
+
+        var seedQuestions =
+            JsonSerializer.Deserialize<List<QuestionSeed>>(json)
+            ?? throw new Exception(
+                "Failed to deserialize questions.json.");
+
         var questionTypes = await context.QuestionTypes
             .ToDictionaryAsync(qt => qt.TypeText);
 
         var difficulties = await context.Difficulties
             .ToDictionaryAsync(d => d.DifficultyDesc);
 
-        var questions = new List<Question>
-    {
-        new()
-        {
-            QuestionDesc = "What does the slang term 'fire' usually mean?",
-            QuestionTypeID =
-                questionTypes["Multiple Choice"].QuestionTypeID,
-            DifficultyID =
-                difficulties["Easy"].DifficultyID
-        },
+        var questions = new List<Question>();
 
-        new()
+        foreach (var seed in seedQuestions)
         {
-            QuestionDesc = "Is 'sus' commonly used to describe something suspicious?",
-            QuestionTypeID =
-                questionTypes["True or False"].QuestionTypeID,
-            DifficultyID =
-                difficulties["Easy"].DifficultyID
-        },
+            if (!questionTypes.TryGetValue(
+                    seed.QuestionType,
+                    out var questionType))
+            {
+                throw new Exception(
+                    $"Question type '{seed.QuestionType}' referenced in questions.json was not found.");
+            }
 
-        new()
-        {
-            QuestionDesc = "Which slang term is associated with something embarrassing?",
-            QuestionTypeID =
-                questionTypes["Multiple Choice"].QuestionTypeID,
-            DifficultyID =
-                difficulties["Medium"].DifficultyID
-        },
+            if (!difficulties.TryGetValue(
+                    seed.Difficulty,
+                    out var difficulty))
+            {
+                throw new Exception(
+                    $"Difficulty '{seed.Difficulty}' referenced in questions.json was not found.");
+            }
 
-        new()
-        {
-            QuestionDesc = "Which slang term can describe something suspicious or questionable?",
-            QuestionTypeID =
-                questionTypes["Multiple Choice"].QuestionTypeID,
-            DifficultyID =
-                difficulties["Medium"].DifficultyID
-        },
-
-        new()
-        {
-            QuestionDesc = "Which slang term would best describe an extremely funny situation?",
-            QuestionTypeID =
-                questionTypes["Multiple Choice"].QuestionTypeID,
-            DifficultyID =
-                difficulties["Hard"].DifficultyID
+            questions.Add(new Question
+            {
+                QuestionDesc = seed.QuestionDesc,
+                QuestionTypeID = questionType.QuestionTypeID,
+                DifficultyID = difficulty.DifficultyID
+            });
         }
-    };
 
         await context.Questions.AddRangeAsync(questions);
         await context.SaveChangesAsync();
@@ -617,207 +489,119 @@ public static class DbInitializer
     // QUESTIONALTERNATIVES
     // ============================================================
 
-
     private static async Task SeedQuestionAlternativesAsync(
-     VibeCheckDbContext context)
+        VibeCheckDbContext context)
     {
         if (await context.QuestionAlternatives.AnyAsync())
             return;
 
+        // Load question alternatives from JSON
+
+        var jsonPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Seed",
+            "questionalternatives.json");
+
+        var json = await File.ReadAllTextAsync(jsonPath);
+
+        var seedAlternatives =
+            JsonSerializer.Deserialize<List<QuestionAlternativeSeed>>(json)
+            ?? throw new Exception(
+                "Failed to deserialize questionalternatives.json.");
+
+        // Load questions from JSON for validation
+
+        var questionsJsonPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Seed",
+            "questions.json");
+
+        var questionsJson =
+            await File.ReadAllTextAsync(questionsJsonPath);
+
+        var seedQuestions =
+            JsonSerializer.Deserialize<List<QuestionSeed>>(questionsJson)
+            ?? throw new Exception(
+                "Failed to deserialize questions.json.");
+
+        // Validate the JSON seed data before inserting anything
+        SeedValidator.ValidateQuestions(
+            seedQuestions,
+            seedAlternatives);
+
+        // Get questions from database
+
         var questions = await context.Questions
             .ToDictionaryAsync(q => q.QuestionDesc);
 
-        var alternatives = new List<QuestionAlternative>
-    {
-        // Question 1
-        new()
-        {
-            QuestionID = questions[
-                "What does the slang term 'fire' usually mean?"
-            ].QuestionID,
-            AlternativeText = "Amazing or very good"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "What does the slang term 'fire' usually mean?"
-            ].QuestionID,
-            AlternativeText = "Something dangerous"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "What does the slang term 'fire' usually mean?"
-            ].QuestionID,
-            AlternativeText = "Something old-fashioned"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "What does the slang term 'fire' usually mean?"
-            ].QuestionID,
-            AlternativeText = "Something boring"
-        },
+        var alternatives = new List<QuestionAlternative>();
 
-        // Question 2 - True / False
-        new()
-        {
-            QuestionID = questions[
-                "Is 'sus' commonly used to describe something suspicious?"
-            ].QuestionID,
-            AlternativeText = "True"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Is 'sus' commonly used to describe something suspicious?"
-            ].QuestionID,
-            AlternativeText = "False"
-        },
+        // Keep track of the actual QuestionAlternative object
+        // marked as correct for each question.
+        var correctAlternatives =
+            new Dictionary<int, QuestionAlternative>();
 
-        // Question 3
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term is associated with something embarrassing?"
-            ].QuestionID,
-            AlternativeText = "Cringe"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term is associated with something embarrassing?"
-            ].QuestionID,
-            AlternativeText = "Fire"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term is associated with something embarrassing?"
-            ].QuestionID,
-            AlternativeText = "Based"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term is associated with something embarrassing?"
-            ].QuestionID,
-            AlternativeText = "W"
-        },
+        // Create QuestionAlternative entities
 
-        // Question 4
-        new()
+        foreach (var seed in seedAlternatives)
         {
-            QuestionID = questions[
-                "Which slang term can describe something suspicious or questionable?"
-            ].QuestionID,
-            AlternativeText = "Sus"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term can describe something suspicious or questionable?"
-            ].QuestionID,
-            AlternativeText = "Fire"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term can describe something suspicious or questionable?"
-            ].QuestionID,
-            AlternativeText = "Based"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term can describe something suspicious or questionable?"
-            ].QuestionID,
-            AlternativeText = "W"
-        },
+            if (!questions.TryGetValue(
+                    seed.Question,
+                    out var question))
+            {
+                throw new Exception(
+                    $"Question '{seed.Question}' referenced in questionalternatives.json was not found.");
+            }
 
-        // Question 5
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term would best describe an extremely funny situation?"
-            ].QuestionID,
-            AlternativeText = "Hilarious"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term would best describe an extremely funny situation?"
-            ].QuestionID,
-            AlternativeText = "Cringe"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term would best describe an extremely funny situation?"
-            ].QuestionID,
-            AlternativeText = "Sus"
-        },
-        new()
-        {
-            QuestionID = questions[
-                "Which slang term would best describe an extremely funny situation?"
-            ].QuestionID,
-            AlternativeText = "L"
+            var alternative = new QuestionAlternative
+            {
+                QuestionID = question.QuestionID,
+                AlternativeText = seed.AlternativeText
+            };
+
+            alternatives.Add(alternative);
+
+            if (seed.IsCorrect)
+            {
+                if (correctAlternatives.ContainsKey(question.QuestionID))
+                {
+                    throw new Exception(
+                        $"Question '{seed.Question}' has more than one correct alternative.");
+                }
+
+                correctAlternatives[question.QuestionID] = alternative;
+            }
         }
-    };
+
+        // Make sure every question has exactly one correct alternative
+
+        foreach (var question in questions.Values)
+        {
+            if (!correctAlternatives.ContainsKey(question.QuestionID))
+            {
+                throw new Exception(
+                    $"Question '{question.QuestionDesc}' has no correct alternative.");
+            }
+        }
 
         await context.QuestionAlternatives.AddRangeAsync(alternatives);
         await context.SaveChangesAsync();
-    }
 
-    private static async Task SetCorrectAlternativesAsync(
-    VibeCheckDbContext context)
-    {
-        var questions = await context.Questions
-            .ToDictionaryAsync(q => q.QuestionDesc);
+        // The QuestionAlternative objects in correctAlternatives
+        // now contain their database-generated AlternativeIDs.
+        foreach (var question in questions.Values)
+        {
+            var correctAlternative =
+                correctAlternatives[question.QuestionID];
 
-        var alternatives = await context.QuestionAlternatives
-            .ToListAsync();
+            question.CorrectAlternativeID =
+                correctAlternative.AlternativeID;
+        }
 
-        SetCorrectAnswer(
-            questions["What does the slang term 'fire' usually mean?"],
-            "Amazing or very good",
-            alternatives);
-
-        SetCorrectAnswer(
-            questions["Is 'sus' commonly used to describe something suspicious?"],
-            "True",
-            alternatives);
-
-        SetCorrectAnswer(
-            questions["Which slang term is associated with something embarrassing?"],
-            "Cringe",
-            alternatives);
-
-        SetCorrectAnswer(
-            questions["Which slang term can describe something suspicious or questionable?"],
-            "Sus",
-            alternatives);
-
-        SetCorrectAnswer(
-            questions["Which slang term would best describe an extremely funny situation?"],
-            "Hilarious",
-            alternatives);
-
+        // Save the generated CorrectAlternativeID values
         await context.SaveChangesAsync();
     }
 
-    private static void SetCorrectAnswer(
-        Question question,
-        string correctAnswer,
-        List<QuestionAlternative> alternatives)
-    {
-        question.CorrectAlternativeID = alternatives
-            .Single(a =>
-                a.QuestionID == question.QuestionID &&
-                a.AlternativeText == correctAnswer)
-            .AlternativeID;
-    }
 
     // ============================================================
     // QUIZZES

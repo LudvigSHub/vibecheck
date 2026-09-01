@@ -1,0 +1,27 @@
+[
+  {
+    "QuestionDesc": "What does the slang term 'fire' usually mean?",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Is 'sus' commonly used to describe something suspicious?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Which slang term is associated with something embarrassing?",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Which slang term can describe something suspicious or questionable?",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Which slang term would best describe an extremely funny situation?",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard"
+  }
+]

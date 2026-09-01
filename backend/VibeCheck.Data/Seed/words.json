@@ -1,3 +1,34 @@
-{
-
-}
+[
+  {
+    "WordDesc": "fire",
+    "Meaning": "Very good or impressive"
+  },
+  {
+    "WordDesc": "lit",
+    "Meaning": "Very good or impressive"
+  },
+  {
+    "WordDesc": "cringe",
+    "Meaning": "Something embarrassing"
+  },
+  {
+    "WordDesc": "embarrassing",
+    "Meaning": "Something embarrassing"
+  },
+  {
+    "WordDesc": "sus",
+    "Meaning": "Suspicious or questionable"
+  },
+  {
+    "WordDesc": "sketchy",
+    "Meaning": "Suspicious or questionable"
+  },
+  {
+    "WordDesc": "annoying",
+    "Meaning": "Annoying or frustrating"
+  },
+  {
+    "WordDesc": "hilarious",
+    "Meaning": "Something extremely funny"
+  }
+]

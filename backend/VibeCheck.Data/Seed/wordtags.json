@@ -1,0 +1,46 @@
+[
+  {
+    "Word": "fire",
+    "Tag": "positive"
+  },
+  {
+    "Word": "fire",
+    "Tag": "popular"
+  },
+  {
+    "Word": "lit",
+    "Tag": "positive"
+  },
+  {
+    "Word": "lit",
+    "Tag": "popular"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "negative"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "funny"
+  },
+  {
+    "Word": "sus",
+    "Tag": "suspicious"
+  },
+  {
+    "Word": "sus",
+    "Tag": "negative"
+  },
+  {
+    "Word": "sketchy",
+    "Tag": "suspicious"
+  },
+  {
+    "Word": "sketchy",
+    "Tag": "negative"
+  },
+  {
+    "Word": "hilarious",
+    "Tag": "funny"
+  }
+]
