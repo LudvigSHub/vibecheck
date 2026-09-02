@@ -5,13 +5,11 @@
    ========================================================================== */
 
 .navbar {
-  --navbar-bg: #031009;
-  --navbar-height: 72px;
-  --navbar-text: #ffffff;
-  --navbar-text-muted: #d5dcd6;
-  --navbar-accent: #b8e62e;
-  --navbar-accent-hover: #c9f24a;
-  --navbar-accent-text: #0b1a0c;
+  --navbar-bg: var(--color-bg);
+  --navbar-text: var(--color-text);
+  --navbar-accent: var(--color-accent);
+  --navbar-accent-hover: var(--color-accent-hover);
+  --navbar-accent-text: var(--color-on-accent);
 
   background: var(--navbar-bg);
   color: var(--navbar-text);

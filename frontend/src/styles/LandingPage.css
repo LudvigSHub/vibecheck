@@ -1,0 +1,277 @@
+/* ==========================================================================
+   LandingPage
+   Färger och mått kommer från de globala tokens i index.css.
+   ========================================================================== */
+
+.landing {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+  box-sizing: border-box;
+}
+
+/* ---------- Hero ---------------------------------------------------------- */
+
+.landing__hero {
+  display: grid;
+  /* minmax(0, 1fr) låter textkolumnen krympa i stället för att spränga griden */
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.landing__title {
+  font-size: clamp(38px, 4.6vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  font-weight: 800;
+}
+
+.landing__title-accent {
+  color: var(--color-accent);
+}
+
+.landing__subtitle {
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.landing__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.landing__phone {
+  display: block;
+  width: 210px;
+  height: auto;
+}
+
+/* ---------- Knappar (återanvänds på fler sidor) --------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn--ghost {
+  color: var(--color-text);
+  border-color: var(--color-border-subtle);
+}
+
+.btn--ghost:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---------- Dagens slang -------------------------------------------------- */
+
+.slang-card {
+  width: 250px;
+  padding: 18px 20px 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+}
+
+.slang-card__label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.slang-card__divider {
+  height: 1px;
+  margin: 12px 0;
+  border: 0;
+  background: var(--color-border-subtle);
+}
+
+.slang-card__word {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.slang-card__meaning {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.slang-card__example {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.slang-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 9px 16px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.slang-card__link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---------- Funktionskort ------------------------------------------------- */
+
+.landing__features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 72px;
+}
+
+.feature-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.feature-card__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-accent);
+}
+
+.feature-card__title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.feature-card__text {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.feature-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: gap 0.15s ease;
+}
+
+.feature-card__link:hover {
+  gap: 10px;
+}
+
+/* ---------- Tangentbordsfokus --------------------------------------------- */
+
+.landing :is(a, button):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Responsivt ----------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .landing__hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 32px;
+  }
+
+  /* Kortet flyttar ner på egen rad över hela bredden */
+  .slang-card {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .landing__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 720px) {
+  .landing {
+    padding: 36px 16px 56px;
+  }
+
+  .landing__hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .landing__cta {
+    justify-content: center;
+  }
+
+  .landing__phone {
+    width: 180px;
+  }
+
+  .landing__features {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing *,
+  .btn {
+    transition: none !important;
+  }
+}
