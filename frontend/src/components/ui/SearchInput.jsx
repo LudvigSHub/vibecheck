@@ -1,8 +1,9 @@
 import { SearchIcon } from "../Icons";
+import Card from "./Card";
 
 export default function SearchInput({ value, onChange, placeholder }) {
   return (
-    <div className="search-input card">
+    <Card className="search-input">
       <SearchIcon className="search-input__icon" />
       <input
         type="search"
@@ -12,6 +13,6 @@ export default function SearchInput({ value, onChange, placeholder }) {
         placeholder={placeholder}
         aria-label={placeholder}
       />
-    </div>
+    </Card>
   );
 }
