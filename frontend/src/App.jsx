@@ -1,18 +1,18 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home';
+import TestPage from './pages/TestPage';
+import LandingPage from "./pages/LandingPage";
+import Navbar from './components/Navbar';
 
 function App() {
 
   return (
     <Router>
-      {/* NAVBAR SKA VARA HÄR*/}
+      <Navbar />
       <Routes>
-        
         {/* Route avser per page, element hämtas från pages där */}
-        <Route path='/' element={<Home/>}/>
-        {/* <Route path='/' element={<Home/>}/> */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path='/Test' element={<TestPage/>}/>
         {/* <Route path='/WordStash' element={<WordStash/>}/> */}
         {/* <Route path='/Account' element={<Account/>}/> */}
         {/* <Route path='/Quiz' element={<Quiz/>}/> */}

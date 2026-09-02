@@ -1,0 +1,128 @@
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+
+import "../styles/Navbar.css";
+
+/*
+  Navbar – oinloggat state.
+  Länkarna ligger i en array så att vi bara behöver ändra på ett ställe
+  när vi lägger till fler sidor.
+*/
+const NAV_LINKS = [
+  { label: "Ordbok", to: "/ordbok" },
+  { label: "Quiz", to: "/quiz" },
+  { label: "Topplistor", to: "/topplistor" },
+  { label: "Om oss", to: "/om-oss" },
+];
+
+function UserIcon() {
+  return (
+    <svg
+      className="navbar__login-icon"
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7" />
+    </svg>
+  );
+}
+
+function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Stäng mobilmenyn när man navigerar till en ny sida.
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  // Escape stänger mobilmenyn.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  return (
+    <header className="navbar">
+      <nav className="navbar__inner" aria-label="Huvudmeny">
+        <Link
+          to="/"
+          className="navbar__brand"
+          aria-label="VibeCheck – till startsidan"
+        >
+          <img
+            src="/images/vibecheck-logo.png"
+            alt="VibeCheck"
+            className="navbar__logo"
+            width="655"
+            height="140"
+          />
+        </Link>
+
+        <button
+          type="button"
+          className="navbar__toggle"
+          aria-label={menuOpen ? "Stäng meny" : "Öppna meny"}
+          aria-expanded={menuOpen}
+          aria-controls="navbar-menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span className="navbar__burger" aria-hidden="true" />
+        </button>
+
+        <div
+          id="navbar-menu"
+          className={
+            menuOpen ? "navbar__menu navbar__menu--open" : "navbar__menu"
+          }
+        >
+          <ul className="navbar__links">
+            {NAV_LINKS.map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "navbar__link navbar__link--active"
+                      : "navbar__link"
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          {/* Oinloggat state. När vi kopplar på auth byter vi ut det här
+              blocket mot en avatar/dropdown baserat på isAuthenticated. */}
+          <Link to="/logga-in" className="navbar__login">
+            <UserIcon />
+            <span>Logga in</span>
+          </Link>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+export default Navbar;
