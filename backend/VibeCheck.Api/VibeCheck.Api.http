@@ -8,3 +8,10 @@ GET {{VibeCheck.Api_HostAddress}}/openapi/v1.json
 Accept: application/json
 
 ###
+
+###
+
+# Dagens ord. Ska ge samma svar hur många gånger du än kör den idag,
+# och ett annat ord imorgon.
+GET {{VibeCheck.Api_HostAddress}}/api/words/word-of-the-day
+Accept: application/json
