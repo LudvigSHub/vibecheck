@@ -20,12 +20,16 @@ builder.Services.AddDbContext<VibeCheckDbContext>(options =>
 builder.Services
     .AddIdentityCore<User>()
     .AddRoles<IdentityRole<int>>()
-    .AddEntityFrameworkStores<VibeCheckDbContext>();
+    .AddEntityFrameworkStores<VibeCheckDbContext>()
+    .AddSignInManager();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<PingService>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<WordOfTheDayService>();
 
 // Tillåter frontendes adress och anrop
 const string CorsPolicy = "frontend";
@@ -84,7 +88,7 @@ builder.Services
 // Behövs för att [Authorize] och rollerna ska funka.
 builder.Services.AddAuthorization();
 
-builder.Services.AddScoped<TokenService>();
+
 
 var app = builder.Build();
 

@@ -1,6 +1,6 @@
 import Ping from "../components/Ping";
 
-function Home() {
+function TestPage() {
   return (
     <div>
       <h1>Test, ser ni mig?</h1>
@@ -9,4 +9,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TestPage;
