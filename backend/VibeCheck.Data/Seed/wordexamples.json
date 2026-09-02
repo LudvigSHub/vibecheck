@@ -1,0 +1,338 @@
+[
+  {
+    "Word": "fire",
+    "ExampleText": "Den nya låten är helt fire."
+  },
+  {
+    "Word": "fire",
+    "ExampleText": "Hon hade en fire outfit på festen."
+  },
+  {
+    "Word": "rizz",
+    "ExampleText": "Han har så mycket rizz att han kan snacka med vem som helst."
+  },
+  {
+    "Word": "no cap",
+    "ExampleText": "Det där var den bästa burgaren jag har ätit, no cap."
+  },
+  {
+    "Word": "keff",
+    "ExampleText": "Den nya uppdateringen är riktigt keff."
+  },
+  {
+    "Word": "aura",
+    "ExampleText": "Han fick mycket aura när han gick fram och löste situationen."
+  },
+  {
+    "Word": "sus",
+    "ExampleText": "Den där snubben beter sig riktigt sus."
+  },
+  {
+    "Word": "sus",
+    "ExampleText": "Det där låter lite sus, jag vet inte om jag hade litat på det."
+  },
+  {
+    "Word": "based",
+    "ExampleText": "Du tycker att man ska få göra som man vill? Based."
+  },
+  {
+    "Word": "mid",
+    "ExampleText": "Alla hypade den här filmen, men jag tyckte faktiskt att den var ganska mid."
+  },
+  {
+    "Word": "goated",
+    "ExampleText": "Han är helt goated på det här spelet."
+  },
+  {
+    "Word": "goated",
+    "ExampleText": "Den där spelaren är goated, ingen kan mäta sig med honom."
+  },
+  {
+    "Word": "delulu",
+    "ExampleText": "Hon tror fortfarande att hennes crush kommer ringa henne efter tre år, hon är helt delulu."
+  },
+  {
+    "Word": "delulu",
+    "ExampleText": "Att tro att jag kan klara hela spelet på en kväll är lite delulu."
+  },
+  {
+    "Word": "aina",
+    "ExampleText": "Vi borde dra härifrån innan aina kommer."
+  },
+  {
+    "Word": "aina",
+    "ExampleText": "Han blev stoppad av aina på vägen hem."
+  },
+  {
+    "Word": "abow",
+    "ExampleText": "Abow, såg du hur snabbt den bilen körde?"
+  },
+  {
+    "Word": "abow",
+    "ExampleText": "Abow, den där maten ser riktigt god ut."
+  },
+  {
+    "Word": "no shit",
+    "ExampleText": "No shit, det regnar ju ute."
+  },
+  {
+    "Word": "no shit",
+    "ExampleText": "Du menar att han blev arg när du kallade honom idiot? No shit."
+  },
+  {
+    "Word": "deadass",
+    "ExampleText": "Deadass, jag har aldrig sett en bättre film."
+  },
+  {
+    "Word": "deadass",
+    "ExampleText": "Jag trodde du skämtade, men du var deadass."
+  },
+  {
+    "Word": "yap",
+    "ExampleText": "Bro, sluta yap:a och kom till saken."
+  },
+  {
+    "Word": "yap",
+    "ExampleText": "Han började yappa om sitt nya gamingbygge i en timme."
+  },
+  {
+    "Word": "clown",
+    "ExampleText": "Bror, sluta vara en clown."
+  },
+  {
+    "Word": "clown",
+    "ExampleText": "Han sprang runt och betedde sig som en clown."
+  },
+  {
+    "Word": "bot",
+    "ExampleText": "Bror, du spelar som en bot."
+  },
+  {
+    "Word": "bot",
+    "ExampleText": "Han fattar ingenting, vilken bot."
+  },
+  {
+    "Word": "NPC",
+    "ExampleText": "Han säger exakt samma sak som alla andra, riktig NPC."
+  },
+  {
+    "Word": "NPC",
+    "ExampleText": "Varför beter du dig som en NPC?"
+  },
+  {
+    "Word": "goofy",
+    "ExampleText": "Bror, den där outfiten är riktigt goofy."
+  },
+  {
+    "Word": "goofy",
+    "ExampleText": "Han började dansa mitt på torget, så goofy."
+  },
+  {
+    "Word": "cringe",
+    "ExampleText": "Det där var så cringe att jag ville lämna rummet."
+  },
+  {
+    "Word": "cringe",
+    "ExampleText": "Bror, sluta vara cringe."
+  },
+  {
+    "Word": "bozo",
+    "ExampleText": "Vilken bozo, han lyckades missa bollen helt."
+  },
+  {
+    "Word": "bozo",
+    "ExampleText": "Sluta bete dig som en bozo."
+  },
+  {
+    "Word": "corny",
+    "ExampleText": "Det där raggningsförsöket var riktigt corny."
+  },
+  {
+    "Word": "corny",
+    "ExampleText": "Bror, den där repliken var så corny."
+  },
+  {
+    "Word": "glazer",
+    "ExampleText": "Sluta vara en glazer, han är inte ens så bra."
+  },
+  {
+    "Word": "glazer",
+    "ExampleText": "Chatten kallade honom en glazer efter att han försvarat spelaren hela kvällen."
+  },
+  {
+    "Word": "tryhard",
+    "ExampleText": "Han spelar casual men beter sig som värsta tryhard."
+  },
+  {
+    "Word": "tryhard",
+    "ExampleText": "Ingen bryr sig om ranken, sluta vara en tryhard."
+  },
+  {
+    "Word": "washed",
+    "ExampleText": "Han var riktigt bra förut, men nu är han washed."
+  },
+  {
+    "Word": "washed",
+    "ExampleText": "Efter den där matchen började alla säga att han är washed."
+  },
+  {
+    "Word": "bum",
+    "ExampleText": "Du gjorde ingenting hela matchen, vilken bum."
+  },
+  {
+    "Word": "bum",
+    "ExampleText": "Han sitter hemma hela dagarna och kallas för en bum."
+  },
+  {
+    "Word": "simp",
+    "ExampleText": "Bro, du gör verkligen allt hon ber om. Du är en simp."
+  },
+  {
+    "Word": "simp",
+    "ExampleText": "Han blev kallad simp efter att ha försvarat henne hela kvällen."
+  },
+  {
+    "Word": "wannabe",
+    "ExampleText": "Han försöker verkligen vara en influencer, riktig wannabe."
+  },
+  {
+    "Word": "wannabe",
+    "ExampleText": "Sluta vara en wannabe och var bara dig själv."
+  },
+  {
+    "Word": "yapper",
+    "ExampleText": "Han är en riktig yapper, han har snackat i en timme."
+  },
+  {
+    "Word": "yapper",
+    "ExampleText": "Ingen frågade, men yappern fortsatte ändå."
+  },
+  {
+    "Word": "skill issue",
+    "ExampleText": "Du dog igen? Skill issue."
+  },
+  {
+    "Word": "skill issue",
+    "ExampleText": "Han klagade på spelet efter att ha missat sitt skott, så jag sa bara skill issue."
+  },
+  {
+    "Word": "glazea",
+    "ExampleText": "Bro, sluta glazea honom, han är inte ens så bra."
+  },
+  {
+    "Word": "glazea",
+    "ExampleText": "Du glazear den där spelaren varje gång någon nämner honom."
+  },
+  {
+    "Word": "cooked",
+    "ExampleText": "Om läraren ser det där är jag cooked."
+  },
+  {
+    "Word": "cooked",
+    "ExampleText": "Han missade tåget och har prov om tio minuter, han är cooked."
+  },
+  {
+    "Word": "fraud",
+    "ExampleText": "Han snackade om att han var bäst och dog först, vilken fraud."
+  },
+  {
+    "Word": "fraud",
+    "ExampleText": "Efter den där matchen började folk kalla honom en fraud."
+  },
+  {
+    "Word": "chopped",
+    "ExampleText": "Bror, den där frisyren gör dig chopped."
+  },
+  {
+    "Word": "chopped",
+    "ExampleText": "Han trodde att han såg bra ut på bilden, men kommentarerna kallade honom chopped."
+  },
+  {
+    "Word": "unc",
+    "ExampleText": "Unc fattar fortfarande inte hur man använder TikTok."
+  },
+  {
+    "Word": "unc",
+    "ExampleText": "Bro, du låter som en unc när du klagar på dagens musik."
+  },
+  {
+    "Word": "aura loss",
+    "ExampleText": "Han snubblade framför hela klassen, brutal aura loss."
+  },
+  {
+    "Word": "aura loss",
+    "ExampleText": "Att säga det där inför hela gruppen var en enorm aura loss."
+  },
+  {
+    "Word": "L",
+    "ExampleText": "Du missade bollen helt, L."
+  },
+  {
+    "Word": "L",
+    "ExampleText": "Att tacka nej till det erbjudandet var ett stort L."
+  },
+  {
+    "Word": "glazing",
+    "ExampleText": "Chatten är full av glazing så fort han börjar spela."
+  },
+  {
+    "Word": "glazing",
+    "ExampleText": "Det där är inte en recension, det är bara glazing."
+  },
+  {
+    "Word": "meatriding",
+    "ExampleText": "Bro, allt det där meatridandet börjar bli pinsamt."
+  },
+  {
+    "Word": "meatriding",
+    "ExampleText": "Han försvarar honom oavsett vad han gör, snacka om meatriding."
+  },
+  {
+    "Word": "caught in 4K",
+    "ExampleText": "Du sa att du inte spelade igår, men vi såg dig online. Caught in 4K."
+  },
+  {
+    "Word": "caught in 4K",
+    "ExampleText": "Han blev caught in 4K när skärmdumpen kom fram."
+  },
+  {
+    "Word": "W",
+    "ExampleText": "Du fick jobbet? W!"
+  },
+  {
+    "Word": "W",
+    "ExampleText": "Att hjälpa honom var en riktig W."
+  },
+  {
+    "Word": "cooking",
+    "ExampleText": "Bror, han cookar just nu, låt honom fortsätta."
+  },
+  {
+    "Word": "cooking",
+    "ExampleText": "Vi trodde det skulle bli dåligt, men hon började cooka och vände hela situationen."
+  },
+  {
+    "Word": "locked in",
+    "ExampleText": "Han har pluggat hela dagen, han är verkligen locked in."
+  },
+  {
+    "Word": "locked in",
+    "ExampleText": "Hon var helt locked in under matchen."
+  },
+  {
+    "Word": "peak",
+    "ExampleText": "Den här säsongen är peak gaming."
+  },
+  {
+    "Word": "peak",
+    "ExampleText": "Det där var peak humor."
+  },
+  {
+    "Word": "slay",
+    "ExampleText": "Hon kom in med den outfiten och bara slayade."
+  },
+  {
+    "Word": "slay",
+    "ExampleText": "Du slayade verkligen presentationen."
+  }
+]

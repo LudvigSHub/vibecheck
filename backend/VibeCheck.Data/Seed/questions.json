@@ -1,0 +1,127 @@
+[
+  {
+    "QuestionDesc": "Används \"fire\" för att beskriva något som är väldigt bra eller imponerande?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Betyder \"mid\" att något anses vara bland det bästa som finns?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Används \"rizz\" för att beskriva någons förmåga att charma eller attrahera någon?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Kan \"NPC\" användas som en förolämpning för någon som uppfattas som tråkig och förutsägbar?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Betyder \"cooked\" att någon är i en situation som ser väldigt bra ut och helt under kontroll?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Används \"no cap\" för att markera att man talar sanning och är helt seriös?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Betyder \"goated\" att något anses vara dåligt eller mediokert?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Kan \"aura\" beskriva en persons utstrålning eller karisma?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Används \"keff\" för att beskriva något som är imponerande och av hög kvalitet?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Betyder \"locked in\" att någon har svårt att koncentrera sig och inte är särskilt fokuserad?",
+    "QuestionType": "True or False",
+    "Difficulty": "Easy"
+  },
+  {
+    "QuestionDesc": "Vi skulle bara ta en snabb fika, men han pratade oavbrutet i nästan en timme om sitt nya spel.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Han kallade sig själv lagets bästa spelare, men när det väl gällde missade han allt och blev totalt utspelad.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Efter att ha sett en populär streamer började han använda samma kläder, uttryck och frisyr för att försöka få exakt samma stil.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Han missade ett helt öppet mål och skyllde direkt på spelet istället för att erkänna att han gjorde ett dåligt skott.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Han försökte göra en cool entré, snubblade direkt framför alla och tappade helt sin coola image.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Motståndarlaget leder med 20 poäng, vår bästa spelare har blivit utvisad och det är bara två minuter kvar.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Han håller med om precis allt hans favoritstreamer säger och försvarar honom varje gång någon kritiserar honom, även när kritiken är helt rimlig.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Alla påstod att den nya filmen var årets bästa, men efter att ha sett den tyckte du bara att den var helt okej.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Det är bara en vanlig match med kompisar, men han har tränat strategier i flera timmar och blir arg så fort någon gör ett misstag.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "Han hävdade att han aldrig hade tagit den sista pizzabiten. Sedan visade någon en video där man tydligt ser honom äta den.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Medium"
+  },
+  {
+    "QuestionDesc": "En person lägger upp en bild på sig själv och frågar sina kompisar vad de tycker. En kompis svarar att personen ser väldigt ful ut.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard"
+  },
+  {
+    "QuestionDesc": "En 20-åring börjar prata om hur dagens ungdomar använder för mycket internet-slang och säger att allt var bättre förr.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard"
+  },
+  {
+    "QuestionDesc": "En person försvarar sin favoritspelare så extremt mycket att han fortsätter hitta ursäkter för spelaren även när det är uppenbart att spelaren gjorde fel.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard"
+  },
+  {
+    "QuestionDesc": "En streamer som tidigare var känd för att vara en av de bästa i spelet förlorar nu regelbundet mot betydligt sämre spelare.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard"
+  },
+  {
+    "QuestionDesc": "En person som kallas \"goated\" behöver inte nödvändigtvis vara bäst genom tiderna, utan uttrycket kan användas mer generellt om någon eller något som anses vara extremt bra.",
+    "QuestionType": "True or False",
+    "Difficulty": "Hard"
+  }
+]
