@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-
+import LinkButton from "../components/ui/LinkButton";
 import FeatureCard from "../components/FeatureCard";
 import SlangOfDayCard from "../components/SlangOfDayCard";
 import { BookIcon, ChartIcon, TargetIcon, UserIcon } from "../components/Icons";
@@ -56,15 +55,15 @@ function LandingPage() {
           <p className="landing__subtitle">All slang samlad på ett ställe</p>
 
           <div className="landing__cta">
-            <Link to="/ordbok" className="btn btn--primary">
+            <LinkButton to="/ordbok" variant="primary">
               <BookIcon width={20} height={20} />
               Utforska ordboken
-            </Link>
+            </LinkButton>
 
-            <Link to="/quiz" className="btn btn--ghost">
+            <LinkButton to="/quiz" variant="ghost">
               <TargetIcon width={20} height={20} />
               Testa quiz
-            </Link>
+            </LinkButton>
           </div>
         </div>
 
