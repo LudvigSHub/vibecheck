@@ -1,30 +1,43 @@
-import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import './AuthForm.css';
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import "./AuthForm.css";
 
 // Samma upplägg som LoginForm, bara fler fält
 function RegisterForm({ onSuccess, onSwitch, onClose }) {
   const { register } = useAuth();
 
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
-  const [error, setError] = useState('');
+  // Escape stänger rutan. Samma mönster som mobilmenyn i Navbar.
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        onClose?.();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const passwordsMatch = confirm === '' || password === confirm;
+  const passwordsMatch = confirm === "" || password === confirm;
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     // Bara frontend kollar det här, backend vet inget om bekräftelsefältet
     if (password !== confirm) {
-      setError('Lösenorden är inte lika.');
+      setError("Lösenorden är inte lika.");
       return;
     }
 
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
@@ -47,7 +60,34 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
   return (
     <div className="auth-overlay" onClick={handleOverlayClick}>
       <form className="auth-card" onSubmit={handleSubmit}>
-        <p className="auth-logo">VibeCheck</p>
+        <button
+          type="button"
+          className="auth-close"
+          onClick={() => onClose?.()}
+          aria-label="Stäng"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12" />
+            <path d="M18 6L6 18" />
+          </svg>
+        </button>
+
+        <img
+          className="auth-logo"
+          src="/images/vibecheck-logo.png"
+          alt="VibeCheck"
+          width="655"
+          height="140"
+        />
 
         <h2 className="auth-title">Skapa konto</h2>
         <p className="auth-subtitle">Häng med i snacket!</p>
@@ -55,7 +95,9 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
         {error && <p className="auth-error-box">{error}</p>}
 
         <div className="auth-field">
-          <label className="auth-label" htmlFor="register-username">Användarnamn</label>
+          <label className="auth-label" htmlFor="register-username">
+            Användarnamn
+          </label>
           <input
             className="auth-input"
             id="register-username"
@@ -68,7 +110,9 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
         </div>
 
         <div className="auth-field">
-          <label className="auth-label" htmlFor="register-email">E-post</label>
+          <label className="auth-label" htmlFor="register-email">
+            E-post
+          </label>
           <input
             className="auth-input"
             id="register-email"
@@ -81,7 +125,9 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
         </div>
 
         <div className="auth-field">
-          <label className="auth-label" htmlFor="register-password">Lösenord</label>
+          <label className="auth-label" htmlFor="register-password">
+            Lösenord
+          </label>
           <input
             className="auth-input"
             id="register-password"
@@ -91,13 +137,17 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <p className="auth-hint">Minst 8 tecken, en stor bokstav och en siffra.</p>
+          <p className="auth-hint">
+            Minst 8 tecken, en stor bokstav och en siffra.
+          </p>
         </div>
 
         <div className="auth-field">
-          <label className="auth-label" htmlFor="register-confirm">Bekräfta lösenord</label>
+          <label className="auth-label" htmlFor="register-confirm">
+            Bekräfta lösenord
+          </label>
           <input
-            className={`auth-input${passwordsMatch ? '' : ' auth-input--error'}`}
+            className={`auth-input${passwordsMatch ? "" : " auth-input--error"}`}
             id="register-confirm"
             type="password"
             placeholder="Bekräfta lösenord"
@@ -116,15 +166,21 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
           disabled={loading}
           style={{ marginTop: 6 }}
         >
-          {loading ? 'Skapar konto...' : 'Skapa konto'}
-          <svg className="auth-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          {loading ? "Skapar konto..." : "Skapa konto"}
+          <svg
+            className="auth-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="12" cy="8" r="4" />
             <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
           </svg>
         </button>
 
         <p className="auth-footer">
-          Har redan ett konto?{' '}
+          Har redan ett konto?{" "}
           <a
             className="auth-link"
             href="#"
