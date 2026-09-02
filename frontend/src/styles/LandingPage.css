@@ -51,45 +51,6 @@
   height: auto;
 }
 
-/* ---------- Knappar (återanvänds på fler sidor) --------------------------- */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 22px;
-  border: 2px solid transparent;
-  border-radius: var(--radius-md);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.btn--primary {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-}
-
-.btn--primary:hover {
-  background: var(--color-accent-hover);
-}
-
-.btn--ghost {
-  color: var(--color-text);
-  border-color: var(--color-border-subtle);
-}
-
-.btn--ghost:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
 /* ---------- Dagens slang -------------------------------------------------- */
 
 .slang-card {
@@ -188,18 +149,6 @@
   50% {
     opacity: 1;
   }
-}
-
-/* Synlig bara för skärmläsare. */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
 }
 
 /* ---------- Funktionskort ------------------------------------------------- */
