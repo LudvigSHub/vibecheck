@@ -37,17 +37,54 @@
   border-radius: 16px;
   background: var(--auth-surface);
   color: var(--auth-text);
+  position: relative;   /* så att stängknappen kan placeras i hörnet */
 
   /* Vites CSS centrerar allt, annars hamnar etiketterna mitt i kortet */
   text-align: left;
 }
 
+/* Var en textplatshållare, är nu loggan. */
 .auth-logo {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  text-align: center;
+  display: block;
+  height: 34px;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* Stängknappen. Behövs framför allt på mobil, där ytan utanför
+   kortet knappt går att träffa. */
+.auth-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  /* 44x44 är minsta rekommenderade träffyta för fingrar.
+     Ikonen är 18px, resten är osynlig marginal runt den. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--auth-text-dim);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.auth-close:hover {
+  color: var(--auth-text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.auth-close:focus-visible {
+  outline: 2px solid var(--auth-primary);
+  outline-offset: -2px;
 }
 
 .auth-title {
