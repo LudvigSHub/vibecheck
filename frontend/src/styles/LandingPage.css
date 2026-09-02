@@ -152,6 +152,56 @@
   border-color: var(--color-accent);
 }
 
+.slang-card__status {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.slang-card__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.slang-card__bar {
+  height: 12px;
+  border-radius: 6px;
+  background: var(--color-border-subtle);
+  animation: slang-pulse 1.4s ease-in-out infinite;
+}
+
+.slang-card__bar--title {
+  height: 22px;
+  width: 60%;
+}
+
+.slang-card__bar--short {
+  width: 40%;
+}
+
+@keyframes slang-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Synlig bara för skärmläsare. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---------- Funktionskort ------------------------------------------------- */
 
 .landing__features {
@@ -273,5 +323,8 @@
   .landing *,
   .btn {
     transition: none !important;
+  }
+  .slang-card__bar {
+    animation: none;
   }
 }

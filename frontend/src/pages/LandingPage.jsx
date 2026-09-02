@@ -76,14 +76,15 @@ function LandingPage() {
           height={476}
         />
 
-        {/* Hårdkodad data tills endpointen för dagens ord finns. */}
+        <SlangOfDayCard />
+        {/* Hårdkodad data tills endpointen för dagens ord finns.
         <SlangOfDayCard
           word="Cooked"
           meaning="Körd / chanslös"
           exampleQuestion="Jag har prov imorgon"
           exampleAnswer="Du är cooked 💀"
           to="/ordbok/cooked"
-        />
+        /> */}
       </section>
 
       <section className="landing__features" aria-label="Vad du kan göra">
