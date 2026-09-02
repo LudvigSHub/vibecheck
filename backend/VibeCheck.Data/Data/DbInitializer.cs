@@ -350,13 +350,6 @@ public static class DbInitializer
         new()
         {
             UserID = users["user"].Id,
-            WordID = words["lit"].WordID,
-            IsPositive = true
-        },
-
-        new()
-        {
-            UserID = users["user"].Id,
             WordID = words["sus"].WordID,
             IsPositive = false
         }
@@ -371,7 +364,7 @@ public static class DbInitializer
     // ============================================================
 
     private static async Task SeedQuestionTypesAsync(
-    VibeCheckDbContext context)
+        VibeCheckDbContext context)
     {
         if (await context.QuestionTypes.AnyAsync())
             return;
@@ -380,12 +373,14 @@ public static class DbInitializer
     {
         new()
         {
-            TypeText = "Multiple Choice"
+            TypeText = "Multiple Choice",
+            Description = "Vilket slangord passar bäst för att beskriva denna situation?"
         },
 
         new()
         {
-            TypeText = "True or False"
+            TypeText = "True or False",
+            Description = "Är påståendet ovan sant eller falskt?"
         }
     };
 
@@ -671,6 +666,7 @@ public static class DbInitializer
     {
         // ============================================================
         // Internet Slang Basics - Easy
+        // Questions 1-10
         // ============================================================
 
         new()
@@ -685,50 +681,154 @@ public static class DbInitializer
             QuestionID = questions[2].QuestionID
         },
 
-
-        // ============================================================
-        // Internet Slang Challenge - Medium
-        // ============================================================
-
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
-            QuestionID = questions[2].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
             QuestionID = questions[3].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
             QuestionID = questions[4].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuestionID = questions[5].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuestionID = questions[6].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuestionID = questions[7].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuestionID = questions[8].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuestionID = questions[9].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuestionID = questions[10].QuestionID
+        },
+
+
+        // ============================================================
+        // Internet Slang Challenge - Medium
+        // Questions 11-20
+        // ============================================================
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[11].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[12].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[13].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[14].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[15].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[16].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[17].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[18].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[19].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuestionID = questions[20].QuestionID
         },
 
 
         // ============================================================
         // Advanced Slang Knowledge - Hard
+        // Questions 21-25
         // ============================================================
 
         new()
         {
             QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
-            QuestionID = questions[3].QuestionID
+            QuestionID = questions[21].QuestionID
         },
 
         new()
         {
             QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
-            QuestionID = questions[4].QuestionID
+            QuestionID = questions[22].QuestionID
         },
 
         new()
         {
             QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
-            QuestionID = questions[5].QuestionID
+            QuestionID = questions[23].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuestionID = questions[24].QuestionID
+        },
+
+        new()
+        {
+            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuestionID = questions[25].QuestionID
         }
     };
 
@@ -741,8 +841,8 @@ public static class DbInitializer
     // ============================================================
 
     private static async Task SeedQuizAttemptsAsync(
-    VibeCheckDbContext context,
-    UserManager<User> userManager)
+     VibeCheckDbContext context,
+     UserManager<User> userManager)
     {
         if (await context.QuizAttempts.AnyAsync())
             return;
@@ -757,6 +857,10 @@ public static class DbInitializer
 
         var attempts = new List<QuizAttempt>
     {
+        // ============================================================
+        // Internet Slang Basics
+        // ============================================================
+
         new()
         {
             UserID = user.Id,
@@ -766,6 +870,10 @@ public static class DbInitializer
             AttemptDate = DateTime.UtcNow.AddDays(-2),
             CompletedAt = DateTime.UtcNow.AddDays(-2).AddMinutes(5)
         },
+
+        // ============================================================
+        // Internet Slang Challenge
+        // ============================================================
 
         new()
         {
@@ -781,7 +889,6 @@ public static class DbInitializer
         await context.QuizAttempts.AddRangeAsync(attempts);
         await context.SaveChangesAsync();
     }
-
 
     // ============================================================
     // QUIZATTEMPTSANSWERS
@@ -803,19 +910,38 @@ public static class DbInitializer
         var alternatives = await context.QuestionAlternatives
             .ToListAsync();
 
-        QuestionAlternative GetAlternative(
-            int questionId,
-            string alternativeText)
+        // ============================================================
+        // Helper methods
+        // ============================================================
+
+        QuestionAlternative GetCorrectAlternative(int questionId)
         {
+            var question = questions[questionId];
+
             var alternative = alternatives.FirstOrDefault(a =>
-                a.QuestionID == questionId &&
-                a.AlternativeText == alternativeText);
+                a.AlternativeID == question.CorrectAlternativeID);
 
             if (alternative == null)
             {
                 throw new Exception(
-                    $"Could not find alternative '{alternativeText}' " +
-                    $"for question {questionId}.");
+                    $"Could not find correct alternative for question {questionId}.");
+            }
+
+            return alternative;
+        }
+
+        QuestionAlternative GetWrongAlternative(int questionId)
+        {
+            var question = questions[questionId];
+
+            var alternative = alternatives.FirstOrDefault(a =>
+                a.QuestionID == questionId &&
+                a.AlternativeID != question.CorrectAlternativeID);
+
+            if (alternative == null)
+            {
+                throw new Exception(
+                    $"Could not find wrong alternative for question {questionId}.");
             }
 
             return alternative;
@@ -839,7 +965,7 @@ public static class DbInitializer
             QuizAttemptID = basicAttempt.QuizAttemptID,
             QuestionID = questions[1].QuestionID,
             SelectedAlternativeID =
-                GetAlternative(1, "Amazing or very good").AlternativeID,
+                GetCorrectAlternative(1).AlternativeID,
             IsCorrect = true
         },
 
@@ -849,42 +975,41 @@ public static class DbInitializer
             QuizAttemptID = basicAttempt.QuizAttemptID,
             QuestionID = questions[2].QuestionID,
             SelectedAlternativeID =
-                GetAlternative(2, "True").AlternativeID,
+                GetCorrectAlternative(2).AlternativeID,
             IsCorrect = true
         },
-
 
         // ============================================================
         // Internet Slang Challenge - Attempt
         // ============================================================
 
-        // Q2 - Correct
+        // Q11 - Correct
         new()
         {
             QuizAttemptID = challengeAttempt.QuizAttemptID,
-            QuestionID = questions[2].QuestionID,
+            QuestionID = questions[11].QuestionID,
             SelectedAlternativeID =
-                GetAlternative(2, "True").AlternativeID,
+                GetCorrectAlternative(11).AlternativeID,
             IsCorrect = true
         },
 
-        // Q3 - Correct
+        // Q12 - Correct
         new()
         {
             QuizAttemptID = challengeAttempt.QuizAttemptID,
-            QuestionID = questions[3].QuestionID,
+            QuestionID = questions[12].QuestionID,
             SelectedAlternativeID =
-                GetAlternative(3, "Cringe").AlternativeID,
+                GetCorrectAlternative(12).AlternativeID,
             IsCorrect = true
         },
 
-        // Q4 - Wrong
+        // Q13 - Wrong
         new()
         {
             QuizAttemptID = challengeAttempt.QuizAttemptID,
-            QuestionID = questions[4].QuestionID,
+            QuestionID = questions[13].QuestionID,
             SelectedAlternativeID =
-                GetAlternative(4, "Fire").AlternativeID,
+                GetWrongAlternative(13).AlternativeID,
             IsCorrect = false
         }
     };

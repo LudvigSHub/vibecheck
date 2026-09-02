@@ -1,17 +1,32 @@
 [
   {
-    "TagName": "positive"
+    "TagName": "positiv"
   },
   {
-    "TagName": "negative"
+    "TagName": "negativ"
   },
   {
-    "TagName": "popular"
+    "TagName": "ungdomsslang"
   },
   {
-    "TagName": "funny"
+    "TagName": "internet"
   },
   {
-    "TagName": "suspicious"
+    "TagName": "sociala medier"
+  },
+  {
+    "TagName": "gaming"
+  },
+  {
+    "TagName": "humor"
+  },
+  {
+    "TagName": "förolämpning"
+  },
+  {
+    "TagName": "svordom"
+  },
+  {
+    "TagName": "vardaglig"
   }
 ]

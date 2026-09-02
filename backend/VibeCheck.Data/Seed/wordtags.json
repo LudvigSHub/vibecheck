@@ -1,46 +1,706 @@
 [
   {
     "Word": "fire",
-    "Tag": "positive"
+    "Tag": "positiv"
   },
   {
     "Word": "fire",
-    "Tag": "popular"
+    "Tag": "ungdomsslang"
   },
   {
-    "Word": "lit",
-    "Tag": "positive"
+    "Word": "fire",
+    "Tag": "internet"
+  },
+
+  {
+    "Word": "rizz",
+    "Tag": "positiv"
   },
   {
-    "Word": "lit",
-    "Tag": "popular"
+    "Word": "rizz",
+    "Tag": "ungdomsslang"
   },
   {
-    "Word": "cringe",
-    "Tag": "negative"
+    "Word": "rizz",
+    "Tag": "internet"
   },
   {
-    "Word": "cringe",
-    "Tag": "funny"
+    "Word": "rizz",
+    "Tag": "sociala medier"
+  },
+
+  {
+    "Word": "no cap",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "no cap",
+    "Tag": "internet"
+  },
+  {
+    "Word": "no cap",
+    "Tag": "sociala medier"
+  },
+
+  {
+    "Word": "keff",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "keff",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "keff",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "aura",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "aura",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "aura",
+    "Tag": "internet"
+  },
+  {
+    "Word": "aura",
+    "Tag": "sociala medier"
   },
   {
     "Word": "sus",
-    "Tag": "suspicious"
+    "Tag": "negativ"
   },
   {
     "Word": "sus",
-    "Tag": "negative"
+    "Tag": "ungdomsslang"
   },
   {
-    "Word": "sketchy",
-    "Tag": "suspicious"
+    "Word": "sus",
+    "Tag": "internet"
   },
   {
-    "Word": "sketchy",
-    "Tag": "negative"
+    "Word": "sus",
+    "Tag": "gaming"
   },
   {
-    "Word": "hilarious",
-    "Tag": "funny"
+    "Word": "based",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "based",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "based",
+    "Tag": "internet"
+  },
+  {
+    "Word": "mid",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "mid",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "mid",
+    "Tag": "internet"
+  },
+  {
+    "Word": "goated",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "goated",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "goated",
+    "Tag": "internet"
+  },
+  {
+    "Word": "goated",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "delulu",
+    "Tag": "humor"
+  },
+  {
+    "Word": "delulu",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "delulu",
+    "Tag": "internet"
+  },
+  {
+    "Word": "delulu",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "aina",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "aina",
+    "Tag": "vardaglig"
+  },
+  {
+    "Word": "abow",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "abow",
+    "Tag": "internet"
+  },
+  {
+    "Word": "abow",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "no shit",
+    "Tag": "humor"
+  },
+  {
+    "Word": "no shit",
+    "Tag": "vardaglig"
+  },
+  {
+    "Word": "no shit",
+    "Tag": "internet"
+  },
+  {
+    "Word": "deadass",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "deadass",
+    "Tag": "internet"
+  },
+  {
+    "Word": "deadass",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "yap",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "yap",
+    "Tag": "internet"
+  },
+  {
+    "Word": "yap",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "yap",
+    "Tag": "humor"
+  },
+  {
+    "Word": "clown",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "clown",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "clown",
+    "Tag": "internet"
+  },
+  {
+    "Word": "clown",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "clown",
+    "Tag": "humor"
+  },
+  {
+    "Word": "bot",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "bot",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "bot",
+    "Tag": "internet"
+  },
+  {
+    "Word": "bot",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "bot",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "NPC",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "NPC",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "NPC",
+    "Tag": "internet"
+  },
+  {
+    "Word": "NPC",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "NPC",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "goofy",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "goofy",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "goofy",
+    "Tag": "internet"
+  },
+  {
+    "Word": "goofy",
+    "Tag": "humor"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "internet"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "cringe",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "bozo",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "bozo",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "bozo",
+    "Tag": "internet"
+  },
+  {
+    "Word": "bozo",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "bozo",
+    "Tag": "humor"
+  },
+  {
+    "Word": "corny",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "corny",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "corny",
+    "Tag": "internet"
+  },
+  {
+    "Word": "corny",
+    "Tag": "humor"
+  },
+  {
+    "Word": "glazer",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "glazer",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "glazer",
+    "Tag": "internet"
+  },
+  {
+    "Word": "glazer",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "tryhard",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "tryhard",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "tryhard",
+    "Tag": "internet"
+  },
+  {
+    "Word": "tryhard",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "washed",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "washed",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "washed",
+    "Tag": "internet"
+  },
+  {
+    "Word": "washed",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "bum",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "bum",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "bum",
+    "Tag": "internet"
+  },
+  {
+    "Word": "bum",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "simp",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "simp",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "simp",
+    "Tag": "internet"
+  },
+  {
+    "Word": "simp",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "wannabe",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "wannabe",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "wannabe",
+    "Tag": "internet"
+  },
+  {
+    "Word": "wannabe",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "yapper",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "yapper",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "yapper",
+    "Tag": "internet"
+  },
+  {
+    "Word": "yapper",
+    "Tag": "humor"
+  },
+  {
+    "Word": "skill issue",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "skill issue",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "skill issue",
+    "Tag": "internet"
+  },
+  {
+    "Word": "skill issue",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "skill issue",
+    "Tag": "humor"
+  },
+  {
+    "Word": "glazea",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "glazea",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "glazea",
+    "Tag": "internet"
+  },
+  {
+    "Word": "glazea",
+    "Tag": "humor"
+  },
+  {
+    "Word": "cooked",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "cooked",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "cooked",
+    "Tag": "internet"
+  },
+  {
+    "Word": "cooked",
+    "Tag": "humor"
+  },
+  {
+    "Word": "fraud",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "fraud",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "fraud",
+    "Tag": "internet"
+  },
+  {
+    "Word": "fraud",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "chopped",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "chopped",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "chopped",
+    "Tag": "internet"
+  },
+  {
+    "Word": "chopped",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "unc",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "unc",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "unc",
+    "Tag": "internet"
+  },
+  {
+    "Word": "unc",
+    "Tag": "humor"
+  },
+  {
+    "Word": "aura loss",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "aura loss",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "aura loss",
+    "Tag": "internet"
+  },
+  {
+    "Word": "aura loss",
+    "Tag": "humor"
+  },
+  {
+    "Word": "L",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "L",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "L",
+    "Tag": "internet"
+  },
+  {
+    "Word": "glazing",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "glazing",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "glazing",
+    "Tag": "internet"
+  },
+  {
+    "Word": "glazing",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "meatriding",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "meatriding",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "meatriding",
+    "Tag": "internet"
+  },
+  {
+    "Word": "meatriding",
+    "Tag": "förolämpning"
+  },
+  {
+    "Word": "caught in 4K",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "caught in 4K",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "caught in 4K",
+    "Tag": "internet"
+  },
+  {
+    "Word": "caught in 4K",
+    "Tag": "humor"
+  },
+  {
+    "Word": "W",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "W",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "W",
+    "Tag": "internet"
+  },
+  {
+    "Word": "W",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "cooking",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "cooking",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "cooking",
+    "Tag": "internet"
+  },
+  {
+    "Word": "cooking",
+    "Tag": "humor"
+  },
+  {
+    "Word": "locked in",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "locked in",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "locked in",
+    "Tag": "internet"
+  },
+  {
+    "Word": "locked in",
+    "Tag": "gaming"
+  },
+  {
+    "Word": "peak",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "peak",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "peak",
+    "Tag": "internet"
+  },
+  {
+    "Word": "peak",
+    "Tag": "humor"
+  },
+  {
+    "Word": "slay",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "slay",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "slay",
+    "Tag": "internet"
+  },
+  {
+    "Word": "slay",
+    "Tag": "sociala medier"
   }
 ]

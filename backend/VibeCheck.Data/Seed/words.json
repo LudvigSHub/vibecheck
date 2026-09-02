@@ -1,34 +1,182 @@
 [
   {
     "WordDesc": "fire",
-    "Meaning": "Very good or impressive"
+    "Meaning": "Något som är väldigt bra, häftigt, imponerande eller håller hög kvalitet."
   },
   {
-    "WordDesc": "lit",
-    "Meaning": "Very good or impressive"
+    "WordDesc": "rizz",
+    "Meaning": "Förmågan att charma eller attrahera någon, särskilt i romantiska sammanhang."
   },
   {
-    "WordDesc": "cringe",
-    "Meaning": "Something embarrassing"
+    "WordDesc": "no cap",
+    "Meaning": "Att man talar sanning eller är helt seriös och inte överdriver."
   },
   {
-    "WordDesc": "embarrassing",
-    "Meaning": "Something embarrassing"
+    "WordDesc": "keff",
+    "Meaning": "Något som är dåligt, konstigt, tråkigt eller av låg kvalitet."
+  },
+  {
+    "WordDesc": "aura",
+    "Meaning": "En persons utstrålning, karisma eller coola intryck, särskilt hur personen uppfattas av andra."
   },
   {
     "WordDesc": "sus",
-    "Meaning": "Suspicious or questionable"
+    "Meaning": "Något eller någon som verkar misstänkt, skum eller opålitlig."
   },
   {
-    "WordDesc": "sketchy",
-    "Meaning": "Suspicious or questionable"
+    "WordDesc": "based",
+    "Meaning": "Att uttrycka stöd eller uppskattning för någons åsikt eller beteende, ofta utan att bry sig om vad andra tycker."
   },
   {
-    "WordDesc": "annoying",
-    "Meaning": "Annoying or frustrating"
+    "WordDesc": "mid",
+    "Meaning": "Något som är mediokert, överskattat eller helt enkelt inte särskilt bra."
   },
   {
-    "WordDesc": "hilarious",
-    "Meaning": "Something extremely funny"
+    "WordDesc": "goated",
+    "Meaning": "Något eller någon som anses vara extremt bra och bland de bästa inom sitt område."
+  },
+  {
+    "WordDesc": "delulu",
+    "Meaning": "Att vara orealistisk eller ha överdrivet optimistiska föreställningar, ofta på ett skämtsamt sätt."
+  },
+  {
+    "WordDesc": "aina",
+    "Meaning": "Polis eller polisen, ofta använt i vardagligt språk och ibland med en negativ eller skämtsam ton."
+  },
+  {
+    "WordDesc": "abow",
+    "Meaning": "Ett utrop som används för att uttrycka stark förvåning, chock eller imponerad reaktion."
+  },
+  {
+    "WordDesc": "no shit",
+    "Meaning": "Ett uttryck som används för att visa att något är uppenbart, eller som en sarkastisk reaktion på något som redan är självklart."
+  },
+  {
+    "WordDesc": "deadass",
+    "Meaning": "Att man är helt seriös eller talar sanning utan att skämta."
+  },
+  {
+    "WordDesc": "yap",
+    "Meaning": "Att prata mycket eller länge, särskilt om något oviktigt eller utan att komma till saken."
+  },
+  {
+    "WordDesc": "clown",
+    "Meaning": "En person som beter sig dumt, pinsamt eller oseriöst och därför inte tas på allvar."
+  },
+  {
+    "WordDesc": "bot",
+    "Meaning": "En förolämpning för någon som beter sig korkat, stelt eller som om personen saknar eget tänkande."
+  },
+  {
+    "WordDesc": "NPC",
+    "Meaning": "En förolämpning för någon som uppfattas som tråkig, förutsägbar eller som om personen bara följer andra istället för att tänka själv."
+  },
+  {
+    "WordDesc": "goofy",
+    "Meaning": "Någon eller något som uppfattas som löjligt, töntigt eller pinsamt på ett ofta skämtsamt sätt."
+  },
+  {
+    "WordDesc": "cringe",
+    "Meaning": "Något som uppfattas som pinsamt, stelt eller obekvämt att bevittna, ofta på grund av hur någon beter sig."
+  },
+  {
+    "WordDesc": "bozo",
+    "Meaning": "En förolämpning för en person som beter sig dumt, klumpigt eller gör bort sig."
+  },
+  {
+    "WordDesc": "corny",
+    "Meaning": "Något som uppfattas som töntigt, klyschigt eller pinsamt på ett försök att vara coolt eller imponerande."
+  },
+  {
+    "WordDesc": "glazer",
+    "Meaning": "En person som överdrivet hyllar eller försvarar någon annan, ofta på ett sätt som uppfattas som löjligt."
+  },
+  {
+    "WordDesc": "tryhard",
+    "Meaning": "En person som försöker alldeles för hårt att vinna, imponera eller verka bra, särskilt när det märks tydligt."
+  },
+  {
+    "WordDesc": "washed",
+    "Meaning": "En person som inte längre anses vara lika bra som tidigare, särskilt inom gaming, sport eller någon annan prestation."
+  },
+  {
+    "WordDesc": "bum",
+    "Meaning": "En förolämpning för någon som uppfattas som lat, värdelös eller dålig på det de försöker göra."
+  },
+  {
+    "WordDesc": "simp",
+    "Meaning": "En person som är överdrivet tillgiven, undergiven eller desperat efter uppmärksamhet från någon de gillar."
+  },
+  {
+    "WordDesc": "wannabe",
+    "Meaning": "En person som försöker efterlikna någon annan eller framstå som något de egentligen inte är."
+  },
+  {
+    "WordDesc": "yapper",
+    "Meaning": "En person som pratar väldigt mycket, ofta utan att säga något särskilt viktigt eller komma till saken."
+  },
+  {
+    "WordDesc": "skill issue",
+    "Meaning": "Ett hånfullt uttryck som används när någon misslyckas och antyder att problemet beror på personens bristande skicklighet."
+  },
+  {
+    "WordDesc": "glazea",
+    "Meaning": "Att överdrivet hylla, försvara eller ge någon beröm, ofta på ett sätt som uppfattas som överdrivet eller löjligt."
+  },
+  {
+    "WordDesc": "cooked",
+    "Meaning": "Att vara körd, ha stora problem eller vara i en situation som ser väldigt dålig ut."
+  },
+  {
+    "WordDesc": "fraud",
+    "Meaning": "En person som framstår som mycket bättre än den egentligen är och som anses ha blivit avslöjad som en bluff."
+  },
+  {
+    "WordDesc": "chopped",
+    "Meaning": "Att beskriva någon som ful eller oattraktiv, främst i skämtsamt internet- och ungdomsspråk."
+  },
+  {
+    "WordDesc": "unc",
+    "Meaning": "Ett slanguttryck för en äldre person eller någon som beter sig gammaldags och därför uppfattas som gammal."
+  },
+  {
+    "WordDesc": "aura loss",
+    "Meaning": "Att göra något pinsamt eller klantigt som får en att framstå som mindre cool eller imponerande."
+  },
+  {
+    "WordDesc": "L",
+    "Meaning": "Ett uttryck som används för att markera att någon har misslyckats, gjort bort sig eller tagit ett dåligt beslut."
+  },
+  {
+    "WordDesc": "glazing",
+    "Meaning": "Överdrivet hyllande eller försvarande av någon, särskilt när det uppfattas som överdrivet eller oförtjänt."
+  },
+  {
+    "WordDesc": "meatriding",
+    "Meaning": "Att överdrivet hylla, försvara eller stödja någon på ett löjligt eller överdrivet sätt."
+  },
+  {
+    "WordDesc": "caught in 4K",
+    "Meaning": "Att bli avslöjad med något pinsamt eller något som motsäger det man tidigare sagt eller påstått."
+  },
+  {
+    "WordDesc": "W",
+    "Meaning": "Ett uttryck som används för att markera att någon har lyckats, gjort något bra eller tagit ett bra beslut."
+  },
+  {
+    "WordDesc": "cooking",
+    "Meaning": "Att vara på gång att göra något riktigt bra eller lyckas med något, ofta när ens prestation börjar ge resultat."
+  },
+  {
+    "WordDesc": "locked in",
+    "Meaning": "Att vara extremt fokuserad och helt koncentrerad på att prestera eller lyckas med något."
+  },
+  {
+    "WordDesc": "peak",
+    "Meaning": "Något som befinner sig på sin bästa nivå eller anses vara bland det bästa som finns."
+  },
+  {
+    "WordDesc": "slay",
+    "Meaning": "Att göra något väldigt bra, självsäkert eller imponerande."
   }
 ]

@@ -6,6 +6,8 @@ public class QuestionType
 
     public string TypeText { get; set; } = string.Empty;
 
+    public string Description { get; set; } = string.Empty;
+
     // Relationships
     public ICollection<Question> Questions { get; set; }
         = new List<Question>();
