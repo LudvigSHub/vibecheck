@@ -88,12 +88,16 @@
 
 /* --- Logga in-knapp ------------------------------------------------------- */
 
+/* Är en button nu, därför border, font och cursor */
 .navbar__login {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 9px 18px;
+  border: 0;
   border-radius: 999px;
+  font-family: inherit;
+  cursor: pointer;
   background: var(--navbar-accent);
   color: var(--navbar-accent-text);
   font-size: 15px;
@@ -116,6 +120,30 @@
 
 .navbar__login-icon {
   flex-shrink: 0;
+}
+
+/* --- Inloggat state (avatar + logga ut) ----------------------------------- */
+
+.navbar__user {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Första bokstaven i användarnamnet, tills vi har riktiga profilbilder */
+.navbar__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--navbar-accent);
+  color: var(--navbar-accent-text);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 /* --- Hamburgare (döljs på desktop) ---------------------------------------- */
@@ -252,6 +280,16 @@
     justify-content: center;
     margin-top: 10px;
     padding: 12px 18px;
+  }
+
+  .navbar__user {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  /* Marginalen sitter på raden i stället, annars hamnar knappen snett mot avataren */
+  .navbar__user .navbar__login {
+    margin-top: 0;
   }
 }
 

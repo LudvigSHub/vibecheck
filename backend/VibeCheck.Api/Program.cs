@@ -26,6 +26,10 @@ builder.Services
         options.Password.RequireDigit = true;
         options.Password.RequireLowercase = false;
         options.Password.RequireNonAlphanumeric = false;
+
+        // Utan den här kollar Identity varken formatet på e-posten
+        // eller om adressen redan används
+        options.User.RequireUniqueEmail = true;
     })
     .AddRoles<IdentityRole<int>>()
     .AddRoles<IdentityRole<int>>()
