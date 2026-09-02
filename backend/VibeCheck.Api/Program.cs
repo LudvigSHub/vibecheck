@@ -18,7 +18,20 @@ builder.Services.AddDbContext<VibeCheckDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services
-    .AddIdentityCore<User>()
+    .AddIdentityCore<User>(options =>
+    {
+        // Modifierade regler för lösenord
+        options.Password.RequiredLength = 8;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+
+        // Utan den här kollar Identity varken formatet på e-posten
+        // eller om adressen redan används
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddRoles<IdentityRole<int>>()
     .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<VibeCheckDbContext>()
     .AddSignInManager();

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
+import { useAuth } from "../context/AuthContext";
+
 import "../styles/Navbar.css";
 
 /*
@@ -36,9 +38,11 @@ function UserIcon() {
   );
 }
 
-function Navbar() {
+// onLoginClick öppnar inloggningsrutan, den ligger i App
+function Navbar({ onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, authLoading, user, logout } = useAuth();
 
   // Stäng mobilmenyn när man navigerar till en ny sida.
   useEffect(() => {
@@ -113,12 +117,24 @@ function Navbar() {
             ))}
           </ul>
 
-          {/* Oinloggat state. När vi kopplar på auth byter vi ut det här
-              blocket mot en avatar/dropdown baserat på isAuthenticated. */}
-          <Link to="/logga-in" className="navbar__login">
-            <UserIcon />
-            <span>Logga in</span>
-          </Link>
+          {/* Knappar och inte länkar, eftersom inloggningen är en popup.
+              authLoading gör att knappen inte hinner blinka förbi vid omladdning. */}
+          {authLoading ? null : isAuthenticated ? (
+            <div className="navbar__user">
+              <span className="navbar__avatar" aria-hidden="true">
+                {user.userName.charAt(0).toUpperCase()}
+              </span>
+              <button type="button" className="navbar__login" onClick={logout}>
+                <UserIcon />
+                <span>Logga ut</span>
+              </button>
+            </div>
+          ) : (
+            <button type="button" className="navbar__login" onClick={onLoginClick}>
+              <UserIcon />
+              <span>Logga in</span>
+            </button>
+          )}
         </div>
       </nav>
     </header>
