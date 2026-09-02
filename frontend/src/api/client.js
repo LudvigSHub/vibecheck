@@ -52,10 +52,21 @@ export async function apiFetch(path, options = {}) {
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
-    ...fetchOptions,
-    headers,
-  });
+  let response;
+
+  // fetch kastar bara när servern inte svarar alls, 400 och 500 fångas längre ner.
+  // Utan den här står det "Failed to fetch" när API:et ligger nere.
+  try {
+    response = await fetch(`${API_URL}${path}`, {
+      ...fetchOptions,
+      headers,
+    });
+  } catch {
+    throw new ApiError(
+      "Kunde inte nå servern. Försök igen om en stund.",
+      0
+    );
+  }
 
   const text = await response.text();
 
