@@ -12,7 +12,7 @@ const DIFFICULTY_LABELS = {
   Hard: "Svår",
 };
 
-export default function QuizCard({ quiz, onStart }) {
+export default function QuizCard({ quiz, onStart, starting = false }) {
   const {
     quizName,
     quizDescription,
@@ -60,9 +60,13 @@ export default function QuizCard({ quiz, onStart }) {
       </div>
 
       {isUnlocked ? (
-        <Button className="quiz-card__action" onClick={onStart}>
+        <Button
+          className="quiz-card__action"
+          onClick={onStart}
+          disabled={starting}
+        >
           <TargetIcon width={19} height={19} />
-          {hasResult ? "Gör om quizet" : "Starta quiz"}
+          {starting ? "Startar…" : hasResult ? "Gör om quizet" : "Starta quiz"}
         </Button>
       ) : (
         <p className="quiz-card__locked-text">
