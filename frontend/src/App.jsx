@@ -1,27 +1,35 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 
 import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
+import QuizesPage from "./pages/QuizesPage";
+
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
-import QuizesPage from "./pages/QuizesPage";
 
 function App() {
-  // null = ingen ruta öppen. Ligger här så knappen i navbaren når den.
+  // null = ingen autentiseringsruta är öppen.
   const [authView, setAuthView] = useState(null);
   const [authMessage, setAuthMessage] = useState("");
 
-  // Vart användaren var på väg när hen blockerades.
+  // Sidan användaren försökte nå innan ProtectedRoute stoppade navigeringen.
   const [redirectTo, setRedirectTo] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // ProtectedRoute skickar hit via Navigate-state när någon blockerats.
+  // ProtectedRoute skickar information via Navigate-state
+  // när en oinloggad användare försöker nå en skyddad sida.
   useEffect(() => {
     if (!location.state?.requireAuth) {
       return;
@@ -31,19 +39,28 @@ function App() {
     setAuthMessage("Logga in för att nå den sidan.");
     setRedirectTo(location.state.from ?? null);
 
-    // Rensa historikposten. Utan det ligger requireAuth kvar, och rutan
-    // poppar upp igen varje gång användaren laddar om startsidan.
-    navigate(location.pathname, { replace: true, state: null });
+    // Rensa state så att inloggningsrutan inte öppnas igen
+    // om användaren laddar om landningssidan.
+    navigate(location.pathname, {
+      replace: true,
+      state: null,
+    });
   }, [location, navigate]);
 
   function handleAuthSuccess() {
     setAuthView(null);
     setAuthMessage("");
 
+    // Om användaren först försökte nå en skyddad sida
+    // skickas hen tillbaka dit efter inloggningen.
     if (redirectTo) {
       navigate(redirectTo, { replace: true });
       setRedirectTo(null);
+      return;
     }
+
+    // Vanlig inloggning från landningssidan leder till Home-page.
+    navigate("/home");
   }
 
   function handleAuthClose() {
@@ -60,9 +77,15 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/test" element={<TestPage />} />
 
-        {/* Skyddade sidor: wrappa elementet, inte routen.
-            <Route> tar bara emot <Route> som barn. */}
-        
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/quiz"
           element={
@@ -71,10 +94,9 @@ function App() {
             </ProtectedRoute>
           }
         />
-       
       </Routes>
 
-      {/* Ligger utanför Routes så de kan öppnas från vilken sida som helst */}
+      {/* Formulären ligger utanför Routes så att de kan öppnas över alla sidor. */}
       {authView === "login" && (
         <LoginForm
           message={authMessage}
