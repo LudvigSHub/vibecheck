@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import TestPage from './pages/TestPage';
 import LandingPage from "./pages/LandingPage";
+import WordStashPage from "./pages/WordStashPage";
 import Navbar from './components/Navbar';
 import LoginForm from './components/auth/LoginForm';
 import RegisterForm from './components/auth/RegisterForm';
@@ -18,7 +19,7 @@ function App() {
         {/* Route avser per page, element hämtas från pages där */}
         <Route path="/" element={<LandingPage />} />
         <Route path='/Test' element={<TestPage/>}/>
-        {/* <Route path='/WordStash' element={<WordStash/>}/> */}
+        <Route path='/WordStash' element={<WordStashPage/>}/>
         {/* <Route path='/Account' element={<Account/>}/> */}
         {/* <Route path='/Quiz' element={<Quiz/>}/> */}
 

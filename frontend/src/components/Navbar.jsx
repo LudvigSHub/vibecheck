@@ -11,7 +11,7 @@ import "../styles/Navbar.css";
   när vi lägger till fler sidor.
 */
 const NAV_LINKS = [
-  { label: "Ordbok", to: "/ordbok" },
+  { label: "WordStash", to: "/wordstash" },
   { label: "Quiz", to: "/quiz" },
   { label: "Topplistor", to: "/topplistor" },
   { label: "Om oss", to: "/om-oss" },
