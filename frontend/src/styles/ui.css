@@ -208,14 +208,19 @@
   inset: 0;
   z-index: 100;
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 24px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   background: rgba(3, 16, 9, 0.85);
 }
 
 .modal-panel {
+  /* margin: auto i stället för align-items: center på overlayen. Auto-marginaler
+     i flexbox centrerar när det finns plats över, men nollställs när panelen är
+     högre än skärmen – då ligger toppen kvar innanför scrollytan. Med
+     align-items: center skjuts toppen i stället ovanför overlayens början, och
+     den delen går inte att scrolla fram. */
+  margin: auto;
   width: 100%;
   max-width: 360px;
   padding: 24px;

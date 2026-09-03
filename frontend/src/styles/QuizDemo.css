@@ -109,6 +109,15 @@
   color: var(--color-text-muted);
 }
 
+/* display: flex + width: fit-content gör knappen till ett block utan att den
+   blir fullbred. Som inline-flex lägger radboxen till extra utrymme under för
+   textens underhäng, så luckorna över och under hade inte blivit lika stora. */
+.quiz-demo__next {
+  display: flex;
+  width: fit-content;
+  margin-top: 20px;
+}
+
 .quiz-demo__progress {
   margin-top: 20px;
 }
