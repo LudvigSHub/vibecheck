@@ -9,7 +9,6 @@ using VibeCheck.Data.Models;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using VibeCheck.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +43,8 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<WordOfTheDayService>();
 builder.Services.AddScoped<QuizDemoService>();
+builder.Services.AddScoped<HomeService>();
+builder.Services.AddScoped<QuizProgressService>();
 
 // Tillåter frontendes adress och anrop
 const string CorsPolicy = "frontend";
