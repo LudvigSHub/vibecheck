@@ -10,12 +10,18 @@ public class Question
 
     public int DifficultyID { get; set; }
 
+    public int WordID { get; set; }
+
     public int? CorrectAlternativeID { get; set; }
 
     // Relationships
     public QuestionType QuestionType { get; set; } = null!;
 
     public Difficulty Difficulty { get; set; } = null!;
+
+    // Ordet frågan handlar om. Ger oss Word.Meaning som förklaringstext
+    // på resultatkortet, utan att vi behöver duplicera texten här.
+    public Word Word { get; set; } = null!;
 
     public QuestionAlternative? CorrectAlternative { get; set; }
 
