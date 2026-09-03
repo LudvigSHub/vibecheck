@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import Modal from "../ui/Modal";
 import "./AuthForm.css";
 
 // Propsen sätts av sidan som visar formuläret, t.ex. landningssidan
 function LoginForm({ onSuccess, onSwitch, onClose, message }) {
   const { login } = useAuth();
-
-  // Escape stänger rutan. Samma mönster som mobilmenyn i Navbar.
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === "Escape") {
-        onClose?.();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -40,38 +27,10 @@ function LoginForm({ onSuccess, onSwitch, onClose, message }) {
     }
   }
 
-  // Stänger bara om man klickar på det mörka, inte inuti rutan
-  function handleOverlayClick(event) {
-    if (event.target === event.currentTarget) {
-      onClose?.();
-    }
-  }
-
   return (
-    <div className="auth-overlay" onClick={handleOverlayClick}>
-      <form className="auth-card" onSubmit={handleSubmit}>
-        {/* Platshållare tills vi har loggan som fil */}
-        <button
-          type="button"
-          className="auth-close"
-          onClick={() => onClose?.()}
-          aria-label="Stäng"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <path d="M6 6l12 12" />
-            <path d="M18 6L6 18" />
-          </svg>
-        </button>
+    <Modal onClose={onClose}>
 
+      <form onSubmit={handleSubmit}>
         <img
           className="auth-logo"
           src="/images/vibecheck-logo.png"
@@ -151,7 +110,7 @@ function LoginForm({ onSuccess, onSwitch, onClose, message }) {
           </a>
         </p>
       </form>
-    </div>
+    </Modal>
   );
 }
 

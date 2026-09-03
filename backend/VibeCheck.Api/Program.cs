@@ -42,6 +42,7 @@ builder.Services.AddScoped<PingService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<WordOfTheDayService>();
+builder.Services.AddScoped<QuizDemoService>();
 builder.Services.AddScoped<HomeService>();
 builder.Services.AddScoped<QuizProgressService>();
 

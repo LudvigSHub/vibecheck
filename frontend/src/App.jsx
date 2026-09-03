@@ -74,7 +74,7 @@ function App() {
       <Navbar onLoginClick={() => setAuthView("login")} />
 
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage onOpenRegister={() => setAuthView("register")} />}/>
         <Route path="/test" element={<TestPage />} />
 
         <Route
