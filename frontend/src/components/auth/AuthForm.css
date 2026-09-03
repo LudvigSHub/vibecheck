@@ -4,6 +4,8 @@
 /* Tillfälligt, tills fonterna laddas globalt */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;600&display=swap');
 
+
+
 /* Färgerna från Figma. Ligger här och inte i :root så de inte krockar med index.css. */
 .auth-overlay {
   --auth-primary: #b8e62e;
@@ -210,4 +212,14 @@
   font-size: 14px;
   text-align: center;
   color: var(--auth-text-dim);
+}
+
+.auth-notice {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--auth-primary);
+  border-radius: 10px;
+  background: rgba(184, 230, 46, 0.1);
+  color: var(--auth-text);
+  font-size: 14px;
 }
