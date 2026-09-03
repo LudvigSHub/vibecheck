@@ -199,7 +199,7 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
   }
 
   const current = questions[index];
-  const progress = Math.round(((index + 1) / questions.length) * 100);
+  const progress = Math.round(((index) / questions.length) * 100);
   const isLastQuestion = index === questions.length - 1;
 
   return (
@@ -253,14 +253,14 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
       )}
 
       {answered && !isLastQuestion && (
-        <Button onClick={handleNext}>
+        <Button className="quiz-demo__next" onClick={handleNext}>
           Nästa fråga
           <ArrowRightIcon width={20} height={20} />
         </Button>
       )}
 
       {answered && isLastQuestion && (
-        <Button onClick={handleFinish}>
+        <Button className="quiz-demo__next" onClick={handleFinish}>
           Se resultat
           <ArrowRightIcon width={20} height={20} />
         </Button>
@@ -270,7 +270,6 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
         <ProgressBar value={progress} />
         <div className="quiz-demo__progress-labels">
           <span>{progress}% avklarat</span>
-          <span>{index + 1} / {questions.length}</span>
         </div>
       </div>
     </Modal>
