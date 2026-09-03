@@ -19,4 +19,7 @@ public class Word
 
     public ICollection<WordTag> WordTags { get; set; }
         = new List<WordTag>();
+
+    public ICollection<Question> Questions { get; set; }
+        = new List<Question>();
 }

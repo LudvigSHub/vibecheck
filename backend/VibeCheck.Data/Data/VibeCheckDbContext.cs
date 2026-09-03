@@ -136,6 +136,17 @@ public class VibeCheckDbContext
             .HasForeignKey(q => q.DifficultyID)
             .OnDelete(DeleteBehavior.Restrict);
 
+        // Question -> Word
+        //
+        // Restrict och inte Cascade: raderar någon ett ord ska det smälla,
+        // inte tyst ta med sig frågorna. Samma val som för QuestionType
+        // och Difficulty ovan.
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.Word)
+            .WithMany(w => w.Questions)
+            .HasForeignKey(q => q.WordID)
+            .OnDelete(DeleteBehavior.Restrict);
+
         // QuestionAlternative primary key
         modelBuilder.Entity<QuestionAlternative>()
             .HasKey(qa => qa.AlternativeID);

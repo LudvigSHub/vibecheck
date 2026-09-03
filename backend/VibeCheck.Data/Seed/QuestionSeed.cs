@@ -7,4 +7,6 @@ public class QuestionSeed
     public string QuestionType { get; set; } = string.Empty;
 
     public string Difficulty { get; set; } = string.Empty;
+
+    public string Word { get; set; } = string.Empty;
 }

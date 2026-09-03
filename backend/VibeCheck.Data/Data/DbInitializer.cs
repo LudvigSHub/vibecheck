@@ -448,6 +448,9 @@ public static class DbInitializer
         var difficulties = await context.Difficulties
             .ToDictionaryAsync(d => d.DifficultyDesc);
 
+        var words = await context.Words
+            .ToDictionaryAsync(w => w.WordDesc);
+
         var questions = new List<Question>();
 
         foreach (var seed in seedQuestions)
@@ -468,11 +471,18 @@ public static class DbInitializer
                     $"Difficulty '{seed.Difficulty}' referenced in questions.json was not found.");
             }
 
+            if (!words.TryGetValue(seed.Word, out var word))
+            {
+                throw new Exception(
+                    $"Word '{seed.Word}' referenced by question '{seed.QuestionDesc}' was not found.");
+            }
+
             questions.Add(new Question
             {
                 QuestionDesc = seed.QuestionDesc,
                 QuestionTypeID = questionType.QuestionTypeID,
-                DifficultyID = difficulty.DifficultyID
+                DifficultyID = difficulty.DifficultyID,
+                WordID = word.WordID
             });
         }
 
