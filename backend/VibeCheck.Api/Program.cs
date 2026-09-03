@@ -45,6 +45,7 @@ builder.Services.AddScoped<WordOfTheDayService>();
 builder.Services.AddScoped<QuizDemoService>();
 builder.Services.AddScoped<HomeService>();
 builder.Services.AddScoped<QuizProgressService>();
+builder.Services.AddScoped<QuizService>();
 
 // Tillåter frontendes adress och anrop
 const string CorsPolicy = "frontend";
