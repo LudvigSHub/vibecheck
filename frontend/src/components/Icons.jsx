@@ -84,3 +84,20 @@ export function SearchIcon(props) {
     </svg>
   );
 }
+
+export function CloseIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M6 6l12 12" />
+      <path d="M18 6L6 18" />
+    </svg>
+  );
+}
+
+export function CheckIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}

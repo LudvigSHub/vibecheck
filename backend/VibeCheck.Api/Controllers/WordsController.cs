@@ -10,17 +10,21 @@ namespace VibeCheck.Api.Controllers;
 public class WordsController : ControllerBase
 {
     private readonly WordOfTheDayService _wordOfTheDayService;
+    private readonly QuizDemoService _quizDemoService;
     private readonly WordStashService _wordStashService;
+
     // Svensk tid, inte UTC. Annars byts dagens ord vid 01:00 eller 02:00 beroende på sommartid, i stället för vid midnatt.
     private static readonly TimeZoneInfo SwedishTime =
         TimeZoneInfo.FindSystemTimeZoneById("Europe/Stockholm");
 
     public WordsController(
         WordOfTheDayService wordOfTheDayService,
-        WordStashService wordStashService)
+        WordStashService wordStashService,
+        QuizDemoService quizDemoService)
     {
         _wordOfTheDayService = wordOfTheDayService;
         _wordStashService = wordStashService;
+        _quizDemoService = quizDemoService;
     }
 
     // GET /api/words
@@ -79,5 +83,14 @@ public class WordsController : ControllerBase
         }
 
         return Ok(word);
+    }
+
+    // GET /api/words/quiz-demo?count=10
+    [HttpGet("quiz-demo")]
+    public async Task<IActionResult> GetQuizDemo([FromQuery] int count = 10)
+    {
+        var questions = await _quizDemoService.GetQuestionsAsync(count);
+
+        return Ok(questions);
     }
 }

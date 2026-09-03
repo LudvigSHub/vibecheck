@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Modal from "../ui/Modal";
 import { useAuth } from "../../context/AuthContext";
 import "./AuthForm.css";
 
 // Samma upplägg som LoginForm, bara fler fält
 function RegisterForm({ onSuccess, onSwitch, onClose }) {
   const { register } = useAuth();
-
-  // Escape stänger rutan. Samma mönster som mobilmenyn i Navbar.
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === "Escape") {
-        onClose?.();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
-
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,37 +37,9 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
     }
   }
 
-  // Stänger bara om man klickar på det mörka, inte inuti rutan
-  function handleOverlayClick(event) {
-    if (event.target === event.currentTarget) {
-      onClose?.();
-    }
-  }
-
   return (
-    <div className="auth-overlay" onClick={handleOverlayClick}>
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <button
-          type="button"
-          className="auth-close"
-          onClick={() => onClose?.()}
-          aria-label="Stäng"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <path d="M6 6l12 12" />
-            <path d="M18 6L6 18" />
-          </svg>
-        </button>
-
+    <Modal onClose={onClose}>
+      <form onSubmit={handleSubmit}>
         <img
           className="auth-logo"
           src="/images/vibecheck-logo.png"
@@ -193,7 +152,7 @@ function RegisterForm({ onSuccess, onSwitch, onClose }) {
           </a>
         </p>
       </form>
-    </div>
+    </Modal>
   );
 }
 

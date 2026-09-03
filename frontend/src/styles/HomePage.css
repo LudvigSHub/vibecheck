@@ -1,0 +1,167 @@
+/* ========================================================================== 
+   HomePage – inloggad användares översikt
+   ========================================================================== */
+
+.home {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 34px 24px 80px;
+  box-sizing: border-box;
+}
+
+.home__overview {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto minmax(270px, 330px);
+  align-items: center;
+  gap: clamp(36px, 6vw, 84px);
+}
+
+.home__welcome {
+  min-width: 0;
+}
+
+.home__eyebrow {
+  margin-bottom: 8px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home__title {
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.home__streak {
+  margin-top: 10px;
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.home__progress-copy {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.home__progress-meta {
+  margin-top: 2px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.home__progress {
+  width: min(100%, 340px);
+  margin-top: 12px;
+}
+
+.home__continue {
+  margin-top: 28px;
+  border-color: var(--color-accent);
+}
+
+.home__phone {
+  display: block;
+  width: clamp(145px, 16vw, 190px);
+  height: auto;
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.28));
+}
+
+.home__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 54px 0 0;
+}
+
+.home__stat {
+  min-width: 0;
+  padding: 14px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.home__stat dt {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.home__stat dd {
+  margin: 5px 0 0;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.home__stats-status {
+  margin-top: 12px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.home__features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+
+@media (max-width: 1024px) {
+  .home__overview {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 36px;
+  }
+
+  .home__overview .slang-card {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: none;
+  }
+
+  .home__stats,
+  .home__features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .home {
+    padding: 28px 16px 56px;
+  }
+
+  .home__overview {
+    grid-template-columns: 1fr;
+  }
+
+  .home__phone {
+    justify-self: center;
+    width: 165px;
+  }
+
+  .home__overview .slang-card {
+    grid-column: auto;
+  }
+
+  .home__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 36px;
+  }
+
+  .home__features {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .home__stats {
+    grid-template-columns: 1fr;
+  }
+}

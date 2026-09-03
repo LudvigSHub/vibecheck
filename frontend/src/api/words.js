@@ -11,6 +11,15 @@ export function getWordOfTheDay(options = {}) {
   });
 }
 
+export function getQuizDemoQuestions(count = 10, options = {}) {
+  return apiFetch(`/api/words/quiz-demo?count=${count}`, {
+    method: "GET",
+    auth: false,
+    ...options,
+  });
+}
+
+
 // Wordstash
 
 export function getWords({ search = "", tag = "" } = {}) {

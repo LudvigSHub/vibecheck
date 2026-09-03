@@ -1,4 +1,7 @@
+import { useState } from "react";
 import LinkButton from "../components/ui/LinkButton";
+import Button from "../components/ui/Button";
+import QuizDemo from "../components/QuizDemo";
 import FeatureCard from "../components/FeatureCard";
 import SlangOfDayCard from "../components/SlangOfDayCard";
 import { BookIcon, ChartIcon, TargetIcon, UserIcon } from "../components/Icons";
@@ -41,7 +44,9 @@ const FEATURES = [
   },
 ];
 
-function LandingPage() {
+function LandingPage({ onOpenRegister }) {
+  const [showQuiz, setShowQuiz] = useState(false);
+
   return (
     <main className="landing">
       <section className="landing__hero">
@@ -60,10 +65,10 @@ function LandingPage() {
               Utforska ordboken
             </LinkButton>
 
-            <LinkButton to="/quiz" variant="ghost">
+            <Button variant="ghost" onClick={() => setShowQuiz(true)}>
               <TargetIcon width={20} height={20} />
               Testa quiz
-            </LinkButton>
+            </Button>
           </div>
         </div>
 
@@ -91,6 +96,7 @@ function LandingPage() {
           <FeatureCard key={feature.to} {...feature} />
         ))}
       </section>
+      {showQuiz && <QuizDemo onClose={() => setShowQuiz(false)} onCreateAccount={onOpenRegister} />}
     </main>
   );
 }
