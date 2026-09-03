@@ -4,7 +4,7 @@ import Modal from "../ui/Modal";
 import "./AuthForm.css";
 
 // Propsen sätts av sidan som visar formuläret, t.ex. landningssidan
-function LoginForm({ onSuccess, onSwitch, onClose }) {
+function LoginForm({ onSuccess, onSwitch, onClose, message }) {
   const { login } = useAuth();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +41,7 @@ function LoginForm({ onSuccess, onSwitch, onClose }) {
 
         <h2 className="auth-title">Logga in</h2>
         <p className="auth-subtitle">Välkommen tillbaka!</p>
+        {message && <p className="auth-notice">{message}</p>}
 
         {error && <p className="auth-error-box">{error}</p>}
 
