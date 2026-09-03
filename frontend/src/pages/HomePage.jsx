@@ -74,9 +74,32 @@ function HomePage() {
     return () => controller.abort();
   }, []);
 
+  const streakDays = summary?.currentStreak ?? 0;
+  const streakLabel = `${streakDays} ${streakDays === 1 ? "dag" : "dagar"}`;
+  const streakMessage = summaryLoading
+    ? "Vi hämtar din quizstatistik…"
+    : summaryError
+      ? "Din streak kunde inte hämtas just nu."
+      : streakDays === 0
+        ? "Gör ett quiz idag och starta din streak!"
+        : `Bra jobbat, du har en streak på ${streakLabel}!`;
+
+  const activeQuiz = summary?.activeQuiz;
+  const quizProgress = activeQuiz?.totalQuestionCount
+    ? Math.round(
+        (activeQuiz.answeredQuestionCount / activeQuiz.totalQuestionCount) * 100,
+      )
+    : 0;
+  const quizHeading = summaryLoading
+    ? "Hämtar ditt senaste quiz…"
+    : activeQuiz
+      ? "Fortsätt där du slutade"
+      : "Redo för nästa quiz?";
+  const quizMeta = activeQuiz
+    ? `${activeQuiz.quizName}: ${activeQuiz.answeredQuestionCount} av ${activeQuiz.totalQuestionCount} frågor besvarade`
+    : "Du har inget påbörjat quiz.";
   const stats = [
-    // Streak kopplas till riktig data i nästa steg.
-    { label: "Streak", value: "5 dagar" },
+    { label: "Streak", value: summaryLoading ? "…" : streakLabel },
     {
       label: "Bästa resultat",
       value: summaryLoading
@@ -99,22 +122,26 @@ function HomePage() {
           <h1 id="home-heading" className="home__title">
             Hej{user?.userName ? `, ${user.userName}` : ""}!
           </h1>
-          <p className="home__streak">Bra jobbat, du har en 5-dagars streak!</p>
+          <p className="home__streak">{streakMessage}</p>
 
           <div className="home__progress-copy">
-            <p>Fortsätt där du slutade</p>
-            <p className="home__progress-meta">Quiz 3 av 10</p>
+            <p>{quizHeading}</p>
+            {!summaryLoading && (
+              <p className="home__progress-meta">{quizMeta}</p>
+            )}
           </div>
 
-          <ProgressBar
-            value={30}
-            className="home__progress"
-            aria-label="Quizprogression: 3 av 10"
-          />
+          {activeQuiz && (
+            <ProgressBar
+              value={quizProgress}
+              className="home__progress"
+              aria-label={`Quizprogression: ${activeQuiz.answeredQuestionCount} av ${activeQuiz.totalQuestionCount} frågor`}
+            />
+          )}
 
           <LinkButton to="/quiz" variant="ghost" className="home__continue">
             <TargetIcon width={19} height={19} />
-            Fortsätt quiz
+            {activeQuiz ? "Fortsätt quiz" : "Starta quiz"}
           </LinkButton>
         </div>
 
