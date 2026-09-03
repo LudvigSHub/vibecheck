@@ -9,3 +9,12 @@ export function getWordOfTheDay(options = {}) {
     ...options,
   });
 }
+
+export function getQuizDemoQuestions(count = 10, options = {}) {
+  return apiFetch(`/api/words/quiz-demo?count=${count}`, {
+    method: "GET",
+    auth: false,
+    ...options,
+  });
+}
+

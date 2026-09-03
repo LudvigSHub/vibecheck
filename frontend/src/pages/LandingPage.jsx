@@ -44,7 +44,7 @@ const FEATURES = [
   },
 ];
 
-function LandingPage() {
+function LandingPage({ onOpenRegister }) {
   const [showQuiz, setShowQuiz] = useState(false);
 
   return (
@@ -96,7 +96,7 @@ function LandingPage() {
           <FeatureCard key={feature.to} {...feature} />
         ))}
       </section>
-      {showQuiz && <QuizDemo onClose={() => setShowQuiz(false)} />}
+      {showQuiz && <QuizDemo onClose={() => setShowQuiz(false)} onCreateAccount={onOpenRegister} />}
     </main>
   );
 }

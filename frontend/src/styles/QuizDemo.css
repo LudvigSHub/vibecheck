@@ -120,3 +120,52 @@
   font-size: 14px;
   color: var(--color-text-muted);
 }
+
+.quiz-demo__result {
+  padding-top: 8px;
+  text-align: center;
+}
+
+.quiz-demo__result-trophy {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.quiz-demo__result-score {
+  margin-top: 16px;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.quiz-demo__result-percent {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.quiz-demo__result-message {
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.quiz-demo__result-actions {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.quiz-demo__result-link {
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quiz-demo__result-link:hover {
+  color: var(--color-text);
+}

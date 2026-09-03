@@ -43,6 +43,7 @@ builder.Services.AddScoped<PingService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<WordOfTheDayService>();
+builder.Services.AddScoped<QuizDemoService>();
 
 // Tillåter frontendes adress och anrop
 const string CorsPolicy = "frontend";
