@@ -1,66 +1,120 @@
-import { useState } from 'react'
-import './App.css'
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
-import TestPage from './pages/TestPage';
-import LandingPage from "./pages/LandingPage";
-import HomePage from './pages/HomePage';
-import Navbar from './components/Navbar';
-import LoginForm from './components/auth/LoginForm';
-import RegisterForm from './components/auth/RegisterForm';
+import { useEffect, useState } from "react";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import "./App.css";
 
-function AppContent() {
-  // null = ingen ruta öppen. Ligger här så knappen i navbaren når den.
+import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/HomePage";
+import TestPage from "./pages/TestPage";
+import QuizesPage from "./pages/QuizesPage";
+
+import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
+import LoginForm from "./components/auth/LoginForm";
+import RegisterForm from "./components/auth/RegisterForm";
+
+function App() {
+  // null = ingen autentiseringsruta är öppen.
   const [authView, setAuthView] = useState(null);
+  const [authMessage, setAuthMessage] = useState("");
+
+  // Sidan användaren försökte nå innan ProtectedRoute stoppade navigeringen.
+  const [redirectTo, setRedirectTo] = useState(null);
+
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // ProtectedRoute skickar information via Navigate-state
+  // när en oinloggad användare försöker nå en skyddad sida.
+  useEffect(() => {
+    if (!location.state?.requireAuth) {
+      return;
+    }
+
+    setAuthView("login");
+    setAuthMessage("Logga in för att nå den sidan.");
+    setRedirectTo(location.state.from ?? null);
+
+    // Rensa state så att inloggningsrutan inte öppnas igen
+    // om användaren laddar om landningssidan.
+    navigate(location.pathname, {
+      replace: true,
+      state: null,
+    });
+  }, [location, navigate]);
 
   function handleAuthSuccess() {
     setAuthView(null);
-    navigate('/home');
+    setAuthMessage("");
+
+    // Om användaren först försökte nå en skyddad sida
+    // skickas hen tillbaka dit efter inloggningen.
+    if (redirectTo) {
+      navigate(redirectTo, { replace: true });
+      setRedirectTo(null);
+      return;
+    }
+
+    // Vanlig inloggning från landningssidan leder till Home-page.
+    navigate("/home");
+  }
+
+  function handleAuthClose() {
+    setAuthView(null);
+    setAuthMessage("");
+    setRedirectTo(null);
   }
 
   return (
     <>
-      <Navbar onLoginClick={() => setAuthView('login')} />
-      <Routes>
-        {/* Route avser per page, element hämtas från pages där */}
-        <Route path="/" element={<LandingPage />} />
-        {/* Skyddet kopplas på här när ProtectedRoute-komponenten är klar. */}
-        <Route path="/home" element={<HomePage />} />
-        <Route path='/Test' element={<TestPage/>}/>
-        {/* <Route path='/WordStash' element={<WordStash/>}/> */}
-        {/* <Route path='/Account' element={<Account/>}/> */}
-        {/* <Route path='/Quiz' element={<Quiz/>}/> */}
+      <Navbar onLoginClick={() => setAuthView("login")} />
 
-        {/* NEDAN AVSER SKYDD FÖR ATT INTE KUNNA NÅ ACCOUNT PAGE UTAN ATT VARA INLOGGAD. PROTECTEDROUTE ÄR EN EGEN KOMPONENT SOM ISF SKA IMPORTERAS */}
-        {/* <Route path="/account" element={ <ProtectedRoute><AccountPage /></ProtectedRoute>}/> */}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/test" element={<TestPage />} />
+
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/quiz"
+          element={
+            <ProtectedRoute>
+              <QuizesPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
-      {/* Ligger utanför Routes så de kan öppnas från vilken sida som helst */}
-      {authView === 'login' && (
+      {/* Formulären ligger utanför Routes så att de kan öppnas över alla sidor. */}
+      {authView === "login" && (
         <LoginForm
+          message={authMessage}
           onSuccess={handleAuthSuccess}
-          onClose={() => setAuthView(null)}
-          onSwitch={() => setAuthView('register')}
+          onClose={handleAuthClose}
+          onSwitch={() => setAuthView("register")}
         />
       )}
 
-      {authView === 'register' && (
+      {authView === "register" && (
         <RegisterForm
           onSuccess={handleAuthSuccess}
-          onClose={() => setAuthView(null)}
-          onSwitch={() => setAuthView('login')}
+          onClose={handleAuthClose}
+          onSwitch={() => setAuthView("login")}
         />
       )}
     </>
   );
 }
 
-function App() {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-}
-
-export default App
+export default App;

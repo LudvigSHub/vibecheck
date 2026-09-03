@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import "./AuthForm.css";
 
 // Propsen sätts av sidan som visar formuläret, t.ex. landningssidan
-function LoginForm({ onSuccess, onSwitch, onClose }) {
+function LoginForm({ onSuccess, onSwitch, onClose, message }) {
   const { login } = useAuth();
 
   // Escape stänger rutan. Samma mönster som mobilmenyn i Navbar.
@@ -82,6 +82,7 @@ function LoginForm({ onSuccess, onSwitch, onClose }) {
 
         <h2 className="auth-title">Logga in</h2>
         <p className="auth-subtitle">Välkommen tillbaka!</p>
+        {message && <p className="auth-notice">{message}</p>}
 
         {error && <p className="auth-error-box">{error}</p>}
 

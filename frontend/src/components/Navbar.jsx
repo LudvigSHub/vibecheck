@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
@@ -43,6 +43,13 @@ function Navbar({ onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const { isAuthenticated, authLoading, user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  //När man loggar ut så blir man navigerad till startsida
+  function handleLogout() {
+    logout();
+    navigate("/", { replace: true });
+  }
 
   // Stäng mobilmenyn när man navigerar till en ny sida.
   useEffect(() => {
@@ -124,7 +131,7 @@ function Navbar({ onLoginClick }) {
               <span className="navbar__avatar" aria-hidden="true">
                 {user.userName.charAt(0).toUpperCase()}
               </span>
-              <button type="button" className="navbar__login" onClick={logout}>
+              <button type="button" className="navbar__login" onClick={handleLogout}>
                 <UserIcon />
                 <span>Logga ut</span>
               </button>
