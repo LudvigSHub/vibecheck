@@ -12,9 +12,11 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
 import QuizesPage from "./pages/QuizesPage";
+import AdminPage from "./pages/AdminPage";
 
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
 import { useAuth } from "./context/AuthContext";
@@ -104,6 +106,15 @@ function App() {
             <ProtectedRoute>
               <QuizesPage />
             </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminPage />
+            </AdminRoute>
           }
         />
       </Routes>
