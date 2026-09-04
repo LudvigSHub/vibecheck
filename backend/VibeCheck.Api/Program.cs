@@ -46,6 +46,8 @@ builder.Services.AddScoped<QuizDemoService>();
 builder.Services.AddScoped<HomeService>();
 builder.Services.AddScoped<QuizProgressService>();
 builder.Services.AddScoped<QuizService>();
+builder.Services.AddScoped<AdminTagService>();
+builder.Services.AddScoped<AdminWordService>();
 
 // Tillåter frontendes adress och anrop
 const string CorsPolicy = "frontend";
