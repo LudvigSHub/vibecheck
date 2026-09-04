@@ -70,7 +70,7 @@ export async function apiFetch(path, options = {}) {
 
   const text = await response.text();
 
-  let data = null;
+  let data;
 
   try {
     data = text ? JSON.parse(text) : null;
