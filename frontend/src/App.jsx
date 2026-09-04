@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  Navigate,
   Routes,
   Route,
   useLocation,
@@ -16,6 +17,7 @@ import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
   // null = ingen autentiseringsruta är öppen.
@@ -27,6 +29,7 @@ function App() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated, authLoading } = useAuth();
 
   // ProtectedRoute skickar information via Navigate-state
   // när en oinloggad användare försöker nå en skyddad sida.
@@ -74,7 +77,16 @@ function App() {
       <Navbar onLoginClick={() => setAuthView("login")} />
 
       <Routes>
-        <Route path="/" element={<LandingPage onOpenRegister={() => setAuthView("register")} />}/>
+        <Route
+          path="/"
+          element={
+            authLoading ? null : isAuthenticated ? (
+              <Navigate to="/home" replace />
+            ) : (
+              <LandingPage onOpenRegister={() => setAuthView("register")} />
+            )
+          }
+        />
         <Route path="/test" element={<TestPage />} />
 
         <Route
