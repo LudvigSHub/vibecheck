@@ -44,6 +44,7 @@ function Navbar({ onLoginClick }) {
   const location = useLocation();
   const { isAuthenticated, authLoading, user, logout } = useAuth();
   const navigate = useNavigate();
+  const homePath = isAuthenticated ? "/home" : "/";
 
   //När man loggar ut så blir man navigerad till startsida
   function handleLogout() {
@@ -77,9 +78,13 @@ function Navbar({ onLoginClick }) {
     <header className="navbar">
       <nav className="navbar__inner" aria-label="Huvudmeny">
         <Link
-          to="/"
+          to={homePath}
           className="navbar__brand"
-          aria-label="VibeCheck – till startsidan"
+          aria-label={
+            isAuthenticated
+              ? "VibeCheck – till din startsida"
+              : "VibeCheck – till startsidan"
+          }
         >
           <img
             src="/images/vibecheck-logo.png"
@@ -108,6 +113,20 @@ function Navbar({ onLoginClick }) {
           }
         >
           <ul className="navbar__links">
+            <li>
+              <NavLink
+                to={homePath}
+                end
+                className={({ isActive }) =>
+                  isActive
+                    ? "navbar__link navbar__link--active"
+                    : "navbar__link"
+                }
+              >
+                Hem
+              </NavLink>
+            </li>
+
             {NAV_LINKS.map((link) => (
               <li key={link.to}>
                 <NavLink
