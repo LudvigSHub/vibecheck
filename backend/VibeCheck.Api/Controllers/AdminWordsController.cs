@@ -43,4 +43,20 @@ public class AdminWordsController : ControllerBase
             });
         }
     }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<AdminWordDetailsDTO>> GetById(int id)
+    {
+        var word = await _adminWordService.GetByIdAsync(id);
+
+        if (word is null)
+        {
+            return NotFound(new
+            {
+                message = $"Inget ord med id {id} hittades."
+            });
+        }
+
+        return Ok(word);
+    }
 }

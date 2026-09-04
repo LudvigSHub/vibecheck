@@ -198,4 +198,34 @@ public class AdminWordService
             IsUsedInQuiz = false
         };
     }
+
+    public async Task<AdminWordDetailsDTO?> GetByIdAsync(int wordId)
+    {
+        return await _context.Words
+            .AsNoTracking()
+            .Where(word => word.WordID == wordId)
+            .Select(word => new AdminWordDetailsDTO
+            {
+                WordId = word.WordID,
+                Word = word.WordDesc,
+                Meaning = word.Meaning.MeaningText,
+
+                Examples = word.WordExamples
+                    .OrderBy(example => example.ExampleID)
+                    .Select(example => example.ExampleText)
+                    .ToList(),
+
+                Tags = word.WordTags
+                    .OrderBy(wordTag => wordTag.Tag.TagName)
+                    .Select(wordTag => new AdminTagListItemDTO
+                    {
+                        TagId = wordTag.TagID,
+                        TagName = wordTag.Tag.TagName
+                    })
+                    .ToList(),
+
+                IsUsedInQuiz = word.Questions.Any()
+            })
+            .FirstOrDefaultAsync();
+    }
 }
