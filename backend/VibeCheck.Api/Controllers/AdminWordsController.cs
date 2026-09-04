@@ -24,4 +24,23 @@ public class AdminWordsController : ControllerBase
 
         return Ok(words);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<AdminWordListItemDTO>> Create(
+    AdminCreateWordDTO request)
+    {
+        try
+        {
+            var createdWord = await _adminWordService.CreateAsync(request);
+
+            return StatusCode(StatusCodes.Status201Created, createdWord);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new
+            {
+                message = ex.Message
+            });
+        }
+    }
 }
