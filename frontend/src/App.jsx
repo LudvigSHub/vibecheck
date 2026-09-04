@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Navigate,
   Routes,
@@ -22,43 +22,31 @@ import { useAuth } from "./context/AuthContext";
 function App() {
   // null = ingen autentiseringsruta är öppen.
   const [authView, setAuthView] = useState(null);
-  const [authMessage, setAuthMessage] = useState("");
-
-  // Sidan användaren försökte nå innan ProtectedRoute stoppade navigeringen.
-  const [redirectTo, setRedirectTo] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated, authLoading } = useAuth();
 
-  // ProtectedRoute skickar information via Navigate-state
-  // när en oinloggad användare försöker nå en skyddad sida.
-  useEffect(() => {
-    if (!location.state?.requireAuth) {
-      return;
-    }
-
-    setAuthView("login");
-    setAuthMessage("Logga in för att nå den sidan.");
-    setRedirectTo(location.state.from ?? null);
-
-    // Rensa state så att inloggningsrutan inte öppnas igen
-    // om användaren laddar om landningssidan.
-    navigate(location.pathname, {
-      replace: true,
-      state: null,
-    });
-  }, [location, navigate]);
+  // ProtectedRoute skickar med information när en oinloggad användare
+  // försöker nå en skyddad sida. App läser den direkt i stället för att
+  // kopiera den till flera state-variabler i en useEffect.
+  const loginRequired = location.state?.requireAuth === true;
+  const requestedRoute = loginRequired
+    ? (location.state.from ?? null)
+    : null;
+  const routeAuthView = loginRequired
+    ? (location.state.authView ?? "login")
+    : null;
+  const displayedAuthView = routeAuthView ?? authView;
+  const authMessage = loginRequired ? "Logga in för att nå den sidan." : "";
 
   function handleAuthSuccess() {
     setAuthView(null);
-    setAuthMessage("");
 
     // Om användaren först försökte nå en skyddad sida
     // skickas hen tillbaka dit efter inloggningen.
-    if (redirectTo) {
-      navigate(redirectTo, { replace: true });
-      setRedirectTo(null);
+    if (requestedRoute) {
+      navigate(requestedRoute, { replace: true });
       return;
     }
 
@@ -68,8 +56,28 @@ function App() {
 
   function handleAuthClose() {
     setAuthView(null);
-    setAuthMessage("");
-    setRedirectTo(null);
+
+    if (loginRequired) {
+      navigate(location.pathname + location.search, {
+        replace: true,
+        state: null,
+      });
+    }
+  }
+
+  function handleAuthSwitch(nextView) {
+    if (loginRequired) {
+      navigate(location.pathname + location.search, {
+        replace: true,
+        state: {
+          ...location.state,
+          authView: nextView,
+        },
+      });
+      return;
+    }
+
+    setAuthView(nextView);
   }
 
   return (
@@ -81,9 +89,9 @@ function App() {
           path="/"
           element={
             authLoading ? null : isAuthenticated ? (
-              <Navigate to="/home" replace />
+              <Navigate to={requestedRoute ?? "/home"} replace />
             ) : (
-              <LandingPage onOpenRegister={() => setAuthView("register")} />
+              <LandingPage onOpenRegister={() => handleAuthSwitch("register")} />
             )
           }
         />
@@ -109,20 +117,20 @@ function App() {
       </Routes>
 
       {/* Formulären ligger utanför Routes så att de kan öppnas över alla sidor. */}
-      {authView === "login" && (
+      {displayedAuthView === "login" && (
         <LoginForm
           message={authMessage}
           onSuccess={handleAuthSuccess}
           onClose={handleAuthClose}
-          onSwitch={() => setAuthView("register")}
+          onSwitch={() => handleAuthSwitch("register")}
         />
       )}
 
-      {authView === "register" && (
+      {displayedAuthView === "register" && (
         <RegisterForm
           onSuccess={handleAuthSuccess}
           onClose={handleAuthClose}
-          onSwitch={() => setAuthView("login")}
+          onSwitch={() => handleAuthSwitch("login")}
         />
       )}
     </>
