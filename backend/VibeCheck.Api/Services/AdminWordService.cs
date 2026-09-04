@@ -228,4 +228,205 @@ public class AdminWordService
             })
             .FirstOrDefaultAsync();
     }
+
+    public async Task<AdminWordDetailsDTO?> UpdateAsync(
+    int wordId,
+    AdminUpdateWordDTO request)
+    {
+        // Rensa inkommande värden på samma sätt som vid Create.
+        var wordText = request.Word.Trim();
+        var meaningText = request.Meaning.Trim();
+
+        var examples = request.Examples
+            .Select(example => example.Trim())
+            .Where(example => !string.IsNullOrWhiteSpace(example))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        var tagIds = request.TagIds
+            .Distinct()
+            .ToList();
+
+
+        // -----------------------------------------
+        // Validering av obligatoriska fält
+        // -----------------------------------------
+
+        if (string.IsNullOrWhiteSpace(wordText))
+        {
+            throw new InvalidOperationException("Ord måste anges.");
+        }
+
+        if (string.IsNullOrWhiteSpace(meaningText))
+        {
+            throw new InvalidOperationException("Betydelse måste anges.");
+        }
+
+        if (examples.Count == 0)
+        {
+            throw new InvalidOperationException(
+                "Minst ett meningsexempel måste anges.");
+        }
+
+        if (tagIds.Count == 0)
+        {
+            throw new InvalidOperationException(
+                "Minst en tagg måste väljas.");
+        }
+
+
+        // -----------------------------------------
+        // Hämta ordet som ska redigeras
+        // -----------------------------------------
+
+        // Här behöver vi tracking eftersom vi faktiskt ska ändra datan.
+        // Vi laddar även befintliga exempel och taggkopplingar
+        // eftersom de ska kunna ersättas.
+        var word = await _context.Words
+            .Include(word => word.WordExamples)
+            .Include(word => word.WordTags)
+            .FirstOrDefaultAsync(word => word.WordID == wordId);
+
+        if (word is null)
+        {
+            return null;
+        }
+
+
+        // -----------------------------------------
+        // Kontrollera att det nya ordet inte krockar
+        // med något ANNAT ord
+        // -----------------------------------------
+
+        var duplicateWordExists = await _context.Words
+            .AnyAsync(existingWord =>
+                existingWord.WordID != wordId &&
+                existingWord.WordDesc == wordText);
+
+        if (duplicateWordExists)
+        {
+            throw new InvalidOperationException(
+                $"Ordet '{wordText}' finns redan i ordboken.");
+        }
+
+
+        // -----------------------------------------
+        // Kontrollera valda taggar
+        // -----------------------------------------
+
+        // Precis som vid Create får Update bara använda
+        // taggar som redan finns i databasen.
+        var tags = await _context.Tags
+            .Where(tag => tagIds.Contains(tag.TagID))
+            .OrderBy(tag => tag.TagName)
+            .ToListAsync();
+
+        if (tags.Count != tagIds.Count)
+        {
+            throw new InvalidOperationException(
+                "En eller flera av de valda taggarna finns inte.");
+        }
+
+
+        // -----------------------------------------
+        // Hitta eller skapa Meaning
+        // -----------------------------------------
+
+        // Vi ändrar INTE texten på word.Meaning direkt.
+        // Flera Word kan enligt datamodellen dela samma Meaning.
+        //
+        // I stället letar vi efter rätt Meaning och kopplar
+        // ordet till den.
+        var meaning = await _context.Meanings
+            .FirstOrDefaultAsync(m => m.MeaningText == meaningText);
+
+        if (meaning is null)
+        {
+            meaning = new Meaning
+            {
+                MeaningText = meaningText
+            };
+        }
+
+
+        // -----------------------------------------
+        // Uppdatera Word och Meaning-relationen
+        // -----------------------------------------
+
+        word.WordDesc = wordText;
+        word.Meaning = meaning;
+
+
+        // -----------------------------------------
+        // Ersätt befintliga meningsexempel
+        // -----------------------------------------
+
+        // Det enklaste och tydligaste här är att ta bort
+        // de gamla exemplen och skapa relationerna på nytt.
+        _context.WordExamples.RemoveRange(word.WordExamples);
+
+        word.WordExamples.Clear();
+
+        foreach (var example in examples)
+        {
+            word.WordExamples.Add(new WordExample
+            {
+                ExampleText = example
+            });
+        }
+
+
+        // -----------------------------------------
+        // Ersätt befintliga taggkopplingar
+        // -----------------------------------------
+
+        // Vi tar bara bort WordTag-kopplingarna.
+        // Själva Tag-raderna i databasen påverkas inte.
+        _context.WordTags.RemoveRange(word.WordTags);
+
+        word.WordTags.Clear();
+
+        foreach (var tag in tags)
+        {
+            word.WordTags.Add(new WordTag
+            {
+                Tag = tag
+            });
+        }
+
+
+        // -----------------------------------------
+        // Spara ändringarna
+        // -----------------------------------------
+
+        await _context.SaveChangesAsync();
+
+
+        // -----------------------------------------
+        // Returnera den uppdaterade detaljvyn
+        // -----------------------------------------
+
+        return new AdminWordDetailsDTO
+        {
+            WordId = word.WordID,
+            Word = word.WordDesc,
+            Meaning = meaning.MeaningText,
+
+            Examples = word.WordExamples
+                .OrderBy(example => example.ExampleID)
+                .Select(example => example.ExampleText)
+                .ToList(),
+
+            Tags = tags
+                .Select(tag => new AdminTagListItemDTO
+                {
+                    TagId = tag.TagID,
+                    TagName = tag.TagName
+                })
+                .ToList(),
+
+            IsUsedInQuiz = await _context.Questions
+                .AnyAsync(question => question.WordID == word.WordID)
+        };
+    }
 }

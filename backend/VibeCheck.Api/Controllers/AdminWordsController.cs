@@ -59,4 +59,32 @@ public class AdminWordsController : ControllerBase
 
         return Ok(word);
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<AdminWordDetailsDTO>> Update(
+    int id,
+    AdminUpdateWordDTO request)
+    {
+        try
+        {
+            var updatedWord = await _adminWordService.UpdateAsync(id, request);
+
+            if (updatedWord is null)
+            {
+                return NotFound(new
+                {
+                    message = $"Inget ord med id {id} hittades."
+                });
+            }
+
+            return Ok(updatedWord);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new
+            {
+                message = ex.Message
+            });
+        }
+    }
 }
