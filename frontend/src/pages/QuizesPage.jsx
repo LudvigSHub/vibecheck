@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import QuizCard from "../components/QuizCard";
 import QuizRunner from "../components/QuizRunner";
@@ -18,36 +18,39 @@ function QuizesPage() {
   // på rätt knapp och för att hindra dubbelklick.
   const [startingId, setStartingId] = useState(null);
 
-  // useCallback: funktionen används både i useEffect nedan och när ett quiz
-  // stängs. Utan den skapas en ny funktion vid varje rendering, useEffect ser
-  // en ändrad dependency och hämtar om – i all oändlighet.
-  const loadQuizzes = useCallback(async (signal) => {
+  async function refreshQuizzes() {
     try {
-      const data = await getQuizzes({ signal });
+      const data = await getQuizzes();
 
       setQuizzes(data);
       setError("");
     } catch (err) {
-      // Avbryts anropet när komponenten lämnas är det inte ett fel.
-      if (err.name === "AbortError") {
-        return;
-      }
-
       setError(err.message ?? "Kunde inte hämta quizen.");
-    } finally {
-      if (!signal?.aborted) {
-        setLoading(false);
-      }
     }
-  }, []);
+  }
 
   useEffect(() => {
     const controller = new AbortController();
 
-    loadQuizzes(controller.signal);
+    getQuizzes({ signal: controller.signal })
+      .then((data) => {
+        setQuizzes(data);
+        setError("");
+      })
+      .catch((err) => {
+        // Avbryts anropet när komponenten lämnas är det inte ett fel.
+        if (err.name !== "AbortError") {
+          setError(err.message ?? "Kunde inte hämta quizen.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      });
 
     return () => controller.abort();
-  }, [loadQuizzes]);
+  }, []);
 
   // POST:en ligger här och inte i QuizRunner. Ett anrop som SKAPAR något på
   // servern hör hemma i en händelsehanterare, inte i en useEffect – effekter
@@ -77,7 +80,7 @@ function QuizesPage() {
     // Hämtar om listan så att max score och upplåsningar uppdateras.
     // Vid avbrott har inget ändrats, men ett extra GET är billigare
     // än att hålla reda på exakt när det behövs.
-    loadQuizzes();
+    refreshQuizzes();
   }
 
   return (
