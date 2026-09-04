@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
@@ -41,21 +41,25 @@ function UserIcon() {
 // onLoginClick öppnar inloggningsrutan, den ligger i App
 function Navbar({ onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
   const { isAuthenticated, authLoading, user, logout } = useAuth();
   const navigate = useNavigate();
   const homePath = isAuthenticated ? "/home" : "/";
 
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   //När man loggar ut så blir man navigerad till startsida
   function handleLogout() {
+    closeMenu();
     logout();
     navigate("/", { replace: true });
   }
 
-  // Stäng mobilmenyn när man navigerar till en ny sida.
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
+  function handleLogin() {
+    closeMenu();
+    onLoginClick();
+  }
 
   // Escape stänger mobilmenyn.
   useEffect(() => {
@@ -80,6 +84,7 @@ function Navbar({ onLoginClick }) {
         <Link
           to={homePath}
           className="navbar__brand"
+          onClick={closeMenu}
           aria-label={
             isAuthenticated
               ? "VibeCheck – till din startsida"
@@ -117,6 +122,7 @@ function Navbar({ onLoginClick }) {
               <NavLink
                 to={homePath}
                 end
+                onClick={closeMenu}
                 className={({ isActive }) =>
                   isActive
                     ? "navbar__link navbar__link--active"
@@ -131,6 +137,7 @@ function Navbar({ onLoginClick }) {
               <li key={link.to}>
                 <NavLink
                   to={link.to}
+                  onClick={closeMenu}
                   className={({ isActive }) =>
                     isActive
                       ? "navbar__link navbar__link--active"
@@ -156,7 +163,7 @@ function Navbar({ onLoginClick }) {
               </button>
             </div>
           ) : (
-            <button type="button" className="navbar__login" onClick={onLoginClick}>
+            <button type="button" className="navbar__login" onClick={handleLogin}>
               <UserIcon />
               <span>Logga in</span>
             </button>
