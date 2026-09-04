@@ -12,7 +12,9 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
 import QuizesPage from "./pages/QuizesPage";
-import AdminPage from "./pages/AdminPage";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminWordDetailsPage from "./pages/admin/AdminWordDetailsPage";
+import AdminCreateWordPage from "./pages/admin/AdminCreateWordPage";
 
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -116,6 +118,24 @@ function App() {
               <AdminPage />
             </AdminRoute>
           }
+        />
+        
+        <Route
+          path="/admin/words/:id"
+          element={
+            <AdminRoute>
+              <AdminWordDetailsPage />
+            </AdminRoute>
+        }
+        />
+
+        <Route
+          path="/admin/words/new"
+          element={
+            <AdminRoute>
+              <AdminCreateWordPage />
+            </AdminRoute>
+        }
         />
       </Routes>
 
