@@ -429,4 +429,59 @@ public class AdminWordService
                 .AnyAsync(question => question.WordID == word.WordID)
         };
     }
+
+    public async Task<bool> DeleteAsync(int wordId)
+    {
+        // -----------------------------------------
+        // Hämta ordet som ska tas bort
+        // -----------------------------------------
+
+        var word = await _context.Words
+            .FirstOrDefaultAsync(word => word.WordID == wordId);
+
+        // Om ordet inte finns returnerar vi false.
+        // Controllern kan sedan översätta detta till 404 Not Found.
+        if (word is null)
+        {
+            return false;
+        }
+
+
+        // -----------------------------------------
+        // Kontrollera om ordet används i quiz
+        // -----------------------------------------
+
+        // Question -> Word har Restrict-delete i datamodellen.
+        // Ett ord som används av en quizfråga ska därför inte få tas bort.
+        //
+        // Vi kontrollerar detta själva innan Delete så att admin får
+        // ett tydligt felmeddelande istället för ett EF/SQL-fel.
+        var isUsedInQuiz = await _context.Questions
+            .AnyAsync(question => question.WordID == wordId);
+
+        if (isUsedInQuiz)
+        {
+            throw new InvalidOperationException(
+                $"Ordet '{word.WordDesc}' kan inte tas bort eftersom det används i en quizfråga.");
+        }
+
+
+        // -----------------------------------------
+        // Ta bort ordet
+        // -----------------------------------------
+
+        // Relationerna WordExamples, WordTags och WordVotes är konfigurerade
+        // med cascade delete, så deras kopplingar/rader tas bort tillsammans
+        // med ordet.
+        //
+        // Själva Tag-raderna tas INTE bort.
+        //
+        // Vi tar inte heller bort Meaning automatiskt, eftersom flera Word
+        // enligt datamodellen kan dela samma Meaning.
+        _context.Words.Remove(word);
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }
