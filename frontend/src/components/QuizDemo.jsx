@@ -51,27 +51,22 @@ function clearSavedState() {
 }
 
 export default function QuizDemo({ onClose, onCreateAccount }) {
-  const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [savedQuiz] = useState(loadSavedState);
+  const [questions, setQuestions] = useState(savedQuiz?.questions ?? []);
+  const [loading, setLoading] = useState(!savedQuiz);
   const [error, setError] = useState("");
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(savedQuiz?.index ?? 0);
   const [selectedId, setSelectedId] = useState(null);
   const [answered, setAnswered] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [correctCount, setCorrectCount] = useState(
+    savedQuiz?.correctCount ?? 0
+  );
   const [finished, setFinished] = useState(false);
 
-  // Hämta sparat quiz vid mount, annars hämta nytt från backend.
+  // Om inget quiz finns sparat hämtas ett nytt från backend.
   useEffect(() => {
-    const saved = loadSavedState();
-
-    if (saved) {
-      setQuestions(saved.questions);
-      setIndex(saved.index);
-      setCorrectCount(saved.correctCount);
-      setLoading(false);
-      return;
-    }
+    if (savedQuiz) return;
 
     let cancelled = false;
 
@@ -92,7 +87,7 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [savedQuiz]);
 
   // Spara framsteg varje gång man går vidare eller får rätt/fel.
   useEffect(() => {
