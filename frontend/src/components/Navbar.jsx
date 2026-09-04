@@ -41,7 +41,13 @@ function UserIcon() {
 // onLoginClick öppnar inloggningsrutan, den ligger i App
 function Navbar({ onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated, authLoading, user, logout } = useAuth();
+  const {
+  isAuthenticated,
+  authLoading,
+  user,
+  isAdmin,
+  logout,
+} = useAuth();
   const navigate = useNavigate();
   const homePath = isAuthenticated ? "/home" : "/";
 
@@ -148,6 +154,22 @@ function Navbar({ onLoginClick }) {
                 </NavLink>
               </li>
             ))}
+
+            {isAdmin && (
+              <li>
+                <NavLink
+                  to="/admin"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "navbar__link navbar__link--active"
+                      : "navbar__link"
+                  }
+                >
+                  Admin
+                </NavLink>
+              </li>
+            )}
           </ul>
 
           {/* Knappar och inte länkar, eftersom inloggningen är en popup.
