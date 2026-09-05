@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Modal from "./ui/Modal";
 import Card from "./ui/Card";
 import Tag from "./ui/Tag";
+import QuizResult from "./ui/QuizResult";
 import ProgressBar from "./ui/ProgressBar";
 import Button from "./ui/Button";
 import { ArrowRightIcon, CloseIcon, CheckIcon } from "./Icons";
@@ -166,31 +167,26 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
 
     return (
       <Modal onClose={handleClose}>
-        <Tag>QUIZ AVKLARAT</Tag>
-
-        <div className="quiz__result">
-          <div className="quiz__result-trophy">{resultEmoji}</div>
-          <p className="quiz__result-score">
-            {correctCount}/{questions.length}
-          </p>
-          <p className="quiz__result-percent">{percent}% rätt svar</p>
-          <p className="quiz__result-message">{resultMessage}</p>
-
-          <div className="quiz__result-actions">
-            {onCreateAccount && (
-              <Button onClick={handleCreateAccount}>Skapa konto</Button>
-            )}
-            <button
-              type="button"
-              className="quiz__result-link"
-              onClick={handleClose}
-            >
-              Till startsidan
-            </button>
-          </div>
-        </div>
+        <QuizResult
+          emoji={resultEmoji}
+          score={`${correctCount}/${questions.length}`}
+          percent={percent}
+          message={resultMessage}
+        >
+          {onCreateAccount && (
+            <Button onClick={handleCreateAccount}>Skapa konto</Button>
+          )}
+          <button
+            type="button"
+            className="quiz-result__link"
+            onClick={handleClose}
+          >
+            Till startsidan
+          </button>
+        </QuizResult>
       </Modal>
     );
+
   }
 
   const current = questions[index];
