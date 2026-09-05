@@ -5,6 +5,7 @@ import SlangOfDayCard from "../components/SlangOfDayCard";
 import { BookIcon, ChartIcon, TargetIcon, UserIcon } from "../components/Icons";
 import LinkButton from "../components/ui/LinkButton";
 import ProgressBar from "../components/ui/ProgressBar";
+import StatCard from "../components/ui/StatCard";
 import { getHomeSummary } from "../api/home";
 import { useAuth } from "../context/AuthContext";
 
@@ -155,15 +156,13 @@ function HomePage() {
 
         <SlangOfDayCard />
       </section>
-
+      
       <dl className="home__stats" aria-label="Din statistik">
         {stats.map((stat) => (
-          <div className="home__stat" key={stat.label}>
-            <dt>{stat.label}</dt>
-            <dd>{stat.value}</dd>
-          </div>
+          <StatCard key={stat.label} label={stat.label} value={stat.value} />
         ))}
       </dl>
+
 
       {summaryError && (
         <p className="home__stats-status" role="alert">
