@@ -11,6 +11,7 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
+import StyleguidePage from "./pages/StyleguidePage";
 import TestPage from "./pages/TestPage";
 import QuizesPage from "./pages/QuizesPage";
 import AdminPage from "./pages/admin/AdminPage";
@@ -101,6 +102,7 @@ function App() {
           }
         />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/styleguide" element={<StyleguidePage />} />
 
         <Route
           path="/home"

@@ -11,6 +11,19 @@ import "../styles/Quiz.css";
 
 const STORAGE_KEY = "vibecheck.quizDemo.state";
 
+function isValidQuestion(q) {
+  return (
+    q &&
+    typeof q.question === "string" &&
+    typeof q.quote === "string" &&
+    Array.isArray(q.options) &&
+    q.options.length > 0 &&
+    q.options.every((o) => o && "id" in o && typeof o.text === "string") &&
+    q.options.some((o) => o.id === q.correctId) &&
+    typeof q.explanation === "string"
+  );
+}
+
 function loadSavedState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -19,6 +32,10 @@ function loadSavedState() {
     const parsed = JSON.parse(raw);
 
     if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
+      return null;
+    }
+
+    if (!parsed.questions.every(isValidQuestion)) {
       return null;
     }
 
