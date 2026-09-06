@@ -145,6 +145,13 @@
   line-height: 1;
 }
 
+.avatar--lg {
+  width: 72px;
+  height: 72px;
+  font-size: 28px;
+}
+
+
 /* Progress bar component styles */
 
 .progress-bar {
