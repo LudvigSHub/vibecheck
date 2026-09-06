@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { getWords, getTags } from "../api/words";
+import { getWords, getTags, getWordById } from "../api/words";
 import SearchInput from "../components/ui/SearchInput";
 import WordList from "../components/wordstash/WordList";
 import FilterPill from "../components/ui/FilterPill";
 import AlphabetNav from "../components/ui/AlphabetNav";
+import Modal from "../components/ui/Modal";
+import WordDetails from "../components/wordstash/WordDetails";
 import "../styles/WordStashPage.css";
 
 export default function WordStashPage() {
@@ -14,6 +16,8 @@ export default function WordStashPage() {
   const [tags, setTags] = useState([]);
   const [selectedTag, setSelectedTag] = useState("");
   const [selectedLetter, setSelectedLetter] = useState("");
+  const [selectedWord, setSelectedWord] = useState(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     async function loadWords() {
@@ -81,6 +85,31 @@ export default function WordStashPage() {
     setSelectedLetter(selectedLetter === letter ? "" : letter);
   }
 
+  async function handleWordClick(word) {
+    try {
+      setError("");
+
+      const data = await getWordById(word.wordId);
+      setSelectedWord(data);
+    } catch (error) {
+      console.error(error);
+      setError("Kunde inte hämta ordets detaljer.");
+    }
+  }
+
+  function handleResetFilters() {
+    setSearchTerm("");
+    setSelectedTag("");
+    setSelectedLetter("");
+
+    getWords()
+      .then(setWords)
+      .catch((error) => {
+        console.error(error);
+        setError("Kunde inte återställa filtren.");
+      });
+  }
+
   if (loading) {
     return <p>Hämtar ord...</p>;
   }
@@ -104,39 +133,73 @@ export default function WordStashPage() {
     : words;
 
   return (
-    <main>
-      <h1>Ordbok</h1>
+    <main className="word-stash-page">
+      <h1 className="word-stash-page__title">WordStash</h1>
 
-      <SearchInput
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Sök efter ett slangord..."
-      />
+      <div className="word-stash-page__sticky">
+        <div className="word-stash-page__controls">
+          <SearchInput
+            value={searchTerm}
+            onChange={handleSearch}
+            placeholder="Sök efter ett slangord..."
+          />
 
-      <div>
-        {tags.map((tag) => (
-          <FilterPill
-            key={tag.tagId}
-            active={selectedTag === tag.tagName}
-            disabled={
-              !availableTagIds.has(tag.tagId) && selectedTag !== tag.tagName
-            }
-            onClick={() => handleTagClick(tag.tagName)}
+          <div className="word-stash-page__filter-actions">
+            <button
+              type="button"
+              className="word-stash-page__filter-toggle"
+              onClick={() => setShowFilters(!showFilters)}
+              aria-expanded={showFilters}
+            >
+              {showFilters ? "Dölj filter" : "Visa filter"}
+            </button>
+
+            <button
+              type="button"
+              className="word-stash-page__reset"
+              onClick={handleResetFilters}
+            >
+              Återställ filter
+            </button>
+          </div>
+
+          <div
+            className={`word-stash-page__filters${
+              showFilters ? " word-stash-page__filters--visible" : ""
+            }`}
           >
-            {tag.tagName}
-          </FilterPill>
-        ))}
+            {tags.map((tag) => (
+              <FilterPill
+                key={tag.tagId}
+                active={selectedTag === tag.tagName}
+                disabled={
+                  !availableTagIds.has(tag.tagId) && selectedTag !== tag.tagName
+                }
+                onClick={() => handleTagClick(tag.tagName)}
+              >
+                {tag.tagName}
+              </FilterPill>
+            ))}
+          </div>
+        </div>
+
+        <AlphabetNav
+          availableLetters={availableLetters}
+          selectedLetter={selectedLetter}
+          onSelectLetter={handleLetterClick}
+        />
       </div>
-      <AlphabetNav
-        availableLetters={availableLetters}
-        selectedLetter={selectedLetter}
-        onSelectLetter={handleLetterClick}
-      />
 
       {displayedWords.length === 0 ? (
         <p>Inga ord hittades.</p>
       ) : (
-        <WordList words={displayedWords} />
+        <WordList words={displayedWords} onWordClick={handleWordClick} />
+      )}
+
+      {selectedWord && (
+        <Modal onClose={() => setSelectedWord(null)}>
+          <WordDetails word={selectedWord} />
+        </Modal>
       )}
     </main>
   );

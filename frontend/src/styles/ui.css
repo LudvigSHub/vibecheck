@@ -113,12 +113,13 @@
 
 .alphabet-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .alphabet-nav__letter {
-  padding: 4px 6px;
+  padding: 4px 0;
   border: 0;
   background: transparent;
   color: var(--color-text-muted);
@@ -240,7 +241,6 @@
   color: var(--color-accent);
   border-color: var(--color-accent);
 }
-
 
 /* Modal component styles */
 

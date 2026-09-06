@@ -1,9 +1,41 @@
+/* =========================================================
+   WORDSTASH
+   Gemensamma stilar för desktop och mobil
+   ========================================================= */
+
+/* =========================================================
+   WORD LIST
+   ========================================================= */
+
+.word-list > div {
+  display: contents;
+}
+
+/* =========================================================
+   Navbar
+   ========================================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+/* =========================================================
+   WORD CARD
+   ========================================================= */
+
 .word-card {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
+
   cursor: pointer;
+
   transition:
     border-color 0.15s ease,
     transform 0.15s ease;
@@ -14,63 +46,540 @@
   transform: translateY(-2px);
 }
 
+/* ---------- Word card header ---------- */
+
 .word-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 12px;
 }
 
+/* ---------- Word card word ---------- */
+
 .word-card__word {
   margin: 0;
+
   color: var(--color-text);
-  font-size: 22px;
+
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
 }
+
+/* ---------- Word card meaning ---------- */
 
 .word-card__meaning {
-  margin: 10px 0 16px;
   color: var(--color-text-muted);
-  font-size: 15px;
-  line-height: 1.5;
+
+  font-size: 13px;
+  line-height: 1.45;
 }
 
+/* ---------- Inappropriate warning ---------- */
+
 .word-card__warning {
+  flex-shrink: 0;
+
   padding: 4px 8px;
+
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-pill);
+
   color: var(--color-text-muted);
-  font-size: 12px;
+
+  font-size: 10px;
   font-weight: 600;
 }
+
+/* ---------- Word card tags ---------- */
 
 .word-card__tags {
   display: flex;
   flex-wrap: wrap;
+
   gap: 6px;
+
+  margin-top: auto;
 }
 
 .word-card__tag {
-  padding: 4px 10px;
+  padding: 3px 8px;
+
   border: 1px solid var(--color-accent);
   border-radius: var(--radius-pill);
+
   color: var(--color-accent);
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   LETTER SECTIONS
+   ========================================================= */
+
+.word-list__group-start {
+  display: contents;
+}
+
+.word-list__letter {
+  color: var(--color-text-muted);
+
   font-size: 12px;
   font-weight: 600;
 }
 
-.word-list__group-start {
-  margin-top: 24px;
+/* =========================================================
+   WORDSTASH TITLE
+   ========================================================= */
+
+.word-stash-page__title {
+  margin: 0;
 }
 
-.word-list__group-start:first-child {
-  margin-top: 0;
+/* =========================================================
+   SEARCH + FILTERS
+   ========================================================= */
+
+.word-stash-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  align-items: center;
 }
 
-.word-list__letter {
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: 8px;
-  margin-bottom: 12px;
+.word-stash-page__filter-actions {
+  display: flex;
+  gap: 8px;
+}
 
-  font-size: 20px;
-  font-weight: 700;
+.word-stash-page__filter-toggle {
+  border: 0;
+
+  background: transparent;
+  color: var(--color-text);
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.word-stash-page__reset {
+  border: 0;
+
+  background: transparent;
+  color: var(--color-text-muted);
+
+  font: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.word-stash-page__reset:hover {
+  color: var(--color-accent);
+}
+
+.word-stash-page__filter-toggle:focus-visible,
+.word-stash-page__reset:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   STICKY CONTROLS
+   ========================================================= */
+
+.word-stash-page__sticky {
+  position: sticky;
+  top: var(--navbar-height);
+  z-index: 10;
+  background: var(--color-bg);
+}
+
+/* =========================================================
+   WORDSTASH PAGE
+   ========================================================= */
+
+.word-stash-page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   WORD DETAILS
+   Gemensamma stilar för detaljvyn
+   ========================================================= */
+
+.word-details {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+}
+
+.word-details h2 {
+  margin: 0 0 8px;
+
+  color: var(--color-text);
+
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.word-details__warning {
+  align-self: flex-start;
+
+  padding: 4px 8px;
+  margin-bottom: 20px;
+
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+
+  color: var(--color-text-muted);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.word-details > p {
+  margin: 0 0 24px;
+
+  color: var(--color-text-muted);
+
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.word-details__examples {
+  margin-bottom: 24px;
+}
+
+.word-details__examples h3 {
+  margin: 0 0 8px;
+
+  color: var(--color-accent);
+
+  font-size: 14px;
+}
+
+.word-details__examples p {
+  margin: 0 0 6px;
+
+  color: var(--color-text-muted);
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.word-details__tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.word-details__tags span {
+  padding: 4px 10px;
+
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+
+  color: var(--color-accent);
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   DESKTOP
+   Gäller från och med 768px
+   ========================================================= */
+
+@media (min-width: 768px) {
+  /* =======================================================
+     WORD LIST
+     ======================================================= */
+
+  .word-list {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 22px 24px;
+  }
+
+  /* =======================================================
+     WORD CARD
+     ======================================================= */
+
+  .word-card {
+    min-height: 96px;
+
+    padding: 16px;
+  }
+
+  .word-card__meaning {
+    margin: 18px 0 16px;
+  }
+
+  /* =======================================================
+     LETTER SECTIONS
+     ======================================================= */
+
+  .word-list__letter {
+    grid-column: 1 / -1;
+
+    height: 22px;
+
+    padding: 3px 0;
+
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  /* =======================================================
+     WORDSTASH TITLE
+     ======================================================= */
+
+  .word-stash-page__title {
+    margin-bottom: 24px;
+  }
+
+  /* =======================================================
+     SEARCH + FILTERS
+     ======================================================= */
+
+  .word-stash-page__controls {
+    display: grid;
+
+    grid-template-columns: 30% 1fr;
+
+    gap: 24px;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+  }
+
+  /* Search field stays in column 1 */
+  .word-stash-page__controls > .search-input {
+    grid-column: 1;
+  }
+
+  /* Filter actions are only for mobile */
+  .word-stash-page__filter-actions {
+    display: none;
+  }
+
+  /* Filters are always visible on desktop */
+  .word-stash-page__filters {
+    grid-column: 2;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    align-items: center;
+  }
+
+  /* =======================================================
+     STICKY CONTROLS
+     ======================================================= */
+
+  .word-stash-page__sticky {
+    padding-bottom: 8px;
+  }
+
+  /* =======================================================
+     PAGE SPACING
+     ======================================================= */
+
+  .word-stash-page {
+    padding: 0 48px 48px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   Gäller under 768px
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .word-stash-page__title {
+    margin-bottom: 16px;
+  }
+
+  /* =======================================================
+     STICKY CONTROLS
+     ======================================================= */
+
+  .word-stash-page__sticky {
+    padding-bottom: 8px;
+  }
+
+  /* =======================================================
+     SEARCH + CONTROLS
+     ======================================================= */
+
+  .word-stash-page__controls {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  /* =======================================================
+     FILTER ACTIONS
+     Visa filter + Återställ filter
+     ======================================================= */
+
+  .word-stash-page__filter-actions {
+    display: flex;
+
+    width: 100%;
+
+    gap: 8px;
+  }
+
+  /* =======================================================
+     FILTER TOGGLE
+     ======================================================= */
+
+  .word-stash-page__filter-toggle {
+    flex: 1;
+
+    box-sizing: border-box;
+
+    padding: 12px 16px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    background: var(--color-surface);
+    color: var(--color-text);
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .word-stash-page__filter-toggle:hover {
+    border-color: var(--color-accent);
+  }
+
+  /* =======================================================
+     RESET FILTERS
+     ======================================================= */
+
+  .word-stash-page__reset {
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+
+    padding: 12px 16px;
+
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+
+    background: transparent;
+    color: var(--color-text-muted);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .word-stash-page__reset:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* =======================================================
+     FILTERS
+     Dolda som standard på mobil
+     ======================================================= */
+
+  .word-stash-page__filters {
+    display: none;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    align-items: center;
+
+    width: 100%;
+  }
+
+  /* Visas när Visa filter är aktiverad */
+  .word-stash-page__filters--visible {
+    display: flex;
+  }
+
+  /* =======================================================
+     ALPHABET NAVIGATION
+     ======================================================= */
+
+  .alphabet-nav {
+    width: 100%;
+  }
+
+  /* =======================================================
+     WORD LIST
+     ======================================================= */
+
+  .word-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  /* =======================================================
+     WORD CARD
+     ======================================================= */
+
+  .word-card {
+    padding: 16px;
+  }
+
+  .word-card__meaning {
+    margin: 12px 0 16px;
+  }
+
+  /* =======================================================
+     LETTER SECTIONS
+     ======================================================= */
+
+  .word-list__letter {
+    padding: 3px 0;
+
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .word-stash-page {
+    padding: 0 8px 32px;
+  }
 }
