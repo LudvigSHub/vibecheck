@@ -12,7 +12,7 @@ import "../styles/HomePage.css";
 
 const QUICK_LINKS = [
   {
-    to: "/ordbok",
+    to: "/wordstash",
     icon: <BookIcon width={28} height={28} />,
     title: "WordStash",
     description: "Hitta betydelser och exempel på 100+ slangord.",
@@ -87,7 +87,8 @@ function HomePage() {
   const activeQuiz = summary?.activeQuiz;
   const quizProgress = activeQuiz?.totalQuestionCount
     ? Math.round(
-        (activeQuiz.answeredQuestionCount / activeQuiz.totalQuestionCount) * 100,
+        (activeQuiz.answeredQuestionCount / activeQuiz.totalQuestionCount) *
+          100,
       )
     : 0;
   const quizHeading = summaryLoading

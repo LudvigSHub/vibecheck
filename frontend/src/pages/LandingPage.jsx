@@ -15,7 +15,7 @@ import "../styles/LandingPage.css";
 */
 const FEATURES = [
   {
-    to: "/ordbok",
+    to: "/wordstash",
     icon: <BookIcon width={26} height={26} />,
     title: "WordStash",
     description: "Hitta betydelser och exempel på 100+ slangord.",
@@ -60,7 +60,7 @@ function LandingPage({ onOpenRegister }) {
           <p className="landing__subtitle">All slang samlad på ett ställe</p>
 
           <div className="landing__cta">
-            <LinkButton to="/ordbok" variant="primary">
+            <LinkButton to="/wordstash" variant="primary">
               <BookIcon width={20} height={20} />
               Utforska ordboken
             </LinkButton>
@@ -96,7 +96,12 @@ function LandingPage({ onOpenRegister }) {
           <FeatureCard key={feature.to} {...feature} />
         ))}
       </section>
-      {showQuiz && <QuizDemo onClose={() => setShowQuiz(false)} onCreateAccount={onOpenRegister} />}
+      {showQuiz && (
+        <QuizDemo
+          onClose={() => setShowQuiz(false)}
+          onCreateAccount={onOpenRegister}
+        />
+      )}
     </main>
   );
 }
