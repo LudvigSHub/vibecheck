@@ -6,7 +6,7 @@ import ProgressBar from "./ui/ProgressBar";
 import Button from "./ui/Button";
 import { ArrowRightIcon, CloseIcon, CheckIcon } from "./Icons";
 import { getQuizDemoQuestions } from "../api/words";
-import "../styles/QuizDemo.css";
+import "../styles/Quiz.css";
 
 const STORAGE_KEY = "vibecheck.quizDemo.state";
 
@@ -51,27 +51,22 @@ function clearSavedState() {
 }
 
 export default function QuizDemo({ onClose, onCreateAccount }) {
-  const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [savedQuiz] = useState(loadSavedState);
+  const [questions, setQuestions] = useState(savedQuiz?.questions ?? []);
+  const [loading, setLoading] = useState(!savedQuiz);
   const [error, setError] = useState("");
 
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(savedQuiz?.index ?? 0);
   const [selectedId, setSelectedId] = useState(null);
   const [answered, setAnswered] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [correctCount, setCorrectCount] = useState(
+    savedQuiz?.correctCount ?? 0
+  );
   const [finished, setFinished] = useState(false);
 
-  // Hämta sparat quiz vid mount, annars hämta nytt från backend.
+  // Om inget quiz finns sparat hämtas ett nytt från backend.
   useEffect(() => {
-    const saved = loadSavedState();
-
-    if (saved) {
-      setQuestions(saved.questions);
-      setIndex(saved.index);
-      setCorrectCount(saved.correctCount);
-      setLoading(false);
-      return;
-    }
+    if (savedQuiz) return;
 
     let cancelled = false;
 
@@ -92,7 +87,7 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [savedQuiz]);
 
   // Spara framsteg varje gång man går vidare eller får rätt/fel.
   useEffect(() => {
@@ -173,21 +168,21 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
       <Modal onClose={handleClose}>
         <Tag>QUIZ AVKLARAT</Tag>
 
-        <div className="quiz-demo__result">
-          <div className="quiz-demo__result-trophy">{resultEmoji}</div>
-          <p className="quiz-demo__result-score">
+        <div className="quiz__result">
+          <div className="quiz__result-trophy">{resultEmoji}</div>
+          <p className="quiz__result-score">
             {correctCount}/{questions.length}
           </p>
-          <p className="quiz-demo__result-percent">{percent}% rätt svar</p>
-          <p className="quiz-demo__result-message">{resultMessage}</p>
+          <p className="quiz__result-percent">{percent}% rätt svar</p>
+          <p className="quiz__result-message">{resultMessage}</p>
 
-          <div className="quiz-demo__result-actions">
+          <div className="quiz__result-actions">
             {onCreateAccount && (
               <Button onClick={handleCreateAccount}>Skapa konto</Button>
             )}
             <button
               type="button"
-              className="quiz-demo__result-link"
+              className="quiz__result-link"
               onClick={handleClose}
             >
               Till startsidan
@@ -206,37 +201,37 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
     <Modal onClose={handleClose}>
       <Tag>FRÅGA {index + 1} AV {questions.length}</Tag>
 
-      <h2 className="quiz-demo__question">{current.question}</h2>
+      <h2 className="quiz__question">{current.question}</h2>
 
-      <Card className="quiz-demo__quote">
+      <Card className="quiz__quote">
         <p>&quot;{current.quote}&quot;</p>
       </Card>
 
-      <div className="quiz-demo__options">
+      <div className="quiz__options">
         {current.options.map((option) => {
           const isSelected = option.id === selectedId;
           const isCorrect = option.id === current.correctId;
 
           let state = "";
-          if (answered && isCorrect) state = "quiz-demo__option--correct";
-          else if (answered && isSelected && !isCorrect) state = "quiz-demo__option--incorrect";
-          else if (answered) state = "quiz-demo__option--dimmed";
+          if (answered && isCorrect) state = "quiz__option--correct";
+          else if (answered && isSelected && !isCorrect) state = "quiz__option--incorrect";
+          else if (answered) state = "quiz__option--dimmed";
 
           return (
             <button
               key={option.id}
               type="button"
-              className={`quiz-demo__option ${state}`.trim()}
+              className={`quiz__option ${state}`.trim()}
               onClick={() => handleSelect(option.id)}
               disabled={answered}
             >
-              <span className="quiz-demo__option-badge">{option.id}</span>
-              <span className="quiz-demo__option-text">{option.text}</span>
+              <span className="quiz__option-badge">{option.id}</span>
+              <span className="quiz__option-text">{option.text}</span>
               {answered && isCorrect && (
-                <CheckIcon className="quiz-demo__option-status quiz-demo__option-status--correct" />
+                <CheckIcon className="quiz__option-status quiz__option-status--correct" />
               )}
               {answered && isSelected && !isCorrect && (
-                <CloseIcon className="quiz-demo__option-status quiz-demo__option-status--incorrect" />
+                <CloseIcon className="quiz__option-status quiz__option-status--incorrect" />
               )}
             </button>
           );
@@ -244,31 +239,31 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
       </div>
 
       {answered && (
-        <Card className="quiz-demo__explanation">
-          <p className="quiz-demo__explanation-title">
+        <Card className="quiz__explanation">
+          <p className="quiz__explanation-title">
             Rätt svar: {current.options.find((o) => o.id === current.correctId).text}
           </p>
-          <p className="quiz-demo__explanation-text">{current.explanation}</p>
+          <p className="quiz__explanation-text">{current.explanation}</p>
         </Card>
       )}
 
       {answered && !isLastQuestion && (
-        <Button className="quiz-demo__next" onClick={handleNext}>
+        <Button className="quiz__next" onClick={handleNext}>
           Nästa fråga
           <ArrowRightIcon width={20} height={20} />
         </Button>
       )}
 
       {answered && isLastQuestion && (
-        <Button className="quiz-demo__next" onClick={handleFinish}>
+        <Button className="quiz__next" onClick={handleFinish}>
           Se resultat
           <ArrowRightIcon width={20} height={20} />
         </Button>
       )}
 
-      <div className="quiz-demo__progress">
+      <div className="quiz__progress">
         <ProgressBar value={progress} />
-        <div className="quiz-demo__progress-labels">
+        <div className="quiz__progress-labels">
           <span>{progress}% avklarat</span>
         </div>
       </div>

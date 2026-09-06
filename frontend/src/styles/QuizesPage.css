@@ -1,0 +1,153 @@
+/* ==========================================================================
+   QuizesPage – listan över de tre quizen
+   ========================================================================== */
+
+.quizzes {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 34px 24px 80px;
+  box-sizing: border-box;
+}
+
+.quizzes__eyebrow {
+  margin-bottom: 8px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quizzes__title {
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.quizzes__intro {
+  margin-top: 10px;
+  max-width: 75ch;
+  color: var(--color-text-muted);
+  font-size: 16px;
+}
+
+.quizzes__status {
+  margin-top: 28px;
+  color: var(--color-text-muted);
+}
+
+.quizzes__status--error {
+  color: #fda4af;
+}
+
+.quizzes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+/* --------------------------------------------------------------------------
+   Kortet
+   -------------------------------------------------------------------------- */
+
+.quiz-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.quiz-card--locked {
+  /* Dämpat men läsbart – användaren ska se vad som väntar. */
+  opacity: 0.65;
+}
+
+.quiz-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.quiz-card__lock {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.quiz-card__title {
+  margin-top: 14px;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.quiz-card__description {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+.quiz-card__meta {
+  margin-top: 10px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* margin-top: auto äter upp allt ledigt utrymme ovanför och trycker ner
+   resten mot kortets botten. Det är därför alla tre knappar hamnar på
+   samma höjd trots att beskrivningarna är olika långa. */
+.quiz-card__progress {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.quiz-card__progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.quiz-card__score {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* display: flex gör knappen blocknivå och därmed fullbred i kortet.
+   Samma trick som på "Nästa fråga" – som inline-flex hade radboxen
+   lagt till extra utrymme under. */
+.quiz-card__action {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.quiz-card__locked-text {
+  margin-top: 18px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.quiz-card__locked-text strong {
+  color: var(--color-text);
+}
+
+@media (max-width: 900px) {
+  .quizzes__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .quizzes {
+    padding: 28px 16px 56px;
+  }
+
+  .quizzes__grid {
+    grid-template-columns: 1fr;
+  }
+}

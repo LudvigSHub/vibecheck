@@ -374,13 +374,13 @@ public static class DbInitializer
         new()
         {
             TypeText = "Multiple Choice",
-            Description = "Vilket slangord passar bäst för att beskriva denna situation?"
+            Description = "Vilket slangord passar bäst för att beskriva denna situation/person?"
         },
 
         new()
         {
             TypeText = "True or False",
-            Description = "Är påståendet ovan sant eller falskt?"
+            Description = "Är påståendet sant eller falskt?"
         }
     };
 
@@ -448,6 +448,9 @@ public static class DbInitializer
         var difficulties = await context.Difficulties
             .ToDictionaryAsync(d => d.DifficultyDesc);
 
+        var words = await context.Words
+            .ToDictionaryAsync(w => w.WordDesc);
+
         var questions = new List<Question>();
 
         foreach (var seed in seedQuestions)
@@ -468,11 +471,18 @@ public static class DbInitializer
                     $"Difficulty '{seed.Difficulty}' referenced in questions.json was not found.");
             }
 
+            if (!words.TryGetValue(seed.Word, out var word))
+            {
+                throw new Exception(
+                    $"Word '{seed.Word}' referenced by question '{seed.QuestionDesc}' was not found.");
+            }
+
             questions.Add(new Question
             {
                 QuestionDesc = seed.QuestionDesc,
                 QuestionTypeID = questionType.QuestionTypeID,
-                DifficultyID = difficulty.DifficultyID
+                DifficultyID = difficulty.DifficultyID,
+                WordID = word.WordID
             });
         }
 
@@ -615,27 +625,27 @@ public static class DbInitializer
     {
         new()
         {
-            QuizName = "Internet Slang Basics",
+            QuizName = "Slang för nybörjare",
             QuizDescription =
-                "Test your knowledge of common internet slang.",
+                "Testa dina kunskaper om de vanligaste slangorden.",
             DifficultyID =
                 difficulties["Easy"].DifficultyID
         },
 
         new()
         {
-            QuizName = "Internet Slang Challenge",
+            QuizName = "Slangutmaningen",
             QuizDescription =
-                "Put your knowledge of modern slang to the test.",
+                "Sätt dina kunskaper om modern slang på prov",
             DifficultyID =
                 difficulties["Medium"].DifficultyID
         },
 
         new()
         {
-            QuizName = "Advanced Slang Knowledge",
+            QuizName = "Avancerad slang",
             QuizDescription =
-                "A challenging quiz for experienced slang users.",
+                "Ett tuffare quiz för dig som redan kan ditt lingo.",
             DifficultyID =
                 difficulties["Hard"].DifficultyID
         }
@@ -665,169 +675,169 @@ public static class DbInitializer
         var quizQuestions = new List<QuizQuestion>
     {
         // ============================================================
-        // Internet Slang Basics - Easy
+        // Slang för nybörjare - Easy
         // Questions 1-10
         // ============================================================
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[1].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[2].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[3].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[4].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[5].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[6].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[7].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[8].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[9].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             QuestionID = questions[10].QuestionID
         },
 
 
         // ============================================================
-        // Internet Slang Challenge - Medium
+        // Slangutmaningen - Medium
         // Questions 11-20
         // ============================================================
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[11].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[12].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[13].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[14].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[15].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[16].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[17].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[18].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[19].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             QuestionID = questions[20].QuestionID
         },
 
 
         // ============================================================
-        // Advanced Slang Knowledge - Hard
+        // Avancerad slang - Hard
         // Questions 21-25
         // ============================================================
 
         new()
         {
-            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuizID = quizzes["Avancerad slang"].QuizID,
             QuestionID = questions[21].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuizID = quizzes["Avancerad slang"].QuizID,
             QuestionID = questions[22].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuizID = quizzes["Avancerad slang"].QuizID,
             QuestionID = questions[23].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuizID = quizzes["Avancerad slang"].QuizID,
             QuestionID = questions[24].QuestionID
         },
 
         new()
         {
-            QuizID = quizzes["Advanced Slang Knowledge"].QuizID,
+            QuizID = quizzes["Avancerad slang"].QuizID,
             QuestionID = questions[25].QuestionID
         }
     };
@@ -858,13 +868,13 @@ public static class DbInitializer
         var attempts = new List<QuizAttempt>
     {
         // ============================================================
-        // Internet Slang Basics
+        // Slang för nybörjare
         // ============================================================
 
         new()
         {
             UserID = user.Id,
-            QuizID = quizzes["Internet Slang Basics"].QuizID,
+            QuizID = quizzes["Slang för nybörjare"].QuizID,
             Score = 100,
             QuizPassed = true,
             AttemptDate = DateTime.UtcNow.AddDays(-2),
@@ -872,13 +882,13 @@ public static class DbInitializer
         },
 
         // ============================================================
-        // Internet Slang Challenge
+        // Slangutmaningen
         // ============================================================
 
         new()
         {
             UserID = user.Id,
-            QuizID = quizzes["Internet Slang Challenge"].QuizID,
+            QuizID = quizzes["Slangutmaningen"].QuizID,
             Score = 67,
             QuizPassed = false,
             AttemptDate = DateTime.UtcNow.AddDays(-1),
@@ -948,15 +958,15 @@ public static class DbInitializer
         }
 
         var basicAttempt = attempts.First(a =>
-            a.Quiz.QuizName == "Internet Slang Basics");
+            a.Quiz.QuizName == "Slang för nybörjare");
 
         var challengeAttempt = attempts.First(a =>
-            a.Quiz.QuizName == "Internet Slang Challenge");
+            a.Quiz.QuizName == "Slangutmaningen");
 
         var answers = new List<QuizAttemptAnswer>
     {
         // ============================================================
-        // Internet Slang Basics - Attempt
+        // Slang för nybörjare - Attempt
         // ============================================================
 
         // Q1 - Correct
@@ -980,7 +990,7 @@ public static class DbInitializer
         },
 
         // ============================================================
-        // Internet Slang Challenge - Attempt
+        // Slangutmaningen - Attempt
         // ============================================================
 
         // Q11 - Correct

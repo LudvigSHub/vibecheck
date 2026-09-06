@@ -9,9 +9,61 @@ Accept: application/json
 
 ###
 
-###
-
 # Dagens ord. Ska ge samma svar hur många gånger du än kör den idag,
 # och ett annat ord imorgon.
 GET {{VibeCheck.Api_HostAddress}}/api/words/word-of-the-day
 Accept: application/json
+
+
+###
+
+# Kör den här FÖRST. Kopiera "token" ur svaret och klistra in nedan.
+POST {{VibeCheck.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "userName": "user",
+  "password": "User123!"
+}
+
+###
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlciIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3ODg0NzQwNjF9.AHZnUPDqXlL9PmmrioRPW9kFuYu-tc3ckPx1AIVUh7I
+
+# Listan med alla tre quiz.
+GET {{VibeCheck.Api_HostAddress}}/api/quiz
+Authorization: Bearer {{token}}
+
+###
+
+# Advanced (quizId 3) ska vara LÅST – 400 med förklarande meddelande.
+POST {{VibeCheck.Api_HostAddress}}/api/quiz/3/attempts
+Authorization: Bearer {{token}}
+
+###
+
+# Basics (quizId 1) ska gå att starta.
+# Kopiera quizAttemptId ur svaret och klistra in nedan.
+POST {{VibeCheck.Api_HostAddress}}/api/quiz/1/attempts
+Authorization: Bearer {{token}}
+
+###
+
+@attemptId = 3
+
+# Svara på en fråga. Byt questionId/alternativeId mot värden
+# ur frågelistan du fick när quizet startades.
+POST {{VibeCheck.Api_HostAddress}}/api/quiz/attempts/{{attemptId}}/answers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "questionId": 1,
+  "alternativeId": 1
+}
+
+###
+
+# Avsluta och få resultatet.
+POST {{VibeCheck.Api_HostAddress}}/api/quiz/attempts/{{attemptId}}/complete
+Authorization: Bearer {{token}}
