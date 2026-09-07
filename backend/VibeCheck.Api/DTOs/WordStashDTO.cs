@@ -8,6 +8,8 @@ public class WordStashDTO
 
     public string Meaning { get; set; } = string.Empty;
 
+    public List<WordInflectionDTO> Inflections { get; set; } = new();
+
     public List<string> Examples { get; set; } = new();
 
     public List<WordTagDTO> Tags { get; set; } = new();
