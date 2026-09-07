@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Modal from "./ui/Modal";
 import Card from "./ui/Card";
 import Tag from "./ui/Tag";
+import QuizResult from "./ui/QuizResult";
 import ProgressBar from "./ui/ProgressBar";
 import Button from "./ui/Button";
 import { ArrowRightIcon, CloseIcon, CheckIcon } from "./Icons";
@@ -9,6 +10,19 @@ import { getQuizDemoQuestions } from "../api/words";
 import "../styles/Quiz.css";
 
 const STORAGE_KEY = "vibecheck.quizDemo.state";
+
+function isValidQuestion(q) {
+  return (
+    q &&
+    typeof q.question === "string" &&
+    typeof q.quote === "string" &&
+    Array.isArray(q.options) &&
+    q.options.length > 0 &&
+    q.options.every((o) => o && "id" in o && typeof o.text === "string") &&
+    q.options.some((o) => o.id === q.correctId) &&
+    typeof q.explanation === "string"
+  );
+}
 
 function loadSavedState() {
   try {
@@ -18,6 +32,10 @@ function loadSavedState() {
     const parsed = JSON.parse(raw);
 
     if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
+      return null;
+    }
+
+    if (!parsed.questions.every(isValidQuestion)) {
       return null;
     }
 
@@ -166,31 +184,26 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
 
     return (
       <Modal onClose={handleClose}>
-        <Tag>QUIZ AVKLARAT</Tag>
-
-        <div className="quiz__result">
-          <div className="quiz__result-trophy">{resultEmoji}</div>
-          <p className="quiz__result-score">
-            {correctCount}/{questions.length}
-          </p>
-          <p className="quiz__result-percent">{percent}% rätt svar</p>
-          <p className="quiz__result-message">{resultMessage}</p>
-
-          <div className="quiz__result-actions">
-            {onCreateAccount && (
-              <Button onClick={handleCreateAccount}>Skapa konto</Button>
-            )}
-            <button
-              type="button"
-              className="quiz__result-link"
-              onClick={handleClose}
-            >
-              Till startsidan
-            </button>
-          </div>
-        </div>
+        <QuizResult
+          emoji={resultEmoji}
+          score={`${correctCount}/${questions.length}`}
+          percent={percent}
+          message={resultMessage}
+        >
+          {onCreateAccount && (
+            <Button onClick={handleCreateAccount}>Skapa konto</Button>
+          )}
+          <button
+            type="button"
+            className="quiz-result__link"
+            onClick={handleClose}
+          >
+            Till startsidan
+          </button>
+        </QuizResult>
       </Modal>
     );
+
   }
 
   const current = questions[index];

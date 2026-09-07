@@ -1,6 +1,7 @@
-export default function Avatar({ initials }) {
+export default function Avatar({ initials, size = "md" }) {
+  const sizeClass = size === "lg" ? " avatar--lg" : "";
   return (
-    <span className="avatar" aria-hidden="true">
+    <span className={`avatar${sizeClass}`} aria-hidden="true">
       {initials}
     </span>
   );
