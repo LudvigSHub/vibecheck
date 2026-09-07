@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { getWords, getTags, getWordById } from "../api/words";
 import SearchInput from "../components/ui/SearchInput";
 import WordList from "../components/wordstash/WordList";
@@ -9,6 +10,7 @@ import WordDetails from "../components/wordstash/WordDetails";
 import "../styles/WordStashPage.css";
 
 export default function WordStashPage() {
+  const [searchParams] = useSearchParams();
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -25,7 +27,10 @@ export default function WordStashPage() {
         setLoading(true);
         setError("");
 
-        const data = await getWords();
+        const search = searchParams.get("search") || "";
+        setSearchTerm(search);
+
+        const data = await getWords({ search });
         setWords(data);
 
         const tagData = await getTags();
@@ -39,7 +44,7 @@ export default function WordStashPage() {
     }
 
     loadWords();
-  }, []);
+  }, [searchParams]);
 
   async function handleSearch(event) {
     const value = event.target.value;
