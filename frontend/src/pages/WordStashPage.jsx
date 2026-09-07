@@ -134,7 +134,6 @@ export default function WordStashPage() {
 
   return (
     <main className="word-stash-page">
-      <h1 className="word-stash-page__title">WordStash</h1>
 
       <div className="word-stash-page__sticky">
         <div className="word-stash-page__controls">
