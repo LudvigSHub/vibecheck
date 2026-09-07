@@ -14,6 +14,9 @@ public class Word
     public ICollection<WordExample> WordExamples { get; set; }
         = new List<WordExample>();
 
+    public ICollection<WordInflection> WordInflections { get; set; }
+        = new List<WordInflection>();
+
     public ICollection<WordVote> WordVotes { get; set; }
         = new List<WordVote>();
 

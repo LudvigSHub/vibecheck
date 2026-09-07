@@ -4,12 +4,26 @@ import Card from "./ui/Card";
 import Tag from "./ui/Tag";
 import QuizResult from "./ui/QuizResult";
 import ProgressBar from "./ui/ProgressBar";
+import WordInflections from "./ui/WordInflections";
 import Button from "./ui/Button";
 import { ArrowRightIcon, CloseIcon, CheckIcon } from "./Icons";
 import { getQuizDemoQuestions } from "../api/words";
 import "../styles/Quiz.css";
 
 const STORAGE_KEY = "vibecheck.quizDemo.state";
+
+function isValidQuestion(q) {
+  return (
+    q &&
+    typeof q.question === "string" &&
+    typeof q.quote === "string" &&
+    Array.isArray(q.options) &&
+    q.options.length > 0 &&
+    q.options.every((o) => o && "id" in o && typeof o.text === "string") &&
+    q.options.some((o) => o.id === q.correctId) &&
+    typeof q.explanation === "string"
+  );
+}
 
 function loadSavedState() {
   try {
@@ -19,6 +33,10 @@ function loadSavedState() {
     const parsed = JSON.parse(raw);
 
     if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
+      return null;
+    }
+
+    if (!parsed.questions.every(isValidQuestion)) {
       return null;
     }
 
@@ -240,6 +258,11 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
             Rätt svar: {current.options.find((o) => o.id === current.correctId).text}
           </p>
           <p className="quiz__explanation-text">{current.explanation}</p>
+          {current.inflections?.length > 0 && (
+            <p className="quiz__word-forms">
+              <WordInflections inflections={current.inflections} />
+            </p>
+          )}
         </Card>
       )}
 

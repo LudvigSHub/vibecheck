@@ -65,6 +65,11 @@
   gap: 28px;
 }
 
+.navbar__search {
+  width: 220px;
+  flex-shrink: 0;
+}
+
 .navbar__link {
   display: inline-block;
   padding: 6px 2px;
@@ -267,6 +272,10 @@
     justify-content: flex-start;
     gap: 2px;
   }
+
+  .navbar__search {
+  width: 100%;
+}
 
   .navbar__link {
     display: block;

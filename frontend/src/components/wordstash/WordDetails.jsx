@@ -1,7 +1,12 @@
+import WordInflections from "../ui/WordInflections";
+
 export default function WordDetails({ word }) {
   return (
     <div className="word-details">
-      <h2>{word.word}</h2>
+      <div className="word-details__heading">
+        <h2>{word.word}</h2>
+        <WordInflections inflections={word.inflections} />
+      </div>
 
       {word.isInappropriate && (
         <span className="word-details__warning">Olämpligt</span>

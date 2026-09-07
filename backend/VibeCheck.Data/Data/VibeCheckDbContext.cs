@@ -19,6 +19,8 @@ public class VibeCheckDbContext
     public DbSet<Meaning> Meanings => Set<Meaning>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<WordExample> WordExamples => Set<WordExample>();
+    public DbSet<InflectionType> InflectionTypes => Set<InflectionType>();
+    public DbSet<WordInflection> WordInflections => Set<WordInflection>();
     public DbSet<WordVote> WordVotes => Set<WordVote>();
     public DbSet<WordTag> WordTags => Set<WordTag>();
 
@@ -58,6 +60,20 @@ public class VibeCheckDbContext
             .HasForeignKey(e => e.WordID)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // WordInflection -> Word
+        modelBuilder.Entity<WordInflection>()
+            .HasOne(i => i.Word)
+            .WithMany(w => w.WordInflections)
+            .HasForeignKey(i => i.WordID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // WordInflection -> InflectionType
+        modelBuilder.Entity<WordInflection>()
+            .HasOne(i => i.InflectionType)
+            .WithMany(t => t.WordInflections)
+            .HasForeignKey(i => i.InflectionTypeID)
+            .OnDelete(DeleteBehavior.Restrict);
+
         // WordVote -> Word
         modelBuilder.Entity<WordVote>()
             .HasOne(v => v.Word)
@@ -96,6 +112,10 @@ public class VibeCheckDbContext
             .HasKey(wt => new { wt.WordID, wt.TagID });
 
         // Unique fields
+        modelBuilder.Entity<InflectionType>()
+            .HasIndex(t => t.Code)
+            .IsUnique();
+
         modelBuilder.Entity<Word>()
             .HasIndex(w => w.WordDesc)
             .IsUnique();

@@ -1,0 +1,32 @@
+/* ==========================================================================
+   StyleguidePage – internt referensverktyg
+   ========================================================================== */
+
+.styleguide {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 34px 24px 80px;
+  box-sizing: border-box;
+}
+
+.styleguide-section {
+  margin-top: 32px;
+  padding: 24px;
+}
+
+.styleguide-section h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.styleguide-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.styleguide-card-demo {
+  padding: 16px 20px;
+}

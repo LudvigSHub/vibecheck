@@ -19,6 +19,8 @@ public static class DbInitializer
         await SeedUsersAsync(userManager);
         await SeedMeaningsAsync(context);
         await SeedWordsAsync(context);
+        await SeedInflectionTypesAsync(context);
+        await WordInflectionSeeder.SeedAsync(context);
         await SeedWordExamplesAsync(context);
         await SeedTagsAsync(context);
         await SeedWordTagsAsync(context);
@@ -164,6 +166,49 @@ public static class DbInitializer
         }
 
         await context.Words.AddRangeAsync(words);
+        await context.SaveChangesAsync();
+    }
+
+
+    // ============================================================
+    // INFLECTION TYPES
+    // ============================================================
+    private static async Task SeedInflectionTypesAsync(
+        VibeCheckDbContext context)
+    {
+        var inflectionTypes = new List<InflectionType>
+        {
+            // Verb forms. Future is expressed as a phrase, e.g. "ska springa".
+            new() { Code = "verb_present", DisplayName = "Nutid", SortOrder = 10 },
+            new() { Code = "verb_past", DisplayName = "Dåtid", SortOrder = 20 },
+            new() { Code = "verb_supinum", DisplayName = "Supinum", SortOrder = 30 },
+            new() { Code = "verb_future", DisplayName = "Framtid", SortOrder = 40 },
+
+            // Noun forms.
+            new() { Code = "noun_singular_definite", DisplayName = "Bestämd singular", SortOrder = 110 },
+            new() { Code = "noun_plural_indefinite", DisplayName = "Obestämd plural", SortOrder = 120 },
+            new() { Code = "noun_plural_definite", DisplayName = "Bestämd plural", SortOrder = 130 },
+
+            // Adjective forms. Plural and definite may share the same spelling.
+            new() { Code = "adjective_neuter", DisplayName = "Neutrum (ett-form)", SortOrder = 210 },
+            new() { Code = "adjective_plural", DisplayName = "Plural", SortOrder = 220 },
+            new() { Code = "adjective_definite", DisplayName = "Bestämd form", SortOrder = 230 }
+        };
+
+        // Check each code so new types can be added to an already seeded database.
+        var existingCodes = (await context.InflectionTypes
+            .Select(t => t.Code)
+            .ToListAsync())
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        var missingTypes = inflectionTypes
+            .Where(t => !existingCodes.Contains(t.Code))
+            .ToList();
+
+        if (missingTypes.Count == 0)
+            return;
+
+        await context.InflectionTypes.AddRangeAsync(missingTypes);
         await context.SaveChangesAsync();
     }
 
