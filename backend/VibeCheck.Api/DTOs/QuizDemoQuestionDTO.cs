@@ -14,5 +14,7 @@
 
         public string Explanation { get; set; } = string.Empty;
 
+        public List<WordInflectionDTO> Inflections { get; set; } = new();
+
     }
 }

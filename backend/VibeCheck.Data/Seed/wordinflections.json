@@ -1,0 +1,45 @@
+[
+  { "Word": "keff", "InflectionTypeCode": "adjective_neuter", "InflectedText": "kefft" },
+  { "Word": "keff", "InflectionTypeCode": "adjective_plural", "InflectedText": "keffa" },
+  { "Word": "keff", "InflectionTypeCode": "adjective_definite", "InflectedText": "keffa" },
+
+  { "Word": "aura", "InflectionTypeCode": "noun_singular_definite", "InflectedText": "auran" },
+
+  { "Word": "yap", "InflectionTypeCode": "verb_present", "InflectedText": "yappar" },
+  { "Word": "yap", "InflectionTypeCode": "verb_past", "InflectedText": "yappade" },
+  { "Word": "yap", "InflectionTypeCode": "verb_supinum", "InflectedText": "yappat" },
+  { "Word": "yap", "InflectionTypeCode": "verb_future", "InflectedText": "ska yappa" },
+
+  { "Word": "clown", "InflectionTypeCode": "noun_singular_definite", "InflectedText": "clownen" },
+  { "Word": "clown", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "clowner" },
+  { "Word": "clown", "InflectionTypeCode": "noun_plural_definite", "InflectedText": "clownerna" },
+
+  { "Word": "bot", "InflectionTypeCode": "noun_singular_definite", "InflectedText": "boten" },
+  { "Word": "bot", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "botar" },
+  { "Word": "bot", "InflectionTypeCode": "noun_plural_definite", "InflectedText": "botarna" },
+
+  { "Word": "NPC", "InflectionTypeCode": "noun_singular_definite", "InflectedText": "NPC:n" },
+  { "Word": "NPC", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "NPC:er" },
+  { "Word": "NPC", "InflectionTypeCode": "noun_plural_definite", "InflectedText": "NPC:erna" },
+
+  { "Word": "bozo", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "bozos" },
+  { "Word": "glazer", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "glazers" },
+  { "Word": "tryhard", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "tryhards" },
+  { "Word": "bum", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "bums" },
+  { "Word": "simp", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "simps" },
+  { "Word": "wannabe", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "wannabes" },
+  { "Word": "yapper", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "yappers" },
+
+  { "Word": "glazea", "InflectionTypeCode": "verb_present", "InflectedText": "glazear" },
+  { "Word": "glazea", "InflectionTypeCode": "verb_past", "InflectedText": "glazeade" },
+  { "Word": "glazea", "InflectionTypeCode": "verb_supinum", "InflectedText": "glazeat" },
+  { "Word": "glazea", "InflectionTypeCode": "verb_future", "InflectedText": "ska glazea" },
+
+  { "Word": "fraud", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "frauds" },
+  { "Word": "unc", "InflectionTypeCode": "noun_plural_indefinite", "InflectedText": "uncs" },
+
+  { "Word": "slay", "InflectionTypeCode": "verb_present", "InflectedText": "slayar" },
+  { "Word": "slay", "InflectionTypeCode": "verb_past", "InflectedText": "slayade" },
+  { "Word": "slay", "InflectionTypeCode": "verb_supinum", "InflectedText": "slayat" },
+  { "Word": "slay", "InflectionTypeCode": "verb_future", "InflectedText": "ska slaya" }
+]

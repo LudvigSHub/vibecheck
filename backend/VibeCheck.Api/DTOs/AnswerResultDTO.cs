@@ -15,6 +15,11 @@ public class AnswerResultDTO
     // svaret lika säkert som CorrectAlternativeId skulle göra.
     public string Explanation { get; set; } = string.Empty;
 
+    // Descriptive word information, returned only after the answer is submitted.
+    public string ExplanationWord { get; set; } = string.Empty;
+
+    public List<WordInflectionDTO> Inflections { get; set; } = new();
+
     // Räknas fram på servern, inte i React. Servern vet hur många svar som
     // faktiskt ligger i databasen, även om användaren laddar om sidan mitt i.
     public int AnsweredCount { get; set; }

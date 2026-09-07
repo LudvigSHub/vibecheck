@@ -51,6 +51,17 @@ public class WordStashService
 
                 Meaning = w.Meaning.MeaningText,
 
+                Inflections = w.WordInflections
+                    .OrderBy(i => i.InflectionType.SortOrder)
+                    .ThenBy(i => i.WordInflectionID)
+                    .Select(i => new WordInflectionDTO
+                    {
+                        InflectedText = i.InflectedText,
+                        TypeCode = i.InflectionType.Code,
+                        TypeName = i.InflectionType.DisplayName
+                    })
+                    .ToList(),
+
                 Examples = w.WordExamples
                     .OrderBy(e => e.ExampleID)
                     .Select(e => e.ExampleText)
@@ -84,6 +95,17 @@ public class WordStashService
                 Word = w.WordDesc,
 
                 Meaning = w.Meaning.MeaningText,
+
+                Inflections = w.WordInflections
+                    .OrderBy(i => i.InflectionType.SortOrder)
+                    .ThenBy(i => i.WordInflectionID)
+                    .Select(i => new WordInflectionDTO
+                    {
+                        InflectedText = i.InflectedText,
+                        TypeCode = i.InflectionType.Code,
+                        TypeName = i.InflectionType.DisplayName
+                    })
+                    .ToList(),
 
                 Examples = w.WordExamples
                     .OrderBy(e => e.ExampleID)

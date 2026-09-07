@@ -223,8 +223,16 @@
   gap: 0;
 }
 
+.word-details__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-bottom: 8px;
+}
+
 .word-details h2 {
-  margin: 0 0 8px;
+  margin: 0;
 
   color: var(--color-text);
 
