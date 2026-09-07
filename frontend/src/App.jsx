@@ -9,6 +9,7 @@ import {
 import "./App.css";
 
 import LandingPage from "./pages/LandingPage";
+import WordStashPage from "./pages/WordStashPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import StyleguidePage from "./pages/StyleguidePage";
@@ -103,6 +104,8 @@ function App() {
         />
         <Route path="/test" element={<TestPage />} />
         <Route path="/styleguide" element={<StyleguidePage />} />
+
+        <Route path="/wordstash" element={<WordStashPage />} />
 
         <Route
           path="/home"

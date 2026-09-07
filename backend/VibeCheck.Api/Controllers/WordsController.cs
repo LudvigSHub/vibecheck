@@ -11,15 +11,60 @@ public class WordsController : ControllerBase
 {
     private readonly WordOfTheDayService _wordOfTheDayService;
     private readonly QuizDemoService _quizDemoService;
+    private readonly WordStashService _wordStashService;
 
     // Svensk tid, inte UTC. Annars byts dagens ord vid 01:00 eller 02:00 beroende på sommartid, i stället för vid midnatt.
     private static readonly TimeZoneInfo SwedishTime =
         TimeZoneInfo.FindSystemTimeZoneById("Europe/Stockholm");
 
-    public WordsController(WordOfTheDayService wordOfTheDayService, QuizDemoService quizDemoService)
+    public WordsController(
+        WordOfTheDayService wordOfTheDayService,
+        WordStashService wordStashService,
+        QuizDemoService quizDemoService)
     {
         _wordOfTheDayService = wordOfTheDayService;
+        _wordStashService = wordStashService;
         _quizDemoService = quizDemoService;
+    }
+
+    // GET /api/words
+    // GET /api/words?search=fire
+    // GET /api/words?tag=ungdomsslang
+    // GET /api/words?search=fire&tag=ungdomsslang
+    [HttpGet]
+    public async Task<IActionResult> GetWords(
+        [FromQuery] string? search,
+        [FromQuery] string? tag)
+    {
+        var words = await _wordStashService.GetWordsAsync(search, tag);
+
+        return Ok(words);
+    }
+
+    // GET /api/words/{id}
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetWord(int id)
+    {
+        var word = await _wordStashService.GetWordByIdAsync(id);
+
+        if (word is null)
+        {
+            return NotFound(new
+            {
+                message = "Ordet hittades inte."
+            });
+        }
+
+        return Ok(word);
+    }
+
+    // GET /api/words/tags
+    [HttpGet("tags")]
+    public async Task<IActionResult> GetTags()
+    {
+        var tags = await _wordStashService.GetTagsAsync();
+
+        return Ok(tags);
     }
 
     // GET /api/words/word-of-the-day

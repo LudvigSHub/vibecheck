@@ -71,7 +71,7 @@ function SlangOfDayCard() {
             </>
           )}
 
-          <Link to={`/ordbok/${word.wordId}`} className="slang-card__link">
+          <Link to={`/wordstash/${word.wordId}`} className="slang-card__link">
             <InfoIcon width={15} height={15} />
             Mer detaljer
           </Link>
