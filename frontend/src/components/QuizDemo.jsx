@@ -4,6 +4,7 @@ import Card from "./ui/Card";
 import Tag from "./ui/Tag";
 import QuizResult from "./ui/QuizResult";
 import ProgressBar from "./ui/ProgressBar";
+import WordInflections from "./ui/WordInflections";
 import Button from "./ui/Button";
 import { ArrowRightIcon, CloseIcon, CheckIcon } from "./Icons";
 import { getQuizDemoQuestions } from "../api/words";
@@ -257,6 +258,11 @@ export default function QuizDemo({ onClose, onCreateAccount }) {
             Rätt svar: {current.options.find((o) => o.id === current.correctId).text}
           </p>
           <p className="quiz__explanation-text">{current.explanation}</p>
+          {current.inflections?.length > 0 && (
+            <p className="quiz__word-forms">
+              <WordInflections inflections={current.inflections} />
+            </p>
+          )}
         </Card>
       )}
 

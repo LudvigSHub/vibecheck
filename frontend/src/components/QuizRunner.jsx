@@ -5,6 +5,7 @@ import Card from "./ui/Card";
 import Tag from "./ui/Tag";
 import Button from "./ui/Button";
 import ProgressBar from "./ui/ProgressBar";
+import WordInflections from "./ui/WordInflections";
 import { ArrowRightIcon, CheckIcon, CloseIcon } from "./Icons";
 import {
   submitAnswer,
@@ -260,6 +261,12 @@ export default function QuizRunner({ attempt, onClose }) {
             Rätt svar: {answer.correctAlternativeText}
           </p>
           <p className="quiz__explanation-text">{answer.explanation}</p>
+          {answer.inflections?.length > 0 && (
+            <p className="quiz__word-forms">
+              <strong>{answer.explanationWord}</strong>
+              <WordInflections inflections={answer.inflections} />
+            </p>
+          )}
         </Card>
       )}
 

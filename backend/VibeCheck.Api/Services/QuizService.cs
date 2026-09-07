@@ -229,6 +229,9 @@ public class QuizService
             .AsNoTracking()
             .Include(q => q.Word)
                 .ThenInclude(w => w.Meaning)
+            .Include(q => q.Word)
+                .ThenInclude(w => w.WordInflections)
+                    .ThenInclude(i => i.InflectionType)
             .Include(q => q.QuestionAlternatives)
             .FirstAsync(q => q.QuestionID == request.QuestionId);
 
@@ -268,6 +271,17 @@ public class QuizService
             CorrectAlternativeId = correct.AlternativeID,
             CorrectAlternativeText = correct.AlternativeText,
             Explanation = question.Word.Meaning.MeaningText,
+            ExplanationWord = question.Word.WordDesc,
+            Inflections = question.Word.WordInflections
+                .OrderBy(i => i.InflectionType.SortOrder)
+                .ThenBy(i => i.WordInflectionID)
+                .Select(i => new WordInflectionDTO
+                {
+                    InflectedText = i.InflectedText,
+                    TypeCode = i.InflectionType.Code,
+                    TypeName = i.InflectionType.DisplayName
+                })
+                .ToList(),
             AnsweredCount = answeredCount,
             TotalCount = totalCount
         };

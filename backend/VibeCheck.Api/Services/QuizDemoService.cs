@@ -25,6 +25,8 @@ namespace VibeCheck.Api.Services
             var words = await _context.Words
                 .Include(w => w.Meaning)
                 .Include(w => w.WordExamples)
+                .Include(w => w.WordInflections)
+                    .ThenInclude(i => i.InflectionType)
                 .Where(w => w.WordExamples.Any())
                 .ToListAsync();
 
@@ -87,7 +89,17 @@ namespace VibeCheck.Api.Services
                     Quote = quote,
                     Options = options,
                     CorrectId = correctId,
-                    Explanation = word.Meaning.MeaningText
+                    Explanation = word.Meaning.MeaningText,
+                    Inflections = word.WordInflections
+                        .OrderBy(i => i.InflectionType.SortOrder)
+                        .ThenBy(i => i.WordInflectionID)
+                        .Select(i => new WordInflectionDTO
+                        {
+                            InflectedText = i.InflectedText,
+                            TypeCode = i.InflectionType.Code,
+                            TypeName = i.InflectionType.DisplayName
+                        })
+                        .ToList()
                 });
             }
 
