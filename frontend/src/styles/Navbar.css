@@ -14,7 +14,9 @@
   background: var(--navbar-bg);
   color: var(--navbar-text);
   text-align: left;
-  position: relative;
+
+  position: sticky;
+  top: 0;
   z-index: 100;
 }
 
