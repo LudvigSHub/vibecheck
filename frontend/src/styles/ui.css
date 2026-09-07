@@ -55,6 +55,18 @@
   color: var(--color-on-accent);
 }
 
+.filter-pill:disabled {
+  color: var(--color-text-muted);
+  border-color: var(--color-border-subtle);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.filter-pill:disabled:hover {
+  color: var(--color-text-muted);
+  border-color: var(--color-border-subtle);
+}
+
 .filter-pill:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
@@ -101,32 +113,61 @@
 
 .alphabet-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .alphabet-nav__letter {
-  padding: 4px 6px;
+  padding: 4px 0;
   border: 0;
   background: transparent;
   color: var(--color-text-muted);
   font-size: 15px;
   font-weight: 700;
-  cursor: default;
+  cursor: not-allowed;
+  opacity: 0.35;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    opacity 0.15s ease;
 }
 
-.alphabet-nav__letter--active {
-  color: var(--color-accent);
+/* Available letters */
+.alphabet-nav__letter:not(:disabled) {
+  color: var(--color-text);
+  opacity: 1;
   cursor: pointer;
 }
 
-.alphabet-nav__letter--active:hover {
+.alphabet-nav__letter:not(:disabled):hover {
   color: var(--color-accent-hover);
 }
 
-.alphabet-nav__letter--active:focus-visible {
+/* Selected letter */
+.alphabet-nav__letter.alphabet-nav__letter--selected {
+  color: var(--color-accent);
+  opacity: 1;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.alphabet-nav__letter.alphabet-nav__letter--selected:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Keyboard focus */
+.alphabet-nav__letter:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* Unavailable letters */
+.alphabet-nav__letter:disabled {
+  color: var(--color-text-muted);
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 /* Avatar component styles */
