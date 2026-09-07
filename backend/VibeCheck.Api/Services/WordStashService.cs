@@ -15,7 +15,8 @@ public class WordStashService
 
     public async Task<List<WordStashDTO>> GetWordsAsync(
         string? search,
-        string? tag)
+        string? tag,
+        int? userId)
     {
         var query = _context.Words
             .AsNoTracking()
@@ -78,12 +79,25 @@ public class WordStashService
 
                 IsInappropriate = w.WordTags.Any(wt =>
                     wt.Tag.TagName.ToLower() == "svordom" ||
-                    wt.Tag.TagName.ToLower() == "förolämpning")
+                    wt.Tag.TagName.ToLower() == "förolämpning"),
+
+                Upvotes = w.WordVotes.Count(v => v.IsPositive),
+
+                Downvotes = w.WordVotes.Count(v => !v.IsPositive),
+
+                CurrentUserVote = userId == null
+                ? null
+                : w.WordVotes
+                .Where(v => v.UserID == userId)
+                .Select(v => (bool?)v.IsPositive)
+                .FirstOrDefault()
             })
             .ToListAsync();
     }
 
-    public async Task<WordStashDTO?> GetWordByIdAsync(int id)
+    public async Task<WordStashDTO?> GetWordByIdAsync(
+    int id,
+    int? userId)
     {
         return await _context.Words
             .AsNoTracking()
@@ -123,7 +137,19 @@ public class WordStashService
 
                 IsInappropriate = w.WordTags.Any(wt =>
                     wt.Tag.TagName.ToLower() == "svordom" ||
-                    wt.Tag.TagName.ToLower() == "förolämpning")
+                    wt.Tag.TagName.ToLower() == "förolämpning"),
+
+                Upvotes = w.WordVotes.Count(v => v.IsPositive),
+
+                Downvotes = w.WordVotes.Count(v => !v.IsPositive),
+
+                CurrentUserVote = userId == null
+                ? null
+                : w.WordVotes
+                .Where(v => v.UserID == userId)
+                .Select(v => (bool?)v.IsPositive)
+                .FirstOrDefault()
+
             })
             .FirstOrDefaultAsync();
     }

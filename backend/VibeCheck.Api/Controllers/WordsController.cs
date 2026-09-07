@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using VibeCheck.Api.DTOs;
 using VibeCheck.Api.Services;
 
 namespace VibeCheck.Api.Controllers;
@@ -12,6 +15,7 @@ public class WordsController : ControllerBase
     private readonly WordOfTheDayService _wordOfTheDayService;
     private readonly QuizDemoService _quizDemoService;
     private readonly WordStashService _wordStashService;
+    private readonly WordVoteService _wordVoteService;
 
     // Svensk tid, inte UTC. Annars byts dagens ord vid 01:00 eller 02:00 beroende på sommartid, i stället för vid midnatt.
     private static readonly TimeZoneInfo SwedishTime =
@@ -20,11 +24,13 @@ public class WordsController : ControllerBase
     public WordsController(
         WordOfTheDayService wordOfTheDayService,
         WordStashService wordStashService,
+        WordVoteService wordVoteService,
         QuizDemoService quizDemoService)
     {
         _wordOfTheDayService = wordOfTheDayService;
         _wordStashService = wordStashService;
         _quizDemoService = quizDemoService;
+        _wordVoteService = wordVoteService;
     }
 
     // GET /api/words
@@ -33,10 +39,22 @@ public class WordsController : ControllerBase
     // GET /api/words?search=fire&tag=ungdomsslang
     [HttpGet]
     public async Task<IActionResult> GetWords(
-        [FromQuery] string? search,
-        [FromQuery] string? tag)
+    [FromQuery] string? search,
+    [FromQuery] string? tag)
     {
-        var words = await _wordStashService.GetWordsAsync(search, tag);
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        int? userId = null;
+
+        if (int.TryParse(userIdClaim, out var parsedUserId))
+        {
+            userId = parsedUserId;
+        }
+
+        var words = await _wordStashService.GetWordsAsync(
+            search,
+            tag,
+            userId);
 
         return Ok(words);
     }
@@ -45,7 +63,18 @@ public class WordsController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetWord(int id)
     {
-        var word = await _wordStashService.GetWordByIdAsync(id);
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        int? userId = null;
+
+        if (int.TryParse(userIdClaim, out var parsedUserId))
+        {
+            userId = parsedUserId;
+        }
+
+        var word = await _wordStashService.GetWordByIdAsync(
+            id,
+            userId);
 
         if (word is null)
         {
@@ -92,5 +121,42 @@ public class WordsController : ControllerBase
         var questions = await _quizDemoService.GetQuestionsAsync(count);
 
         return Ok(questions);
+    }
+
+    [Authorize]
+    [HttpPost("{wordId:int}/vote")]
+    public async Task<IActionResult> Vote(
+    int wordId,
+    [FromBody] WordVoteDTO vote)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        await _wordVoteService.VoteAsync(
+            wordId,
+            userId,
+            vote.IsPositive);
+
+        return Ok(new { message = "Röst sparad." });
+    }
+
+    [Authorize]
+    [HttpDelete("{wordId:int}/vote")]
+    public async Task<IActionResult> RemoveVote(int wordId)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        await _wordVoteService.RemoveVoteAsync(wordId, userId);
+
+        return Ok(new { message = "Röst borttagen." });
     }
 }
