@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import SearchInput from "./ui/SearchInput";
 
 import { useAuth } from "../context/AuthContext";
 
@@ -41,13 +42,8 @@ function UserIcon() {
 // onLoginClick öppnar inloggningsrutan, den ligger i App
 function Navbar({ onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const {
-  isAuthenticated,
-  authLoading,
-  user,
-  isAdmin,
-  logout,
-} = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isAuthenticated, authLoading, user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
   const homePath = isAuthenticated ? "/home" : "/";
 
@@ -65,6 +61,21 @@ function Navbar({ onLoginClick }) {
   function handleLogin() {
     closeMenu();
     onLoginClick();
+  }
+
+  function handleSearch(event) {
+    setSearchTerm(event.target.value);
+  }
+
+  function handleSearchKeyDown(event) {
+    if (event.key !== "Enter") return;
+
+    const value = searchTerm.trim();
+
+    if (!value) return;
+
+    closeMenu();
+    navigate(`/wordstash?search=${encodeURIComponent(value)}`);
   }
 
   // Escape stänger mobilmenyn.
@@ -171,6 +182,14 @@ function Navbar({ onLoginClick }) {
               </li>
             )}
           </ul>
+          <div className="navbar__search">
+            <SearchInput
+              value={searchTerm}
+              onChange={handleSearch}
+              onKeyDown={handleSearchKeyDown}
+              placeholder="Sök slang..."
+            />
+          </div>
 
           {/* Knappar och inte länkar, eftersom inloggningen är en popup.
               authLoading gör att knappen inte hinner blinka förbi vid omladdning. */}
@@ -179,13 +198,21 @@ function Navbar({ onLoginClick }) {
               <span className="navbar__avatar" aria-hidden="true">
                 {user.userName.charAt(0).toUpperCase()}
               </span>
-              <button type="button" className="navbar__login" onClick={handleLogout}>
+              <button
+                type="button"
+                className="navbar__login"
+                onClick={handleLogout}
+              >
                 <UserIcon />
                 <span>Logga ut</span>
               </button>
             </div>
           ) : (
-            <button type="button" className="navbar__login" onClick={handleLogin}>
+            <button
+              type="button"
+              className="navbar__login"
+              onClick={handleLogin}
+            >
               <UserIcon />
               <span>Logga in</span>
             </button>
