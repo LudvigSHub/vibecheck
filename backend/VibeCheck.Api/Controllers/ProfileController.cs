@@ -38,4 +38,51 @@ public class ProfileController : ControllerBase
 
         return Ok(profile);
     }
-}
+
+    [HttpPut("me/username")]
+    public async Task<IActionResult> UpdateUserName(
+    UpdateUserNameRequestDTO request)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var result = await _profileService.UpdateUserNameAsync(
+            userId,
+            request.NewUserName);
+
+        if (!result.Succeeded)
+        {
+            return BadRequest(result.Errors.Select(e => e.Description));
+        }
+
+        return NoContent();
+    }
+
+    [HttpPut("me/password")]
+    public async Task<IActionResult> ChangePassword(
+        ChangePasswordRequestDTO request)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!int.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var result = await _profileService.ChangePasswordAsync(
+            userId,
+            request.CurrentPassword,
+            request.NewPassword);
+
+        if (!result.Succeeded)
+        {
+            return BadRequest(result.Errors.Select(e => e.Description));
+        }
+
+        return NoContent();
+    }
+}   
