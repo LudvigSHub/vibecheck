@@ -471,6 +471,1287 @@
     "Question": "Leo: Bro, läraren såg när jag kollade mobilen på provet 💀\nNora: Nah, du är cooked\nLeo: Jag vet 😭",
     "AlternativeText": "Nora tror att Leo kommer få ett bra resultat på provet",
     "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"delulu\"?",
+    "AlternativeText": "Att vara väldigt fokuserad på något",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"delulu\"?",
+    "AlternativeText": "Att ha orealistiska eller överdrivet optimistiska föreställningar",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"delulu\"?",
+    "AlternativeText": "Att vara arg eller irriterad",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"delulu\"?",
+    "AlternativeText": "Att vara väldigt populär",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"sus\"?",
+    "AlternativeText": "Något som är väldigt imponerande",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"sus\"?",
+    "AlternativeText": "Något som är pinsamt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"sus\"?",
+    "AlternativeText": "Något eller någon som verkar misstänkt eller skum",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"sus\"?",
+    "AlternativeText": "Någon som pratar väldigt mycket",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"based\"?",
+    "AlternativeText": "Att uttrycka stöd eller uppskattning för någons åsikt eller beteende",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"based\"?",
+    "AlternativeText": "Att någon har blivit avslöjad med att ljuga",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"based\"?",
+    "AlternativeText": "Att något är mediokert",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"based\"?",
+    "AlternativeText": "Att någon försöker för hårt",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"cringe\"?",
+    "AlternativeText": "Något som är väldigt bra",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"cringe\"?",
+    "AlternativeText": "Något som känns pinsamt, stelt eller obekvämt",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"cringe\"?",
+    "AlternativeText": "Något som verkar misstänkt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"cringe\"?",
+    "AlternativeText": "Något som är gammaldags",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"deadass\"?",
+    "AlternativeText": "Att man skämtar eller överdriver",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"deadass\"?",
+    "AlternativeText": "Att någon har gett upp",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"deadass\"?",
+    "AlternativeText": "Att något är pinsamt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"deadass\"?",
+    "AlternativeText": "Att man är helt seriös eller verkligen talar sanning",
+    "IsCorrect": true
+  },
+
+  {
+    "Question": "Vad betyder slanguttrycket \"W\"?",
+    "AlternativeText": "Ett misslyckande eller dåligt beslut",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"W\"?",
+    "AlternativeText": "En framgång eller något som är bra",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"W\"?",
+    "AlternativeText": "Något som är misstänkt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"W\"?",
+    "AlternativeText": "En person som pratar för mycket",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slanguttrycket \"L\"?",
+    "AlternativeText": "Att någon är väldigt fokuserad",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"L\"?",
+    "AlternativeText": "Att något är bland det bästa som finns",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"L\"?",
+    "AlternativeText": "Ett misslyckande, ett dåligt beslut eller att göra bort sig",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"L\"?",
+    "AlternativeText": "Att någon talar sanning",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"slay\"?",
+    "AlternativeText": "Att göra något väldigt bra, självsäkert eller imponerande",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"slay\"?",
+    "AlternativeText": "Att misslyckas totalt med något",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"slay\"?",
+    "AlternativeText": "Att prata för länge",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"slay\"?",
+    "AlternativeText": "Att kopiera någon annan",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har stängt av mobilen och pluggat fokuserat i tre timmar. Han är verkligen ___.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har stängt av mobilen och pluggat fokuserat i tre timmar. Han är verkligen ___.",
+    "AlternativeText": "locked in",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Han har stängt av mobilen och pluggat fokuserat i tre timmar. Han är verkligen ___.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har stängt av mobilen och pluggat fokuserat i tre timmar. Han är verkligen ___.",
+    "AlternativeText": "washed",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Jag lovar att det faktiskt hände, ___.",
+    "AlternativeText": "no cap",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Jag lovar att det faktiskt hände, ___.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag lovar att det faktiskt hände, ___.",
+    "AlternativeText": "aura",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag lovar att det faktiskt hände, ___.",
+    "AlternativeText": "cringe",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Alla hypade filmen jättemycket, men jag tyckte bara den var ___.",
+    "AlternativeText": "goated",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Alla hypade filmen jättemycket, men jag tyckte bara den var ___.",
+    "AlternativeText": "fire",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Alla hypade filmen jättemycket, men jag tyckte bara den var ___.",
+    "AlternativeText": "mid",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Alla hypade filmen jättemycket, men jag tyckte bara den var ___.",
+    "AlternativeText": "locked in",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Han säger att han inte tog pengarna, men hela historien känns väldigt ___.",
+    "AlternativeText": "slay",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han säger att han inte tog pengarna, men hela historien känns väldigt ___.",
+    "AlternativeText": "sus",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Han säger att han inte tog pengarna, men hela historien känns väldigt ___.",
+    "AlternativeText": "goated",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han säger att han inte tog pengarna, men hela historien känns väldigt ___.",
+    "AlternativeText": "based",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Han lyckades charma henne direkt. Han har verkligen ___.",
+    "AlternativeText": "cooked",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han lyckades charma henne direkt. Han har verkligen ___.",
+    "AlternativeText": "rizz",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Han lyckades charma henne direkt. Han har verkligen ___.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han lyckades charma henne direkt. Han har verkligen ___.",
+    "AlternativeText": "NPC",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Låt henne fortsätta jobba på idén, hon är verkligen ___.",
+    "AlternativeText": "washed",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Låt henne fortsätta jobba på idén, hon är verkligen ___.",
+    "AlternativeText": "cooking",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Låt henne fortsätta jobba på idén, hon är verkligen ___.",
+    "AlternativeText": "chopped",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Låt henne fortsätta jobba på idén, hon är verkligen ___.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Din kompis får högsta betyg på ett prov som han har pluggat hårt inför. Du vill markera att det är en stor framgång.",
+    "AlternativeText": "L",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Din kompis får högsta betyg på ett prov som han har pluggat hårt inför. Du vill markera att det är en stor framgång.",
+    "AlternativeText": "W",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Din kompis får högsta betyg på ett prov som han har pluggat hårt inför. Du vill markera att det är en stor framgång.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Din kompis får högsta betyg på ett prov som han har pluggat hårt inför. Du vill markera att det är en stor framgång.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Din kompis glömmer biljetterna hemma och ni missar konserten. Du vill beskriva situationen som ett tydligt misslyckande.",
+    "AlternativeText": "goated",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Din kompis glömmer biljetterna hemma och ni missar konserten. Du vill beskriva situationen som ett tydligt misslyckande.",
+    "AlternativeText": "L",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Din kompis glömmer biljetterna hemma och ni missar konserten. Du vill beskriva situationen som ett tydligt misslyckande.",
+    "AlternativeText": "fire",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Din kompis glömmer biljetterna hemma och ni missar konserten. Du vill beskriva situationen som ett tydligt misslyckande.",
+    "AlternativeText": "rizz",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "En person skryter högt om hur bra han är, gör direkt bort sig framför alla och ingen tar honom längre på allvar.",
+    "AlternativeText": "locked in",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person skryter högt om hur bra han är, gör direkt bort sig framför alla och ingen tar honom längre på allvar.",
+    "AlternativeText": "goated",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person skryter högt om hur bra han är, gör direkt bort sig framför alla och ingen tar honom längre på allvar.",
+    "AlternativeText": "clown",
+    "IsCorrect": true
+  },
+  {
+    "Question": "En person skryter högt om hur bra han är, gör direkt bort sig framför alla och ingen tar honom längre på allvar.",
+    "AlternativeText": "based",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"lowkey\"?",
+    "AlternativeText": "Att uttrycka något väldigt tydligt och öppet",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"lowkey\"?",
+    "AlternativeText": "Att tycka eller känna något lite grann, diskret eller utan att göra en stor grej av det",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"lowkey\"?",
+    "AlternativeText": "Att inte tro på vad någon säger",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"lowkey\"?",
+    "AlternativeText": "Att vara helt fokuserad på något",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"highkey\"?",
+    "AlternativeText": "Att hålla sin åsikt hemlig",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"highkey\"?",
+    "AlternativeText": "Att något är ganska mediokert",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"highkey\"?",
+    "AlternativeText": "Att tydligt eller starkt tycka, känna eller vilja något",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"highkey\"?",
+    "AlternativeText": "Att någon försöker vara cool men misslyckas",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"bet\"?",
+    "AlternativeText": "Ett sätt att säga okej, visst eller deal",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"bet\"?",
+    "AlternativeText": "Att man tror att någon ljuger",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"bet\"?",
+    "AlternativeText": "Att någon har gjort bort sig",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"bet\"?",
+    "AlternativeText": "Att man inte bryr sig om vad som händer",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"valid\"?",
+    "AlternativeText": "Att något är misstänkt eller skumt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"valid\"?",
+    "AlternativeText": "Att något är rimligt, bra eller godkänt",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"valid\"?",
+    "AlternativeText": "Att något är överskattat",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"valid\"?",
+    "AlternativeText": "Att något är pinsamt att bevittna",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder slanguttrycket \"ratio\"?",
+    "AlternativeText": "Att två personer tycker exakt samma sak",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"ratio\"?",
+    "AlternativeText": "Att ett inlägg tas bort eftersom det är opopulärt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"ratio\"?",
+    "AlternativeText": "Att någon får väldigt många följare på kort tid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slanguttrycket \"ratio\"?",
+    "AlternativeText": "Att ett svar eller reaktion får mer stöd än originalinlägget och visar att många inte håller med",
+    "IsCorrect": true
+  },
+
+  {
+    "Question": "Vad betyder slangordet \"brainrot\"?",
+    "AlternativeText": "Att vara helt slut efter att ha pluggat",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"brainrot\"?",
+    "AlternativeText": "Internetuttryck för absurt eller repetitivt innehåll, eller en fixering vid sådant innehåll",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"brainrot\"?",
+    "AlternativeText": "Att glömma lösenordet till sina sociala medier",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"brainrot\"?",
+    "AlternativeText": "Att någon inte längre är lika skicklig som förr",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad betyder uttrycket \"ick\"?",
+    "AlternativeText": "En plötslig känsla av avtändning eller avsmak för någon",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder uttrycket \"ick\"?",
+    "AlternativeText": "Att bli imponerad av någon oväntat",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder uttrycket \"ick\"?",
+    "AlternativeText": "Att misstänka att någon ljuger",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder uttrycket \"ick\"?",
+    "AlternativeText": "Att någon pratar alldeles för mycket",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han påstår att han blev erbjuden kontrakt av tre proffslag, men ingen har sett några bevis. Det låter som ___.",
+    "AlternativeText": "valid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han påstår att han blev erbjuden kontrakt av tre proffslag, men ingen har sett några bevis. Det låter som ___.",
+    "AlternativeText": "cap",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Han påstår att han blev erbjuden kontrakt av tre proffslag, men ingen har sett några bevis. Det låter som ___.",
+    "AlternativeText": "peak",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han påstår att han blev erbjuden kontrakt av tre proffslag, men ingen har sett några bevis. Det låter som ___.",
+    "AlternativeText": "locked in",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "___, jag trodde faktiskt inte att den filmen skulle vara så bra.",
+    "AlternativeText": "Touch grass",
+    "IsCorrect": false
+  },
+  {
+    "Question": "___, jag trodde faktiskt inte att den filmen skulle vara så bra.",
+    "AlternativeText": "Bet",
+    "IsCorrect": false
+  },
+  {
+    "Question": "___, jag trodde faktiskt inte att den filmen skulle vara så bra.",
+    "AlternativeText": "Ngl",
+    "IsCorrect": true
+  },
+  {
+    "Question": "___, jag trodde faktiskt inte att den filmen skulle vara så bra.",
+    "AlternativeText": "Ratio",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Jag är ___ sugen på att stanna hemma istället för att gå på festen.",
+    "AlternativeText": "highkey",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag är ___ sugen på att stanna hemma istället för att gå på festen.",
+    "AlternativeText": "lowkey",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Jag är ___ sugen på att stanna hemma istället för att gå på festen.",
+    "AlternativeText": "cooked",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag är ___ sugen på att stanna hemma istället för att gå på festen.",
+    "AlternativeText": "ratio",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Hon vann tävlingen trots att ingen trodde på henne. Det är ändå en riktigt stor ___.",
+    "AlternativeText": "L",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hon vann tävlingen trots att ingen trodde på henne. Det är ändå en riktigt stor ___.",
+    "AlternativeText": "ick",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hon vann tävlingen trots att ingen trodde på henne. Det är ändå en riktigt stor ___.",
+    "AlternativeText": "W",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Hon vann tävlingen trots att ingen trodde på henne. Det är ändå en riktigt stor ___.",
+    "AlternativeText": "aura loss",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Du behöver inte gilla beslutet, men hennes anledning är ändå ___.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Du behöver inte gilla beslutet, men hennes anledning är ändå ___.",
+    "AlternativeText": "valid",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Du behöver inte gilla beslutet, men hennes anledning är ändå ___.",
+    "AlternativeText": "chopped",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Du behöver inte gilla beslutet, men hennes anledning är ändå ___.",
+    "AlternativeText": "delulu",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vi möts utanför stationen klockan sju? ___.",
+    "AlternativeText": "Mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vi möts utanför stationen klockan sju? ___.",
+    "AlternativeText": "Bet",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vi möts utanför stationen klockan sju? ___.",
+    "AlternativeText": "Ratio",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vi möts utanför stationen klockan sju? ___.",
+    "AlternativeText": "Cooked",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Han har suttit och argumenterat med främlingar på nätet hela natten. Han behöver verkligen ___.",
+    "AlternativeText": "lock in",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har suttit och argumenterat med främlingar på nätet hela natten. Han behöver verkligen ___.",
+    "AlternativeText": "touch grass",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Han har suttit och argumenterat med främlingar på nätet hela natten. Han behöver verkligen ___.",
+    "AlternativeText": "glaze",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har suttit och argumenterat med främlingar på nätet hela natten. Han behöver verkligen ___.",
+    "AlternativeText": "slay",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Efter att ha sett samma absurda meme femtio gånger känns hela mitt flöde som ren ___.",
+    "AlternativeText": "rizz",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Efter att ha sett samma absurda meme femtio gånger känns hela mitt flöde som ren ___.",
+    "AlternativeText": "brainrot",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Efter att ha sett samma absurda meme femtio gånger känns hela mitt flöde som ren ___.",
+    "AlternativeText": "aura",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Efter att ha sett samma absurda meme femtio gånger känns hela mitt flöde som ren ___.",
+    "AlternativeText": "valid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Ngl, jag lowkey gillar hans nya låt.\nLeo: Fr? Jag tyckte den var mid.\nMaja: Nah, det där är cap.",
+    "AlternativeText": "Maja gillar låten lite mer än hon kanske vill erkänna, medan Leo tycker att den är medioker",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Maja: Ngl, jag lowkey gillar hans nya låt.\nLeo: Fr? Jag tyckte den var mid.\nMaja: Nah, det där är cap.",
+    "AlternativeText": "Båda tycker att låten är fantastisk",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Ngl, jag lowkey gillar hans nya låt.\nLeo: Fr? Jag tyckte den var mid.\nMaja: Nah, det där är cap.",
+    "AlternativeText": "Maja tycker att låten är dålig men Leo försvarar den",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Ngl, jag lowkey gillar hans nya låt.\nLeo: Fr? Jag tyckte den var mid.\nMaja: Nah, det där är cap.",
+    "AlternativeText": "De diskuterar om artisten har ljugit om att låten finns",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Noah: Vi ses vid gymmet klockan sex?\nSam: Bet.\nNoah: Kom i tid den här gången 💀\nSam: Fr, jag lovar.",
+    "AlternativeText": "Sam tackar nej till att träffas",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Noah: Vi ses vid gymmet klockan sex?\nSam: Bet.\nNoah: Kom i tid den här gången 💀\nSam: Fr, jag lovar.",
+    "AlternativeText": "De är överens om att ses klockan sex och Sam försäkrar att han ska komma i tid",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Noah: Vi ses vid gymmet klockan sex?\nSam: Bet.\nNoah: Kom i tid den här gången 💀\nSam: Fr, jag lovar.",
+    "AlternativeText": "Noah tror att Sam ljuger om att han tränar",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Noah: Vi ses vid gymmet klockan sex?\nSam: Bet.\nNoah: Kom i tid den här gången 💀\nSam: Fr, jag lovar.",
+    "AlternativeText": "Sam tycker att gymmet är överskattat",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Ella: Han pratade om hur bra han är i en timme och sen förlorade han första matchen.\nMira: Det är ett L.\nElla: Highkey pinsamt.",
+    "AlternativeText": "De är imponerade över att han vågade spela matchen",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Ella: Han pratade om hur bra han är i en timme och sen förlorade han första matchen.\nMira: Det är ett L.\nElla: Highkey pinsamt.",
+    "AlternativeText": "De tycker att han var fokuserad trots att han förlorade",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Ella: Han pratade om hur bra han är i en timme och sen förlorade han första matchen.\nMira: Det är ett L.\nElla: Highkey pinsamt.",
+    "AlternativeText": "De tycker att det är tydligt pinsamt att han skrytte så mycket och sedan förlorade direkt",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Ella: Han pratade om hur bra han är i en timme och sen förlorade han första matchen.\nMira: Det är ett L.\nElla: Highkey pinsamt.",
+    "AlternativeText": "De tror att motståndaren fuskade",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Leo: Jag har spelat samma game i tolv timmar idag.\nNora: Bro 💀 touch grass.\nLeo: En match till.",
+    "AlternativeText": "Nora tycker att Leo borde lämna spelet och göra något utanför internet en stund",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Leo: Jag har spelat samma game i tolv timmar idag.\nNora: Bro 💀 touch grass.\nLeo: En match till.",
+    "AlternativeText": "Nora vill att Leo ska byta till ett annat spel",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Jag har spelat samma game i tolv timmar idag.\nNora: Bro 💀 touch grass.\nLeo: En match till.",
+    "AlternativeText": "Nora tycker att Leo har blivit väldigt bra på spelet",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Jag har spelat samma game i tolv timmar idag.\nNora: Bro 💀 touch grass.\nLeo: En match till.",
+    "AlternativeText": "Nora ber Leo att spela ytterligare en match",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Mira: Jag gillade honom tills han började skryta om hur mycket hans klocka kostade.\nElsa: Instant ick?\nMira: Exakt.",
+    "AlternativeText": "Mira blev mer imponerad när hon hörde priset på klockan",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Mira: Jag gillade honom tills han började skryta om hur mycket hans klocka kostade.\nElsa: Instant ick?\nMira: Exakt.",
+    "AlternativeText": "Mira tror att han ljuger om vad klockan kostade",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Mira: Jag gillade honom tills han började skryta om hur mycket hans klocka kostade.\nElsa: Instant ick?\nMira: Exakt.",
+    "AlternativeText": "Mira tappade snabbt intresset för honom på grund av hans beteende",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Mira: Jag gillade honom tills han började skryta om hur mycket hans klocka kostade.\nElsa: Instant ick?\nMira: Exakt.",
+    "AlternativeText": "Mira tycker att hans beteende var väldigt självsäkert och coolt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Uttrycket \"sigma\" används alltid seriöst för att beskriva en person som faktiskt är självständig och framgångsrik.",
+    "AlternativeText": "Sant",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Uttrycket \"sigma\" används alltid seriöst för att beskriva en person som faktiskt är självständig och framgångsrik.",
+    "AlternativeText": "Falskt",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vilken beskrivning fångar bäst hur \"sigma\" ofta används på internet?",
+    "AlternativeText": "Som ett memeuttryck för någon som framställs som självsäker och självständig, ibland ironiskt",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vilken beskrivning fångar bäst hur \"sigma\" ofta används på internet?",
+    "AlternativeText": "Som ett uttryck för någon som alltid följer gruppen",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vilken beskrivning fångar bäst hur \"sigma\" ofta används på internet?",
+    "AlternativeText": "Som ett ord för någon som blivit avslöjad med att ljuga",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vilken beskrivning fångar bäst hur \"sigma\" ofta används på internet?",
+    "AlternativeText": "Som ett uttryck för någon som pratar alldeles för mycket",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad innebär det vanligtvis att någon blir \"ratioed\" på sociala medier?",
+    "AlternativeText": "Att personens inlägg automatiskt tas bort",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad innebär det vanligtvis att någon blir \"ratioed\" på sociala medier?",
+    "AlternativeText": "Att en reaktion eller ett svar får betydligt mer stöd än originalinlägget",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad innebär det vanligtvis att någon blir \"ratioed\" på sociala medier?",
+    "AlternativeText": "Att personen plötsligt får väldigt många nya följare",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad innebär det vanligtvis att någon blir \"ratioed\" på sociala medier?",
+    "AlternativeText": "Att två inlägg får exakt lika mycket engagemang",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad antyder uttrycket \"touch grass\" när det riktas mot någon?",
+    "AlternativeText": "Att personen borde lämna internet en stund och få perspektiv i verkligheten",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad antyder uttrycket \"touch grass\" när det riktas mot någon?",
+    "AlternativeText": "Att personen borde börja träna mer seriöst",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad antyder uttrycket \"touch grass\" när det riktas mot någon?",
+    "AlternativeText": "Att personen gjorde något väldigt imponerande",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad antyder uttrycket \"touch grass\" när det riktas mot någon?",
+    "AlternativeText": "Att personen borde sluta ljuga",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Vad menas oftast när någon beskriver sitt internetflöde eller en fixering som \"brainrot\"?",
+    "AlternativeText": "Att innehållet är så absurt eller repetitivt att man skämtsamt blivit helt uppslukad av det",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad menas oftast när någon beskriver sitt internetflöde eller en fixering som \"brainrot\"?",
+    "AlternativeText": "Att innehållet är seriöst och utbildande",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad menas oftast när någon beskriver sitt internetflöde eller en fixering som \"brainrot\"?",
+    "AlternativeText": "Att internetanslutningen blivit långsam",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad menas oftast när någon beskriver sitt internetflöde eller en fixering som \"brainrot\"?",
+    "AlternativeText": "Att personen blivit avslöjad med att kopiera någon annans innehåll",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hans inlägg fick 200 likes, men svaret som sa emot honom fick 12 000. Han blev totalt ___.",
+    "AlternativeText": "ratioed",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Hans inlägg fick 200 likes, men svaret som sa emot honom fick 12 000. Han blev totalt ___.",
+    "AlternativeText": "locked in",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hans inlägg fick 200 likes, men svaret som sa emot honom fick 12 000. Han blev totalt ___.",
+    "AlternativeText": "goated",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hans inlägg fick 200 likes, men svaret som sa emot honom fick 12 000. Han blev totalt ___.",
+    "AlternativeText": "valid",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Hon sa först att festen verkade tråkig, men nu säger hon att hon ___ vill gå efter att ha sett vilka som kommer.",
+    "AlternativeText": "lowkey",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hon sa först att festen verkade tråkig, men nu säger hon att hon ___ vill gå efter att ha sett vilka som kommer.",
+    "AlternativeText": "highkey",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Hon sa först att festen verkade tråkig, men nu säger hon att hon ___ vill gå efter att ha sett vilka som kommer.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Hon sa först att festen verkade tråkig, men nu säger hon att hon ___ vill gå efter att ha sett vilka som kommer.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Jag vill inte erkänna det för de andra, men jag ___ tycker att låten är bra.",
+    "AlternativeText": "highkey",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag vill inte erkänna det för de andra, men jag ___ tycker att låten är bra.",
+    "AlternativeText": "lowkey",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Jag vill inte erkänna det för de andra, men jag ___ tycker att låten är bra.",
+    "AlternativeText": "caught in 4K",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag vill inte erkänna det för de andra, men jag ___ tycker att låten är bra.",
+    "AlternativeText": "washed",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Han har analyserat samma TikTok-drama i sex timmar och skrivit tjugo kommentarer. Bro behöver ___.",
+    "AlternativeText": "touch grass",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Han har analyserat samma TikTok-drama i sex timmar och skrivit tjugo kommentarer. Bro behöver ___.",
+    "AlternativeText": "lock in",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har analyserat samma TikTok-drama i sex timmar och skrivit tjugo kommentarer. Bro behöver ___.",
+    "AlternativeText": "glaze",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Han har analyserat samma TikTok-drama i sex timmar och skrivit tjugo kommentarer. Bro behöver ___.",
+    "AlternativeText": "rizz",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Jag gillade honom fram tills han började prata om sig själv i tredje person. Direkt ___.",
+    "AlternativeText": "W",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag gillade honom fram tills han började prata om sig själv i tredje person. Direkt ___.",
+    "AlternativeText": "ick",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Jag gillade honom fram tills han började prata om sig själv i tredje person. Direkt ___.",
+    "AlternativeText": "rizz",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Jag gillade honom fram tills han började prata om sig själv i tredje person. Direkt ___.",
+    "AlternativeText": "peak",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Efter två veckor av samma meme, samma ljud och samma videos är hela gruppchatten bara ___.",
+    "AlternativeText": "valid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Efter två veckor av samma meme, samma ljud och samma videos är hela gruppchatten bara ___.",
+    "AlternativeText": "brainrot",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Efter två veckor av samma meme, samma ljud och samma videos är hela gruppchatten bara ___.",
+    "AlternativeText": "aura",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Efter två veckor av samma meme, samma ljud och samma videos är hela gruppchatten bara ___.",
+    "AlternativeText": "slay",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person tackar nej till en fest för att stanna hemma och ta hand om en vän som mår dåligt. Någon i gruppchatten säger att beslutet ändå är helt rimligt och respektabelt.",
+    "AlternativeText": "valid",
+    "IsCorrect": true
+  },
+  {
+    "Question": "En person tackar nej till en fest för att stanna hemma och ta hand om en vän som mår dåligt. Någon i gruppchatten säger att beslutet ändå är helt rimligt och respektabelt.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person tackar nej till en fest för att stanna hemma och ta hand om en vän som mår dåligt. Någon i gruppchatten säger att beslutet ändå är helt rimligt och respektabelt.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person tackar nej till en fest för att stanna hemma och ta hand om en vän som mår dåligt. Någon i gruppchatten säger att beslutet ändå är helt rimligt och respektabelt.",
+    "AlternativeText": "delulu",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "En person gör något överdrivet självsäkert och dramatiskt, och kompisarna börjar ironiskt beskriva honom som en ensam, oberörd huvudperson som inte behöver någon annan.",
+    "AlternativeText": "yapper",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person gör något överdrivet självsäkert och dramatiskt, och kompisarna börjar ironiskt beskriva honom som en ensam, oberörd huvudperson som inte behöver någon annan.",
+    "AlternativeText": "sigma",
+    "IsCorrect": true
+  },
+  {
+    "Question": "En person gör något överdrivet självsäkert och dramatiskt, och kompisarna börjar ironiskt beskriva honom som en ensam, oberörd huvudperson som inte behöver någon annan.",
+    "AlternativeText": "glazer",
+    "IsCorrect": false
+  },
+  {
+    "Question": "En person gör något överdrivet självsäkert och dramatiskt, och kompisarna börjar ironiskt beskriva honom som en ensam, oberörd huvudperson som inte behöver någon annan.",
+    "AlternativeText": "fraud",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Ngl jag lowkey trodde hans nya låt skulle vara fire.\nLeo: Samma, men den var mid.\nMaja: Fr, folk säger att det är hans bästa låt någonsin.\nLeo: Cap.",
+    "AlternativeText": "De tycker att låten är fantastisk och håller med hypen",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Ngl jag lowkey trodde hans nya låt skulle vara fire.\nLeo: Samma, men den var mid.\nMaja: Fr, folk säger att det är hans bästa låt någonsin.\nLeo: Cap.",
+    "AlternativeText": "De hade höga förväntningar men blev besvikna och Leo tror inte på påståendet att det är artistens bästa låt",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Maja: Ngl jag lowkey trodde hans nya låt skulle vara fire.\nLeo: Samma, men den var mid.\nMaja: Fr, folk säger att det är hans bästa låt någonsin.\nLeo: Cap.",
+    "AlternativeText": "Maja gillar låten mycket men Leo har inte hört den",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Ngl jag lowkey trodde hans nya låt skulle vara fire.\nLeo: Samma, men den var mid.\nMaja: Fr, folk säger att det är hans bästa låt någonsin.\nLeo: Cap.",
+    "AlternativeText": "De misstänker att artisten har kopierat låten",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Noah: Han skrev att ingen i klassen kan slå honom.\nSam: Och sen?\nNoah: Förlorade första matchen 0-6.\nSam: Bro is cooked 😭\nNoah: Generational aura loss.",
+    "AlternativeText": "Han skrytte om hur bra han var men förlorade stort direkt och gjorde bort sig",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Noah: Han skrev att ingen i klassen kan slå honom.\nSam: Och sen?\nNoah: Förlorade första matchen 0-6.\nSam: Bro is cooked 😭\nNoah: Generational aura loss.",
+    "AlternativeText": "Han vann enkelt och ökade sin status i gruppen",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Noah: Han skrev att ingen i klassen kan slå honom.\nSam: Och sen?\nNoah: Förlorade första matchen 0-6.\nSam: Bro is cooked 😭\nNoah: Generational aura loss.",
+    "AlternativeText": "Sam misstänker att motståndaren fuskade",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Noah: Han skrev att ingen i klassen kan slå honom.\nSam: Och sen?\nNoah: Förlorade första matchen 0-6.\nSam: Bro is cooked 😭\nNoah: Generational aura loss.",
+    "AlternativeText": "De tycker att han borde träna mer eftersom han nästan vann",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Ella: Jag sa att jag inte ville gå på festen.\nMira: Fair.\nElla: Men nu såg jag vilka som kommer och jag highkey vill dit.\nMira: 💀",
+    "AlternativeText": "Ella vill fortfarande absolut inte gå",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Ella: Jag sa att jag inte ville gå på festen.\nMira: Fair.\nElla: Men nu såg jag vilka som kommer och jag highkey vill dit.\nMira: 💀",
+    "AlternativeText": "Ella har tydligt ändrat sig och vill nu gärna gå",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Ella: Jag sa att jag inte ville gå på festen.\nMira: Fair.\nElla: Men nu såg jag vilka som kommer och jag highkey vill dit.\nMira: 💀",
+    "AlternativeText": "Ella tycker att personerna på festen verkar misstänkta",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Ella: Jag sa att jag inte ville gå på festen.\nMira: Fair.\nElla: Men nu såg jag vilka som kommer och jag highkey vill dit.\nMira: 💀",
+    "AlternativeText": "Mira försöker övertala Ella att stanna hemma",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Leo: Hon säger att hon aldrig läser kommentarerna.\nNora: Okej?\nLeo: Hon svarade precis på en kommentar från tre månader sedan.\nNora: Caught in 4K.",
+    "AlternativeText": "Hon har tydligt blivit motsagd av sitt eget beteende och avslöjad",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Leo: Hon säger att hon aldrig läser kommentarerna.\nNora: Okej?\nLeo: Hon svarade precis på en kommentar från tre månader sedan.\nNora: Caught in 4K.",
+    "AlternativeText": "Hon har fått väldigt många likes på sin kommentar",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Hon säger att hon aldrig läser kommentarerna.\nNora: Okej?\nLeo: Hon svarade precis på en kommentar från tre månader sedan.\nNora: Caught in 4K.",
+    "AlternativeText": "Nora tycker att hennes svar var imponerande",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Hon säger att hon aldrig läser kommentarerna.\nNora: Okej?\nLeo: Hon svarade precis på en kommentar från tre månader sedan.\nNora: Caught in 4K.",
+    "AlternativeText": "Leo tror att kontot blivit hackat",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Sam: Jag har kollat 47 videos om samma meme idag.\nAlex: Bro har terminal brainrot.\nSam: Ngl jag kan inte sluta.\nAlex: Touch grass 😭",
+    "AlternativeText": "Alex tycker att Sam borde fortsätta eftersom innehållet är väldigt bra",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Sam: Jag har kollat 47 videos om samma meme idag.\nAlex: Bro har terminal brainrot.\nSam: Ngl jag kan inte sluta.\nAlex: Touch grass 😭",
+    "AlternativeText": "Sam har blivit väldigt uppslukad av samma internetinnehåll och Alex tycker att han behöver en paus från nätet",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Sam: Jag har kollat 47 videos om samma meme idag.\nAlex: Bro har terminal brainrot.\nSam: Ngl jag kan inte sluta.\nAlex: Touch grass 😭",
+    "AlternativeText": "Sam försöker skapa ett eget meme och Alex kritiserar kvaliteten",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Sam: Jag har kollat 47 videos om samma meme idag.\nAlex: Bro har terminal brainrot.\nSam: Ngl jag kan inte sluta.\nAlex: Touch grass 😭",
+    "AlternativeText": "Alex tror att Sam ljuger om hur många videos han sett",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Maja: Han sa att han var proffs för några år sedan.\nLeo: Var han bra?\nMaja: Kanske då, men han förlorade mot min lillebror igår.\nLeo: Washed 💀",
+    "AlternativeText": "Leo tror att han fortfarande är lika skicklig som när han var proffs",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Han sa att han var proffs för några år sedan.\nLeo: Var han bra?\nMaja: Kanske då, men han förlorade mot min lillebror igår.\nLeo: Washed 💀",
+    "AlternativeText": "Leo menar att han verkar ha tappat mycket av sin tidigare nivå",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Maja: Han sa att han var proffs för några år sedan.\nLeo: Var han bra?\nMaja: Kanske då, men han förlorade mot min lillebror igår.\nLeo: Washed 💀",
+    "AlternativeText": "Leo tycker att lillebrodern gjorde bort sig",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Han sa att han var proffs för några år sedan.\nLeo: Var han bra?\nMaja: Kanske då, men han förlorade mot min lillebror igår.\nLeo: Washed 💀",
+    "AlternativeText": "Leo misstänker att han aldrig varit proffs",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Nora: Varför försvarar du honom i varje kommentar?\nLeo: För att han aldrig gör något fel.\nNora: Du känner honom inte ens 💀\nMaja: Bro is glazing professionally.",
+    "AlternativeText": "Maja tycker att Leo överdriver sitt beröm och försvar av personen",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Nora: Varför försvarar du honom i varje kommentar?\nLeo: För att han aldrig gör något fel.\nNora: Du känner honom inte ens 💀\nMaja: Bro is glazing professionally.",
+    "AlternativeText": "Maja tycker att Leo borde skriva fler kommentarer",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Nora: Varför försvarar du honom i varje kommentar?\nLeo: För att han aldrig gör något fel.\nNora: Du känner honom inte ens 💀\nMaja: Bro is glazing professionally.",
+    "AlternativeText": "Maja menar att Leo blivit avslöjad med att ljuga",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Nora: Varför försvarar du honom i varje kommentar?\nLeo: För att han aldrig gör något fel.\nNora: Du känner honom inte ens 💀\nMaja: Bro is glazing professionally.",
+    "AlternativeText": "Maja tycker att personen Leo försvarar är medioker",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Alex: Jag tror hon gillar mig.\nSam: Varför?\nAlex: Hon såg min story två minuter efter att jag lade upp den.\nSam: Bro...\nAlex: Det är basically bekräftat.\nSam: Delulu.",
+    "AlternativeText": "Sam tycker att Alex drar en väldigt säker slutsats från nästan inga bevis",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Alex: Jag tror hon gillar mig.\nSam: Varför?\nAlex: Hon såg min story två minuter efter att jag lade upp den.\nSam: Bro...\nAlex: Det är basically bekräftat.\nSam: Delulu.",
+    "AlternativeText": "Sam håller med om att hon definitivt är kär i Alex",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Alex: Jag tror hon gillar mig.\nSam: Varför?\nAlex: Hon såg min story två minuter efter att jag lade upp den.\nSam: Bro...\nAlex: Det är basically bekräftat.\nSam: Delulu.",
+    "AlternativeText": "Sam tycker att Alex har väldigt bra rizz",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Alex: Jag tror hon gillar mig.\nSam: Varför?\nAlex: Hon såg min story två minuter efter att jag lade upp den.\nSam: Bro...\nAlex: Det är basically bekräftat.\nSam: Delulu.",
+    "AlternativeText": "Sam tror att storyn var dålig",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Mira: Jag tyckte faktiskt han verkade trevlig.\nElla: Vad ändrades?\nMira: Han berättade priset på sina skor tre gånger utan att någon frågade.\nElla: Ick?\nMira: Massive.",
+    "AlternativeText": "Mira blev mer intresserad eftersom skorna var dyra",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Mira: Jag tyckte faktiskt han verkade trevlig.\nElla: Vad ändrades?\nMira: Han berättade priset på sina skor tre gånger utan att någon frågade.\nElla: Ick?\nMira: Massive.",
+    "AlternativeText": "Mira tappade intresset eftersom hans skrytande gav henne en stark avtändning",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Mira: Jag tyckte faktiskt han verkade trevlig.\nElla: Vad ändrades?\nMira: Han berättade priset på sina skor tre gånger utan att någon frågade.\nElla: Ick?\nMira: Massive.",
+    "AlternativeText": "Mira tror att han ljuger om vad skorna kostar",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Mira: Jag tyckte faktiskt han verkade trevlig.\nElla: Vad ändrades?\nMira: Han berättade priset på sina skor tre gånger utan att någon frågade.\nElla: Ick?\nMira: Massive.",
+    "AlternativeText": "Mira tycker att han framstår som väldigt självsäker på ett positivt sätt",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Leo: Han skrev att hans take var objektivt korrekt.\nNora: Hur gick det?\nLeo: Hans inlägg har 80 likes och svaret som säger emot honom har 9000.\nNora: Ratio 💀",
+    "AlternativeText": "Hans åsikt verkar ha fått betydligt mindre stöd än svaret som motsäger honom",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Leo: Han skrev att hans take var objektivt korrekt.\nNora: Hur gick det?\nLeo: Hans inlägg har 80 likes och svaret som säger emot honom har 9000.\nNora: Ratio 💀",
+    "AlternativeText": "Hans inlägg blev det mest populära i diskussionen",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Han skrev att hans take var objektivt korrekt.\nNora: Hur gick det?\nLeo: Hans inlägg har 80 likes och svaret som säger emot honom har 9000.\nNora: Ratio 💀",
+    "AlternativeText": "Nora tycker att hans argument var helt rimligt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Han skrev att hans take var objektivt korrekt.\nNora: Hur gick det?\nLeo: Hans inlägg har 80 likes och svaret som säger emot honom har 9000.\nNora: Ratio 💀",
+    "AlternativeText": "Leo tror att någon manipulerade hans konto",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Sam: Ska vi börja med rapporten ikväll?\nNoah: Bet.\nSam: Fr?\nNoah: Ja, jag har stängt av Discord och mobilen. I'm locked in.\nSam: Rare W.",
+    "AlternativeText": "Noah tänker faktiskt fokusera på rapporten och Sam ser det som ett positivt framsteg",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Sam: Ska vi börja med rapporten ikväll?\nNoah: Bet.\nSam: Fr?\nNoah: Ja, jag har stängt av Discord och mobilen. I'm locked in.\nSam: Rare W.",
+    "AlternativeText": "Noah försöker undvika rapporten och vill spela istället",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Sam: Ska vi börja med rapporten ikväll?\nNoah: Bet.\nSam: Fr?\nNoah: Ja, jag har stängt av Discord och mobilen. I'm locked in.\nSam: Rare W.",
+    "AlternativeText": "Sam tror att Noah ljuger om att rapporten finns",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Sam: Ska vi börja med rapporten ikväll?\nNoah: Bet.\nSam: Fr?\nNoah: Ja, jag har stängt av Discord och mobilen. I'm locked in.\nSam: Rare W.",
+    "AlternativeText": "Sam tycker att det är pinsamt att Noah stängt av mobilen",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Maja: Han la upp en bild där han står ensam framför bilen med texten \"wolves don't lose sleep over sheep\".\nLeo: 💀\nMaja: Kommentarerna kallar honom sigma.\nLeo: De menar inte det seriöst.",
+    "AlternativeText": "Kommentarerna använder sannolikt \"sigma\" ironiskt för att driva med hans överdrivet självsäkra inlägg",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Maja: Han la upp en bild där han står ensam framför bilen med texten \"wolves don't lose sleep over sheep\".\nLeo: 💀\nMaja: Kommentarerna kallar honom sigma.\nLeo: De menar inte det seriöst.",
+    "AlternativeText": "Kommentarerna konstaterar seriöst att han är framgångsrik och självständig",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Han la upp en bild där han står ensam framför bilen med texten \"wolves don't lose sleep over sheep\".\nLeo: 💀\nMaja: Kommentarerna kallar honom sigma.\nLeo: De menar inte det seriöst.",
+    "AlternativeText": "Kommentarerna anklagar honom för att ljuga om bilen",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Maja: Han la upp en bild där han står ensam framför bilen med texten \"wolves don't lose sleep over sheep\".\nLeo: 💀\nMaja: Kommentarerna kallar honom sigma.\nLeo: De menar inte det seriöst.",
+    "AlternativeText": "Kommentarerna tycker att bilden är medioker men texten är bra",
+    "IsCorrect": false
   }
 
 ]

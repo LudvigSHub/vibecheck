@@ -166,5 +166,380 @@
     "QuestionType": "Conversation",
     "Difficulty": "Easy",
     "Word": "cooked"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"delulu\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "delulu"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"sus\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "sus"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"based\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "based"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"cringe\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "cringe"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"deadass\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "deadass"
+  },
+  {
+    "QuestionDesc": "Vad betyder slanguttrycket \"W\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "W"
+  },
+  {
+    "QuestionDesc": "Vad betyder slanguttrycket \"L\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "L"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"slay\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "slay"
+  },
+  {
+    "QuestionDesc": "Han har stängt av mobilen och pluggat fokuserat i tre timmar. Han är verkligen ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "locked in"
+  },
+  {
+    "QuestionDesc": "Jag lovar att det faktiskt hände, ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "no cap"
+  },
+  {
+    "QuestionDesc": "Alla hypade filmen jättemycket, men jag tyckte bara den var ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "mid"
+  },
+  {
+    "QuestionDesc": "Han säger att han inte tog pengarna, men hela historien känns väldigt ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "sus"
+  },
+  {
+    "QuestionDesc": "Han lyckades charma henne direkt. Han har verkligen ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "rizz"
+  },
+  {
+    "QuestionDesc": "Låt henne fortsätta jobba på idén, hon är verkligen ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "cooking"
+  },
+  {
+    "QuestionDesc": "Din kompis får högsta betyg på ett prov som han har pluggat hårt inför. Du vill markera att det är en stor framgång.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Easy",
+    "Word": "W"
+  },
+  {
+    "QuestionDesc": "Din kompis glömmer biljetterna hemma och ni missar konserten. Du vill beskriva situationen som ett tydligt misslyckande.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Easy",
+    "Word": "L"
+  },
+  {
+    "QuestionDesc": "En person skryter högt om hur bra han är, gör direkt bort sig framför alla och ingen tar honom längre på allvar.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Easy",
+    "Word": "clown"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"lowkey\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "lowkey"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"highkey\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "highkey"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"bet\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "bet"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"valid\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "valid"
+  },
+  {
+    "QuestionDesc": "Vad betyder slanguttrycket \"ratio\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "ratio"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"brainrot\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "brainrot"
+  },
+  {
+    "QuestionDesc": "Vad betyder uttrycket \"ick\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Medium",
+    "Word": "ick"
+  },
+
+  {
+    "QuestionDesc": "Han påstår att han blev erbjuden kontrakt av tre proffslag, men ingen har sett några bevis. Det låter som ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "cap"
+  },
+  {
+    "QuestionDesc": "___, jag trodde faktiskt inte att den filmen skulle vara så bra.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "ngl"
+  },
+  {
+    "QuestionDesc": "Jag är ___ sugen på att stanna hemma istället för att gå på festen.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "lowkey"
+  },
+  {
+    "QuestionDesc": "Hon vann tävlingen trots att ingen trodde på henne. Det är ändå en riktigt stor ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "W"
+  },
+  {
+    "QuestionDesc": "Du behöver inte gilla beslutet, men hennes anledning är ändå ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "valid"
+  },
+  {
+    "QuestionDesc": "Vi möts utanför stationen klockan sju? ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "bet"
+  },
+  {
+    "QuestionDesc": "Han har suttit och argumenterat med främlingar på nätet hela natten. Han behöver verkligen ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "touch grass"
+  },
+  {
+    "QuestionDesc": "Efter att ha sett samma absurda meme femtio gånger känns hela mitt flöde som ren ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Medium",
+    "Word": "brainrot"
+  },
+
+  {
+    "QuestionDesc": "Maja: Ngl, jag lowkey gillar hans nya låt.\nLeo: Fr? Jag tyckte den var mid.\nMaja: Nah, det där är cap.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Medium",
+    "Word": "lowkey"
+  },
+  {
+    "QuestionDesc": "Noah: Vi ses vid gymmet klockan sex?\nSam: Bet.\nNoah: Kom i tid den här gången 💀\nSam: Fr, jag lovar.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Medium",
+    "Word": "bet"
+  },
+  {
+    "QuestionDesc": "Ella: Han pratade om hur bra han är i en timme och sen förlorade han första matchen.\nMira: Det är ett L.\nElla: Highkey pinsamt.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Medium",
+    "Word": "highkey"
+  },
+  {
+    "QuestionDesc": "Leo: Jag har spelat samma game i tolv timmar idag.\nNora: Bro 💀 touch grass.\nLeo: En match till.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Medium",
+    "Word": "touch grass"
+  },
+  {
+    "QuestionDesc": "Mira: Jag gillade honom tills han började skryta om hur mycket hans klocka kostade.\nElsa: Instant ick?\nMira: Exakt.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Medium",
+    "Word": "ick"
+  },
+  {
+    "QuestionDesc": "Uttrycket \"sigma\" används alltid seriöst för att beskriva en person som faktiskt är självständig och framgångsrik.",
+    "QuestionType": "True or False",
+    "Difficulty": "Hard",
+    "Word": "sigma"
+  },
+  {
+    "QuestionDesc": "Vilken beskrivning fångar bäst hur \"sigma\" ofta används på internet?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Hard",
+    "Word": "sigma"
+  },
+  {
+    "QuestionDesc": "Vad innebär det vanligtvis att någon blir \"ratioed\" på sociala medier?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Hard",
+    "Word": "ratio"
+  },
+  {
+    "QuestionDesc": "Vad antyder uttrycket \"touch grass\" när det riktas mot någon?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Hard",
+    "Word": "touch grass"
+  },
+  {
+    "QuestionDesc": "Vad menas oftast när någon beskriver sitt internetflöde eller en fixering som \"brainrot\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Hard",
+    "Word": "brainrot"
+  },
+  {
+    "QuestionDesc": "Hans inlägg fick 200 likes, men svaret som sa emot honom fick 12 000. Han blev totalt ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Hard",
+    "Word": "ratio"
+  },
+  {
+    "QuestionDesc": "Hon sa först att festen verkade tråkig, men nu säger hon att hon ___ vill gå efter att ha sett vilka som kommer.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Hard",
+    "Word": "highkey"
+  },
+  {
+    "QuestionDesc": "Jag vill inte erkänna det för de andra, men jag ___ tycker att låten är bra.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Hard",
+    "Word": "lowkey"
+  },
+  {
+    "QuestionDesc": "Han har analyserat samma TikTok-drama i sex timmar och skrivit tjugo kommentarer. Bro behöver ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Hard",
+    "Word": "touch grass"
+  },
+  {
+    "QuestionDesc": "Jag gillade honom fram tills han började prata om sig själv i tredje person. Direkt ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Hard",
+    "Word": "ick"
+  },
+  {
+    "QuestionDesc": "Efter två veckor av samma meme, samma ljud och samma videos är hela gruppchatten bara ___.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Hard",
+    "Word": "brainrot"
+  },
+  {
+    "QuestionDesc": "En person tackar nej till en fest för att stanna hemma och ta hand om en vän som mår dåligt. Någon i gruppchatten säger att beslutet ändå är helt rimligt och respektabelt.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard",
+    "Word": "valid"
+  },
+  {
+    "QuestionDesc": "En person gör något överdrivet självsäkert och dramatiskt, och kompisarna börjar ironiskt beskriva honom som en ensam, oberörd huvudperson som inte behöver någon annan.",
+    "QuestionType": "Multiple Choice",
+    "Difficulty": "Hard",
+    "Word": "sigma"
+  },
+  {
+    "QuestionDesc": "Maja: Ngl jag lowkey trodde hans nya låt skulle vara fire.\nLeo: Samma, men den var mid.\nMaja: Fr, folk säger att det är hans bästa låt någonsin.\nLeo: Cap.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "cap"
+  },
+  {
+    "QuestionDesc": "Noah: Han skrev att ingen i klassen kan slå honom.\nSam: Och sen?\nNoah: Förlorade första matchen 0-6.\nSam: Bro is cooked 😭\nNoah: Generational aura loss.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "aura loss"
+  },
+  {
+    "QuestionDesc": "Ella: Jag sa att jag inte ville gå på festen.\nMira: Fair.\nElla: Men nu såg jag vilka som kommer och jag highkey vill dit.\nMira: 💀",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "highkey"
+  },
+  {
+    "QuestionDesc": "Leo: Hon säger att hon aldrig läser kommentarerna.\nNora: Okej?\nLeo: Hon svarade precis på en kommentar från tre månader sedan.\nNora: Caught in 4K.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "caught in 4K"
+  },
+  {
+    "QuestionDesc": "Sam: Jag har kollat 47 videos om samma meme idag.\nAlex: Bro har terminal brainrot.\nSam: Ngl jag kan inte sluta.\nAlex: Touch grass 😭",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "brainrot"
+  },
+  {
+    "QuestionDesc": "Maja: Han sa att han var proffs för några år sedan.\nLeo: Var han bra?\nMaja: Kanske då, men han förlorade mot min lillebror igår.\nLeo: Washed 💀",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "washed"
+  },
+  {
+    "QuestionDesc": "Nora: Varför försvarar du honom i varje kommentar?\nLeo: För att han aldrig gör något fel.\nNora: Du känner honom inte ens 💀\nMaja: Bro is glazing professionally.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "glazer"
+  },
+  {
+    "QuestionDesc": "Alex: Jag tror hon gillar mig.\nSam: Varför?\nAlex: Hon såg min story två minuter efter att jag lade upp den.\nSam: Bro...\nAlex: Det är basically bekräftat.\nSam: Delulu.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "delulu"
+  },
+  {
+    "QuestionDesc": "Mira: Jag tyckte faktiskt han verkade trevlig.\nElla: Vad ändrades?\nMira: Han berättade priset på sina skor tre gånger utan att någon frågade.\nElla: Ick?\nMira: Massive.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "ick"
+  },
+  {
+    "QuestionDesc": "Leo: Han skrev att hans take var objektivt korrekt.\nNora: Hur gick det?\nLeo: Hans inlägg har 80 likes och svaret som säger emot honom har 9000.\nNora: Ratio 💀",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "ratio"
+  },
+  {
+    "QuestionDesc": "Sam: Ska vi börja med rapporten ikväll?\nNoah: Bet.\nSam: Fr?\nNoah: Ja, jag har stängt av Discord och mobilen. I'm locked in.\nSam: Rare W.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "locked in"
+  },
+  {
+    "QuestionDesc": "Maja: Han la upp en bild där han står ensam framför bilen med texten \"wolves don't lose sleep over sheep\".\nLeo: 💀\nMaja: Kommentarerna kallar honom sigma.\nLeo: De menar inte det seriöst.",
+    "QuestionType": "Conversation",
+    "Difficulty": "Hard",
+    "Word": "sigma"
   }
+
 ]
