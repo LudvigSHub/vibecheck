@@ -23,4 +23,7 @@ public class QuizAttempt
 
     public ICollection<QuizAttemptAnswer> QuizAttemptAnswers { get; set; }
         = new List<QuizAttemptAnswer>();
+
+    public ICollection<QuizAttemptQuestion> QuizAttemptQuestions { get; set; }
+        = new List<QuizAttemptQuestion>();
 }
