@@ -27,7 +27,8 @@ public class QuizProgressService
                 QuizId = attempt.QuizID,
                 QuizName = attempt.Quiz.QuizName,
                 AnsweredQuestionCount = attempt.QuizAttemptAnswers.Count,
-                TotalQuestionCount = attempt.Quiz.QuizQuestions.Count
+                // Totalen kommer från just den här omgångens utvalda frågor.
+                TotalQuestionCount = attempt.QuizAttemptQuestions.Count
             })
             .FirstOrDefaultAsync();
     }

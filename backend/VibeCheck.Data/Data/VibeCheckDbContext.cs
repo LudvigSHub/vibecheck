@@ -32,6 +32,7 @@ public class VibeCheckDbContext
     public DbSet<Quiz> Quizzes => Set<Quiz>();
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
     public DbSet<QuizAttempt> QuizAttempts => Set<QuizAttempt>();
+    public DbSet<QuizAttemptQuestion> QuizAttemptQuestions => Set<QuizAttemptQuestion>();
     public DbSet<QuizAttemptAnswer> QuizAttemptAnswers => Set<QuizAttemptAnswer>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -240,6 +241,26 @@ public class VibeCheckDbContext
         // ============================================================
         // QUIZ ATTEMPTS
         // ============================================================
+
+        // Varje fråga och ordningsnummer får bara förekomma en gång per försök.
+        modelBuilder.Entity<QuizAttemptQuestion>()
+            .HasKey(q => new { q.QuizAttemptID, q.QuestionID });
+
+        modelBuilder.Entity<QuizAttemptQuestion>()
+            .HasIndex(q => new { q.QuizAttemptID, q.Order }).IsUnique();
+
+        // Frågekopplingarna tas bort automatiskt när försöket tas bort.
+        modelBuilder.Entity<QuizAttemptQuestion>()
+            .HasOne(q => q.QuizAttempt)
+            .WithMany(a => a.QuizAttemptQuestions)
+            .HasForeignKey(q => q.QuizAttemptID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<QuizAttemptQuestion>()
+            .HasOne(q => q.Question)
+            .WithMany()
+            .HasForeignKey(q => q.QuestionID)
+            .OnDelete(DeleteBehavior.Restrict);
 
         // QuizAttemptAnswer primary key
         modelBuilder.Entity<QuizAttemptAnswer>()
