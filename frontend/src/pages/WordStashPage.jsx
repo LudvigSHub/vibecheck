@@ -102,6 +102,21 @@ export default function WordStashPage() {
     }
   }
 
+  function handleVoteUpdate(updatedWord) {
+    setWords((currentWords) =>
+      currentWords.map((word) =>
+        word.wordId === updatedWord.wordId
+          ? {
+              ...word,
+              upvotes: updatedWord.upvotes,
+              downvotes: updatedWord.downvotes,
+              currentUserVote: updatedWord.currentUserVote,
+            }
+          : word,
+      ),
+    );
+  }
+
   function handleResetFilters() {
     setSearchTerm("");
     setSelectedTag("");
@@ -139,7 +154,14 @@ export default function WordStashPage() {
 
   return (
     <main className="word-stash-page">
+      <p className="word-stash-page__eyebrow">WordStash</p>
 
+      <h1 className="word-stash-page__title">Lär dig snacka slang</h1>
+
+      <p className="word-stash-page__intro">
+        Upptäck nya slangord och lär dig vad de betyder. Sök, filtrera och
+        utforska ord från vardagligt snack till ungdomsslang.
+      </p>
       <div className="word-stash-page__sticky">
         <div className="word-stash-page__controls">
           <SearchInput
@@ -197,12 +219,16 @@ export default function WordStashPage() {
       {displayedWords.length === 0 ? (
         <p>Inga ord hittades.</p>
       ) : (
-        <WordList words={displayedWords} onWordClick={handleWordClick} />
+        <WordList
+          words={displayedWords}
+          onWordClick={handleWordClick}
+          onVoteUpdate={handleVoteUpdate}
+        />
       )}
 
       {selectedWord && (
         <Modal onClose={() => setSelectedWord(null)}>
-          <WordDetails word={selectedWord} />
+          <WordDetails word={selectedWord} onVoteUpdate={handleVoteUpdate} />
         </Modal>
       )}
     </main>

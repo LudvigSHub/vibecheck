@@ -19,32 +19,26 @@ export function getQuizDemoQuestions(count = 10, options = {}) {
   });
 }
 
-
 // Wordstash
 
 export function getWords({ search = "", tag = "" } = {}) {
   const params = new URLSearchParams();
 
-  if (search) {
-    params.set("search", search);
-  }
-
-  if (tag) {
-    params.set("tag", tag);
-  }
+  if (search) params.set("search", search);
+  if (tag) params.set("tag", tag);
 
   const query = params.toString();
 
   return apiFetch(`/api/words${query ? `?${query}` : ""}`, {
     method: "GET",
-    auth: false,
+    optionalAuth: true,
   });
 }
 
 export function getWordById(id) {
   return apiFetch(`/api/words/${id}`, {
     method: "GET",
-    auth: false,
+    optionalAuth: true,
   });
 }
 
@@ -52,5 +46,20 @@ export function getTags() {
   return apiFetch("/api/words/tags", {
     method: "GET",
     auth: false,
+  });
+}
+
+export function voteWord(wordId, isPositive) {
+  return apiFetch(`/api/words/${wordId}/vote`, {
+    method: "POST",
+    body: JSON.stringify({
+      isPositive,
+    }),
+  });
+}
+
+export function removeVote(wordId) {
+  return apiFetch(`/api/words/${wordId}/vote`, {
+    method: "DELETE",
   });
 }

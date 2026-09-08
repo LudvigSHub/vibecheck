@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navigate,
   Routes,
@@ -30,6 +30,18 @@ function App() {
   // null = ingen autentiseringsruta är öppen.
   const [authView, setAuthView] = useState(null);
 
+  useEffect(() => {
+    function handleLoginRequired() {
+      setAuthView("login");
+    }
+
+    window.addEventListener("auth:login-required", handleLoginRequired);
+
+    return () => {
+      window.removeEventListener("auth:login-required", handleLoginRequired);
+    };
+  }, []);
+
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated, authLoading } = useAuth();
@@ -38,9 +50,7 @@ function App() {
   // försöker nå en skyddad sida. App läser den direkt i stället för att
   // kopiera den till flera state-variabler i en useEffect.
   const loginRequired = location.state?.requireAuth === true;
-  const requestedRoute = loginRequired
-    ? (location.state.from ?? null)
-    : null;
+  const requestedRoute = loginRequired ? (location.state.from ?? null) : null;
   const routeAuthView = loginRequired
     ? (location.state.authView ?? "login")
     : null;
@@ -98,7 +108,9 @@ function App() {
             authLoading ? null : isAuthenticated ? (
               <Navigate to={requestedRoute ?? "/home"} replace />
             ) : (
-              <LandingPage onOpenRegister={() => handleAuthSwitch("register")} />
+              <LandingPage
+                onOpenRegister={() => handleAuthSwitch("register")}
+              />
             )
           }
         />
@@ -133,7 +145,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/admin"
           element={
@@ -142,14 +154,14 @@ function App() {
             </AdminRoute>
           }
         />
-        
+
         <Route
           path="/admin/words/:id"
           element={
             <AdminRoute>
               <AdminWordDetailsPage />
             </AdminRoute>
-        }
+          }
         />
 
         <Route
@@ -158,7 +170,7 @@ function App() {
             <AdminRoute>
               <AdminCreateWordPage />
             </AdminRoute>
-        }
+          }
         />
       </Routes>
 

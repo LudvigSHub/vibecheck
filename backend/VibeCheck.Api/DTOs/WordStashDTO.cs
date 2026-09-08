@@ -15,6 +15,10 @@ public class WordStashDTO
     public List<WordTagDTO> Tags { get; set; } = new();
 
     public bool IsInappropriate { get; set; }
+
+    public int Upvotes { get; set; }
+    public int Downvotes { get; set; }
+    public bool? CurrentUserVote { get; set; }
 }
 
 public class WordTagDTO

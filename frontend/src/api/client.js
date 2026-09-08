@@ -38,9 +38,9 @@ function getErrorMessage(data, fallback) {
 }
 
 export async function apiFetch(path, options = {}) {
-  const { auth = true, ...fetchOptions } = options;
+  const { auth = true, optionalAuth = false, ...fetchOptions } = options;
 
-  const token = auth ? getToken() : null;
+  const token = auth || optionalAuth ? getToken() : null;
 
   const headers = new Headers(fetchOptions.headers);
 
