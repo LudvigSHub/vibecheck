@@ -200,8 +200,35 @@
    WORDSTASH TITLE
    ========================================================= */
 
+.word-stash-page__eyebrow {
+  margin-bottom: 8px;
+
+  color: var(--color-text-muted);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .word-stash-page__title {
-  margin: 0;
+  font-size: clamp(30px, 3vw, 42px);
+
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.word-stash-page__intro {
+  margin-top: 10px;
+
+  max-width: 75ch;
+
+  color: var(--color-text-muted);
+
+  font-size: 16px;
+
+  margin-bottom: 24px;
 }
 
 /* =========================================================
