@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VibeCheck.Api.DTOs;
 using VibeCheck.Data.Data;
 using VibeCheck.Data.Models;
@@ -25,10 +25,13 @@ public class QuizService
 
     public async Task<List<QuizListItemDTO>> GetQuizListAsync(int userId)
     {
-        // Quizen i svårighetsordning. DifficultyID är 1/2/3 för Easy/Medium/Hard
-        // eftersom seedningen lägger in dem i den ordningen – ordningen är alltså
-        // korrekt men implicit. Vill man göra den explicit är en SortOrder-kolumn
-        // på Difficulty rätt lösning, men det kräver en migration.
+        // Räkna tillgängliga frågor per nivå för att kunna visa frågeantalet på quizkorten.
+        var questionCounts = await _context.Questions.AsNoTracking()
+            .GroupBy(q => q.Difficulty.DifficultyDesc)
+            .Select(g => new { Level = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(g => g.Level, g => g.Count);
+
+        // Quizen sorteras efter DifficultyID, som seedningen ger ordningen Easy/Medium/Hard.
         var quizzes = await _context.Quizzes
             .AsNoTracking()
             .OrderBy(q => q.DifficultyID)
@@ -37,8 +40,7 @@ public class QuizService
                 q.QuizID,
                 q.QuizName,
                 q.QuizDescription,
-                Difficulty = q.Difficulty.DifficultyDesc,
-                QuestionCount = q.QuizQuestions.Count
+                Difficulty = q.Difficulty.DifficultyDesc
             })
             .ToListAsync();
 
@@ -61,7 +63,10 @@ public class QuizService
                 QuizName = quiz.QuizName,
                 QuizDescription = quiz.QuizDescription,
                 Difficulty = quiz.Difficulty,
-                QuestionCount = quiz.QuestionCount,
+                // Visa högst 10 frågor, inklusive de som kan lånas från andra nivåer.
+                QuestionCount = Math.Min(QuizQuestionSelection.QuestionLimit,
+                    QuizQuestionSelection.LevelOrder(quiz.Difficulty)
+                        .Sum(level => questionCounts.GetValueOrDefault(level))),
                 BestScore = bestScore,
                 IsUnlocked = previousPassed,
                 UnlockedBy = previousQuizName,
@@ -99,8 +104,10 @@ public class QuizService
 
     public async Task<StartQuizAttemptDTO?> StartAttemptAsync(int userId, int quizId)
     {
+        // Frontend skickar den valda banans ID; banans nivå hämtas från databasen.
         var quiz = await _context.Quizzes
             .AsNoTracking()
+            .Include(q => q.Difficulty)
             .FirstOrDefaultAsync(q => q.QuizID == quizId);
 
         if (quiz is null)
@@ -121,6 +128,17 @@ public class QuizService
                 $"Klara '{listItem.UnlockedBy}' med minst {PassScore}% först.");
         }
 
+        // Hämta möjliga frågor från egen nivå och reservnivåerna innan urvalet görs.
+        var levels = QuizQuestionSelection.LevelOrder(quiz.Difficulty.DifficultyDesc);
+        var candidates = await _context.Questions.AsNoTracking()
+            .Where(q => levels.Contains(q.Difficulty.DifficultyDesc))
+            .Select(q => new { q.QuestionID, Level = q.Difficulty.DifficultyDesc })
+            .ToListAsync();
+        var selectedIds = QuizQuestionSelection.Select(quiz.Difficulty.DifficultyDesc,
+            candidates.Select(q => (q.QuestionID, q.Level)));
+        if (selectedIds.Count == 0)
+            throw new InvalidOperationException("Det finns inga frågor tillgängliga för quizet.");
+
         // Städa bort påbörjade försök på samma quiz. De uppstår när någon stänger
         // fliken i stället för att svara på avbryt-rutan, och ett halvfärdigt
         // försök ska aldrig ligga kvar. Svaren följer med tack vare cascade.
@@ -137,7 +155,13 @@ public class QuizService
         {
             UserID = userId,
             QuizID = quizId,
-            AttemptDate = DateTime.UtcNow
+            AttemptDate = DateTime.UtcNow,
+            // Spara urvalet och ordningen så att rättningen vet vilka frågor försöket innehåller.
+            QuizAttemptQuestions = selectedIds.Select((id, index) => new QuizAttemptQuestion
+            {
+                QuestionID = id,
+                Order = index + 1
+            }).ToList()
         };
 
         _context.QuizAttempts.Add(attempt);
@@ -146,10 +170,10 @@ public class QuizService
 
         // Frågorna – utan facit. Varken CorrectAlternativeID eller ordets
         // betydelse följer med hit; de går ut först när frågan är besvarad.
-        var questions = await _context.QuizQuestions
+        var questions = await _context.QuizAttemptQuestions
             .AsNoTracking()
-            .Where(qq => qq.QuizID == quizId)
-            .OrderBy(qq => qq.QuizQuestionID)
+            .Where(qq => qq.QuizAttemptID == attempt.QuizAttemptID)
+            .OrderBy(qq => qq.Order)
             .Select(qq => new QuizQuestionDTO
             {
                 QuestionId = qq.Question.QuestionID,
@@ -202,17 +226,17 @@ public class QuizService
             throw new InvalidOperationException("Quizet är redan avslutat.");
         }
 
-        // Frågan måste ingå i just det här quizet. Utan kontrollen kan man
+        // Frågan måste ha valts ut till just det här försöket. Utan kontrollen kan man
         // svara på vilken fråga som helst i databasen och plocka poäng.
-        var belongsToQuiz = await _context.QuizQuestions
+        var belongsToAttempt = await _context.QuizAttemptQuestions
             .AnyAsync(qq =>
-                qq.QuizID == attempt.QuizID &&
+                qq.QuizAttemptID == attemptId &&
                 qq.QuestionID == request.QuestionId);
 
-        if (!belongsToQuiz)
+        if (!belongsToAttempt)
         {
             throw new InvalidOperationException(
-                $"Fråga {request.QuestionId} ingår inte i det här quizet.");
+                $"Fråga {request.QuestionId} ingår inte i det här quizförsöket.");
         }
 
         var alreadyAnswered = await _context.QuizAttemptAnswers
@@ -262,8 +286,8 @@ public class QuizService
         var answeredCount = await _context.QuizAttemptAnswers
             .CountAsync(a => a.QuizAttemptID == attemptId);
 
-        var totalCount = await _context.QuizQuestions
-            .CountAsync(qq => qq.QuizID == attempt.QuizID);
+        var totalCount = await _context.QuizAttemptQuestions
+            .CountAsync(qq => qq.QuizAttemptID == attemptId);
 
         return new AnswerResultDTO
         {
@@ -309,13 +333,13 @@ public class QuizService
             throw new InvalidOperationException("Quizet är redan avslutat.");
         }
 
-        var totalCount = await _context.QuizQuestions
-            .CountAsync(qq => qq.QuizID == attempt.QuizID);
+        var totalCount = await _context.QuizAttemptQuestions
+            .CountAsync(qq => qq.QuizAttemptID == attemptId);
 
         var correctCount = await _context.QuizAttemptAnswers
             .CountAsync(a => a.QuizAttemptID == attemptId && a.IsCorrect);
 
-        // Nämnaren är antalet frågor i quizet, inte antalet besvarade.
+        // Nämnaren är antalet utvalda frågor i försöket, inte antalet besvarade.
         // Annars skulle tre rätt av tre besvarade ge 100% på ett tiofrågorsquiz.
         var score = totalCount == 0
             ? 0
