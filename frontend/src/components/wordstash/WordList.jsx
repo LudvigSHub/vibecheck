@@ -1,6 +1,6 @@
 import WordCard from "./WordCard";
 
-export default function WordList({ words, onWordClick }) {
+export default function WordList({ words, onWordClick, onVoteUpdate }) {
   return (
     <div className="word-list">
       {words.map((word, index) => {
@@ -20,7 +20,11 @@ export default function WordList({ words, onWordClick }) {
               <div className="word-list__letter">{currentLetter}</div>
             )}
 
-            <WordCard word={word} onClick={() => onWordClick?.(word)} />
+            <WordCard
+              word={word}
+              onClick={() => onWordClick?.(word)}
+              onVoteUpdate={onVoteUpdate}
+            />
           </div>
         );
       })}

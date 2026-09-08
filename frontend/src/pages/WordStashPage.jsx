@@ -102,6 +102,21 @@ export default function WordStashPage() {
     }
   }
 
+  function handleVoteUpdate(updatedWord) {
+    setWords((currentWords) =>
+      currentWords.map((word) =>
+        word.wordId === updatedWord.wordId
+          ? {
+              ...word,
+              upvotes: updatedWord.upvotes,
+              downvotes: updatedWord.downvotes,
+              currentUserVote: updatedWord.currentUserVote,
+            }
+          : word,
+      ),
+    );
+  }
+
   function handleResetFilters() {
     setSearchTerm("");
     setSelectedTag("");
@@ -139,7 +154,6 @@ export default function WordStashPage() {
 
   return (
     <main className="word-stash-page">
-
       <div className="word-stash-page__sticky">
         <div className="word-stash-page__controls">
           <SearchInput
@@ -197,12 +211,16 @@ export default function WordStashPage() {
       {displayedWords.length === 0 ? (
         <p>Inga ord hittades.</p>
       ) : (
-        <WordList words={displayedWords} onWordClick={handleWordClick} />
+        <WordList
+          words={displayedWords}
+          onWordClick={handleWordClick}
+          onVoteUpdate={handleVoteUpdate}
+        />
       )}
 
       {selectedWord && (
         <Modal onClose={() => setSelectedWord(null)}>
-          <WordDetails word={selectedWord} />
+          <WordDetails word={selectedWord} onVoteUpdate={handleVoteUpdate} />
         </Modal>
       )}
     </main>
