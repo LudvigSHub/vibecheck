@@ -148,5 +148,23 @@
     "QuestionType": "True or False",
     "Difficulty": "Hard",
     "Word": "goated"
+  },
+  {
+    "QuestionDesc": "Vad betyder slangordet \"fire\"?",
+    "QuestionType": "Meaning",
+    "Difficulty": "Easy",
+    "Word": "fire"
+  },
+  {
+    "QuestionDesc": "Den där konserten var helt ___, bästa jag varit på i år.",
+    "QuestionType": "FillBlank",
+    "Difficulty": "Easy",
+    "Word": "fire"
+  },
+  {
+    "QuestionDesc": "Leo: Bro, läraren såg när jag kollade mobilen på provet 💀\nNora: Nah, du är cooked\nLeo: Jag vet 😭",
+    "QuestionType": "Conversation",
+    "Difficulty": "Easy",
+    "Word": "cooked"
   }
 ]

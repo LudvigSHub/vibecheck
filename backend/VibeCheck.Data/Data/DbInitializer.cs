@@ -426,6 +426,23 @@ public static class DbInitializer
         {
             TypeText = "True or False",
             Description = "Är påståendet sant eller falskt?"
+        },
+         new()
+        {
+            TypeText = "Meaning",
+            Description = "Vad betyder slangordet?"
+        },
+
+        new()
+        {
+            TypeText = "FillBlank",
+            Description = "Vilket slangord saknas i meningen?"
+        },
+
+        new()
+        {
+            TypeText = "Conversation",
+            Description = "Vad betyder konversationen?"
         }
     };
 

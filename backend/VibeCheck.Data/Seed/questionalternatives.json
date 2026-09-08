@@ -409,5 +409,68 @@
     "Question": "En person som kallas \"goated\" behöver inte nödvändigtvis vara bäst genom tiderna, utan uttrycket kan användas mer generellt om någon eller något som anses vara extremt bra.",
     "AlternativeText": "Falskt",
     "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"fire\"?",
+    "AlternativeText": "Något som är väldigt bra, häftigt eller imponerande",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Vad betyder slangordet \"fire\"?",
+    "AlternativeText": "Något som är mediokert eller överskattat",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"fire\"?",
+    "AlternativeText": "Någon som verkar misstänkt",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Vad betyder slangordet \"fire\"?",
+    "AlternativeText": "Att någon är helt körd",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Den där konserten var helt ___, bästa jag varit på i år.",
+    "AlternativeText": "fire",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Den där konserten var helt ___, bästa jag varit på i år.",
+    "AlternativeText": "mid",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Den där konserten var helt ___, bästa jag varit på i år.",
+    "AlternativeText": "sus",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Den där konserten var helt ___, bästa jag varit på i år.",
+    "AlternativeText": "cooked",
+    "IsCorrect": false
+  },
+
+  {
+    "Question": "Leo: Bro, läraren såg när jag kollade mobilen på provet 💀\nNora: Nah, du är cooked\nLeo: Jag vet 😭",
+    "AlternativeText": "Leo tycker att han sitter i en dålig situation efter att ha blivit påkommen",
+    "IsCorrect": true
+  },
+  {
+    "Question": "Leo: Bro, läraren såg när jag kollade mobilen på provet 💀\nNora: Nah, du är cooked\nLeo: Jag vet 😭",
+    "AlternativeText": "Nora tycker att Leo gjorde något imponerande",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Bro, läraren såg när jag kollade mobilen på provet 💀\nNora: Nah, du är cooked\nLeo: Jag vet 😭",
+    "AlternativeText": "Leo berättar att han lagar mat",
+    "IsCorrect": false
+  },
+  {
+    "Question": "Leo: Bro, läraren såg när jag kollade mobilen på provet 💀\nNora: Nah, du är cooked\nLeo: Jag vet 😭",
+    "AlternativeText": "Nora tror att Leo kommer få ett bra resultat på provet",
+    "IsCorrect": false
   }
+
 ]
