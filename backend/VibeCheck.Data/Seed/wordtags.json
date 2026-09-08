@@ -702,5 +702,164 @@
   {
     "Word": "slay",
     "Tag": "sociala medier"
+  },
+  {
+    "Word": "cap",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "cap",
+    "Tag": "internet"
+  },
+  {
+    "Word": "cap",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "fr",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "fr",
+    "Tag": "internet"
+  },
+  {
+    "Word": "fr",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "ngl",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "ngl",
+    "Tag": "internet"
+  },
+  {
+    "Word": "ngl",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "lowkey",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "lowkey",
+    "Tag": "internet"
+  },
+  {
+    "Word": "lowkey",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "highkey",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "highkey",
+    "Tag": "internet"
+  },
+  {
+    "Word": "highkey",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "bet",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "bet",
+    "Tag": "internet"
+  },
+  {
+    "Word": "bet",
+    "Tag": "vardaglig"
+  },
+
+  {
+    "Word": "valid",
+    "Tag": "positiv"
+  },
+  {
+    "Word": "valid",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "valid",
+    "Tag": "internet"
+  },
+
+  {
+    "Word": "ratio",
+    "Tag": "internet"
+  },
+  {
+    "Word": "ratio",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "ratio",
+    "Tag": "ungdomsslang"
+  },
+
+  {
+    "Word": "brainrot",
+    "Tag": "internet"
+  },
+  {
+    "Word": "brainrot",
+    "Tag": "sociala medier"
+  },
+  {
+    "Word": "brainrot",
+    "Tag": "humor"
+  },
+  {
+    "Word": "brainrot",
+    "Tag": "ungdomsslang"
+  },
+
+  {
+    "Word": "sigma",
+    "Tag": "internet"
+  },
+  {
+    "Word": "sigma",
+    "Tag": "humor"
+  },
+  {
+    "Word": "sigma",
+    "Tag": "ungdomsslang"
+  },
+
+  {
+    "Word": "ick",
+    "Tag": "negativ"
+  },
+  {
+    "Word": "ick",
+    "Tag": "ungdomsslang"
+  },
+  {
+    "Word": "ick",
+    "Tag": "sociala medier"
+  },
+
+  {
+    "Word": "touch grass",
+    "Tag": "internet"
+  },
+  {
+    "Word": "touch grass",
+    "Tag": "humor"
+  },
+  {
+    "Word": "touch grass",
+    "Tag": "ungdomsslang"
   }
 ]

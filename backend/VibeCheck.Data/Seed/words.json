@@ -182,5 +182,53 @@
   {
     "WordDesc": "slay",
     "Meaning": "Att göra något väldigt bra, självsäkert eller imponerande."
+  },
+  {
+    "WordDesc": "cap",
+    "Meaning": "En lögn, överdrift eller något som inte är sant."
+  },
+  {
+    "WordDesc": "fr",
+    "Meaning": "Förkortning av \"for real\", används för att säga verkligen, seriöst eller för att hålla med starkt."
+  },
+  {
+    "WordDesc": "ngl",
+    "Meaning": "Förkortning av \"not gonna lie\", används innan man säger en ärlig eller uppriktig åsikt."
+  },
+  {
+    "WordDesc": "lowkey",
+    "Meaning": "Att tycka, känna eller vilja något lite grann, diskret eller utan att göra en stor grej av det."
+  },
+  {
+    "WordDesc": "highkey",
+    "Meaning": "Att tycka, känna eller vilja något tydligt, öppet eller väldigt mycket."
+  },
+  {
+    "WordDesc": "bet",
+    "Meaning": "Ett informellt sätt att säga okej, visst, överens eller deal."
+  },
+  {
+    "WordDesc": "valid",
+    "Meaning": "Att något anses rimligt, bra, godkänt eller värt respekt."
+  },
+  {
+    "WordDesc": "ratio",
+    "Meaning": "När ett inlägg på sociala medier får en reaktion som tydligt visar att många inte håller med eller när ett svar får mer stöd än originalet."
+  },
+  {
+    "WordDesc": "brainrot",
+    "Meaning": "Internetuttryck för innehåll eller en fixering som är så absurd, repetitiv eller nätpräglad att den skämtsamt sägs påverka hjärnan."
+  },
+  {
+    "WordDesc": "sigma",
+    "Meaning": "Internet- och memeuttryck för någon som uppfattas som självsäker, självständig eller cool, ofta använt ironiskt."
+  },
+  {
+    "WordDesc": "ick",
+    "Meaning": "En plötslig känsla av avtändning, obehag eller avsmak för någon, ofta i romantiska sammanhang."
+  },
+  {
+    "WordDesc": "touch grass",
+    "Meaning": "En uppmaning att lämna internet en stund, komma ut i verkligheten och få lite perspektiv."
   }
 ]

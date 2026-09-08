@@ -426,6 +426,23 @@ public static class DbInitializer
         {
             TypeText = "True or False",
             Description = "Är påståendet sant eller falskt?"
+        },
+         new()
+        {
+            TypeText = "Meaning",
+            Description = "Vad betyder slangordet?"
+        },
+
+        new()
+        {
+            TypeText = "FillBlank",
+            Description = "Vilket slangord saknas i meningen?"
+        },
+
+        new()
+        {
+            TypeText = "Conversation",
+            Description = "Vad betyder konversationen?"
         }
     };
 
@@ -712,180 +729,27 @@ public static class DbInitializer
             return;
 
         var quizzes = await context.Quizzes
-            .ToDictionaryAsync(q => q.QuizName);
+            .ToListAsync();
 
         var questions = await context.Questions
-            .ToDictionaryAsync(q => q.QuestionID);
+            .ToListAsync();
 
-        var quizQuestions = new List<QuizQuestion>
-    {
-        // ============================================================
-        // Slang för nybörjare - Easy
-        // Questions 1-10
-        // ============================================================
+        var quizQuestions = new List<QuizQuestion>();
 
-        new()
+        foreach (var quiz in quizzes)
         {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[1].QuestionID
-        },
+            var matchingQuestions = questions
+                .Where(q => q.DifficultyID == quiz.DifficultyID);
 
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[2].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[3].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[4].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[5].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[6].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[7].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[8].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[9].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slang för nybörjare"].QuizID,
-            QuestionID = questions[10].QuestionID
-        },
-
-
-        // ============================================================
-        // Slangutmaningen - Medium
-        // Questions 11-20
-        // ============================================================
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[11].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[12].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[13].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[14].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[15].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[16].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[17].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[18].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[19].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Slangutmaningen"].QuizID,
-            QuestionID = questions[20].QuestionID
-        },
-
-
-        // ============================================================
-        // Avancerad slang - Hard
-        // Questions 21-25
-        // ============================================================
-
-        new()
-        {
-            QuizID = quizzes["Avancerad slang"].QuizID,
-            QuestionID = questions[21].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Avancerad slang"].QuizID,
-            QuestionID = questions[22].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Avancerad slang"].QuizID,
-            QuestionID = questions[23].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Avancerad slang"].QuizID,
-            QuestionID = questions[24].QuestionID
-        },
-
-        new()
-        {
-            QuizID = quizzes["Avancerad slang"].QuizID,
-            QuestionID = questions[25].QuestionID
+            foreach (var question in matchingQuestions)
+            {
+                quizQuestions.Add(new QuizQuestion
+                {
+                    QuizID = quiz.QuizID,
+                    QuestionID = question.QuestionID
+                });
+            }
         }
-    };
 
         await context.QuizQuestions.AddRangeAsync(quizQuestions);
         await context.SaveChangesAsync();
