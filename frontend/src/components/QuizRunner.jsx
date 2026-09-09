@@ -6,6 +6,7 @@ import Tag from "./ui/Tag";
 import Button from "./ui/Button";
 import ProgressBar from "./ui/ProgressBar";
 import WordInflections from "./ui/WordInflections";
+import ConversationQuestion from "./ConversationQuestion";
 import { ArrowRightIcon, CheckIcon, CloseIcon } from "./Icons";
 import {
   submitAnswer,
@@ -208,9 +209,13 @@ export default function QuizRunner({ attempt, onClose }) {
 
       <h2 className="quiz__question">{current.prompt}</h2>
 
-      <Card className="quiz__quote">
-        <p>{current.body}</p>
-      </Card>
+      {current.questionType === "Conversation" ? (
+  <ConversationQuestion body={current.body} />
+) : (
+  <Card className="quiz__quote">
+    <p>{current.body}</p>
+  </Card>
+)}
 
       <div className="quiz__options">
         {current.alternatives.map((option, i) => {

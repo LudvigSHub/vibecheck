@@ -248,3 +248,66 @@
   font-size: 16px;
   font-weight: 700;
 }
+
+/* --------------------------------------------------------------------------
+   Conversation-frågor
+   -------------------------------------------------------------------------- */
+
+.quiz-conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.quiz-conversation__row {
+  display: flex;
+  width: 100%;
+}
+
+.quiz-conversation__row--left {
+  justify-content: flex-start;
+}
+
+.quiz-conversation__row--right {
+  justify-content: flex-end;
+}
+
+.quiz-conversation__message {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+}
+
+.quiz-conversation__row--right .quiz-conversation__message {
+  align-items: flex-end;
+}
+
+.quiz-conversation__speaker {
+  margin: 0 8px 3px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.quiz-conversation__bubble {
+  padding: 9px 12px;
+  border-radius: 14px;
+  background: var(--color-border-subtle);
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.quiz-conversation__row--left .quiz-conversation__bubble {
+  border-bottom-left-radius: 4px;
+}
+
+.quiz-conversation__row--right .quiz-conversation__bubble {
+  border-bottom-right-radius: 4px;
+  background: rgba(184, 230, 46, 0.14);
+}
