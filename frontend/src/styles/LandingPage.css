@@ -103,6 +103,11 @@
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
+
+  /* Knappar ärver varken typsnitt eller bakgrund från sidan. */
+  font-family: inherit;
+  background: transparent;
+  cursor: pointer;
   transition:
     border-color 0.15s ease,
     color 0.15s ease;

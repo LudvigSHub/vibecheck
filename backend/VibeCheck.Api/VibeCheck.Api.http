@@ -67,3 +67,8 @@ Content-Type: application/json
 # Avsluta och få resultatet.
 POST {{VibeCheck.Api_HostAddress}}/api/quiz/attempts/{{attemptId}}/complete
 Authorization: Bearer {{token}}
+
+###
+
+GET {{VibeCheck.Api_HostAddress}}/api/words
+Accept: application/json

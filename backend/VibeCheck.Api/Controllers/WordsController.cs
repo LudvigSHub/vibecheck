@@ -35,12 +35,12 @@ public class WordsController : ControllerBase
 
     // GET /api/words
     // GET /api/words?search=fire
-    // GET /api/words?tag=ungdomsslang
-    // GET /api/words?search=fire&tag=ungdomsslang
+    // GET /api/words?tags=ungdomsslang
+    // GET /api/words?search=fire&tags=ungdomsslang
     [HttpGet]
     public async Task<IActionResult> GetWords(
     [FromQuery] string? search,
-    [FromQuery] string? tag)
+    [FromQuery] string[]? tags)
     {
         var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -53,7 +53,7 @@ public class WordsController : ControllerBase
 
         var words = await _wordStashService.GetWordsAsync(
             search,
-            tag,
+            tags,
             userId);
 
         return Ok(words);

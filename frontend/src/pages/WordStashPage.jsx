@@ -16,7 +16,10 @@ export default function WordStashPage() {
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [tags, setTags] = useState([]);
-  const [selectedTag, setSelectedTag] = useState("");
+
+  // En lista i stället för en sträng. Det är hela skillnaden mot förut.
+  const [selectedTags, setSelectedTags] = useState([]);
+
   const [selectedLetter, setSelectedLetter] = useState("");
   const [selectedWord, setSelectedWord] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
@@ -30,10 +33,15 @@ export default function WordStashPage() {
         const search = searchParams.get("search") || "";
         setSearchTerm(search);
 
-        const data = await getWords({ search });
-        setWords(data);
+        // Promise.all: de två anropen har inget med varandra att göra,
+        // så de ska inte köa. Vi väntar in den långsammaste i stället
+        // för summan av båda.
+        const [data, tagData] = await Promise.all([
+          getWords({ search }),
+          getTags(),
+        ]);
 
-        const tagData = await getTags();
+        setWords(data);
         setTags(tagData);
       } catch (error) {
         console.error(error);
@@ -56,7 +64,7 @@ export default function WordStashPage() {
 
       const data = await getWords({
         search: value,
-        tag: selectedTag,
+        tags: selectedTags,
       });
 
       setWords(data);
@@ -67,16 +75,23 @@ export default function WordStashPage() {
   }
 
   async function handleTagClick(tagName) {
-    const newTag = selectedTag === tagName ? "" : tagName;
+    // Togglar taggen in i eller ut ur listan. Notera att vi bygger ett
+    // NYTT array i stället för att pusha in i det gamla – muterar man
+    // befintligt state ser React ingen förändring och renderar inte om.
+    const newTags = selectedTags.includes(tagName)
+      ? selectedTags.filter((name) => name !== tagName)
+      : [...selectedTags, tagName];
 
-    setSelectedTag(newTag);
+    setSelectedTags(newTags);
 
     try {
       setError("");
 
+      // newTags och inte selectedTags: setState uppdaterar inte variabeln
+      // direkt, så selectedTags håller fortfarande det gamla värdet här.
       const data = await getWords({
         search: searchTerm,
-        tag: newTag,
+        tags: newTags,
       });
 
       setWords(data);
@@ -119,7 +134,7 @@ export default function WordStashPage() {
 
   function handleResetFilters() {
     setSearchTerm("");
-    setSelectedTag("");
+    setSelectedTags([]);
     setSelectedLetter("");
 
     getWords()
@@ -162,6 +177,7 @@ export default function WordStashPage() {
         Upptäck nya slangord och lär dig vad de betyder. Sök, filtrera och
         utforska ord från vardagligt snack till ungdomsslang.
       </p>
+
       <div className="word-stash-page__sticky">
         <div className="word-stash-page__controls">
           <SearchInput
@@ -197,9 +213,10 @@ export default function WordStashPage() {
             {tags.map((tag) => (
               <FilterPill
                 key={tag.tagId}
-                active={selectedTag === tag.tagName}
+                active={selectedTags.includes(tag.tagName)}
                 disabled={
-                  !availableTagIds.has(tag.tagId) && selectedTag !== tag.tagName
+                  !availableTagIds.has(tag.tagId) &&
+                  !selectedTags.includes(tag.tagName)
                 }
                 onClick={() => handleTagClick(tag.tagName)}
               >
