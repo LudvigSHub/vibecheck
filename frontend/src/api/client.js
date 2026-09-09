@@ -61,7 +61,11 @@ export async function apiFetch(path, options = {}) {
       ...fetchOptions,
       headers,
     });
-  } catch {
+  } catch (err) {
+  // NYTT: skicka avbrottet vidare utan att göra om det till ett serverfel.
+  if (err.name === "AbortError") {
+    throw err;
+  }
     throw new ApiError(
       "Kunde inte nå servern. Försök igen om en stund.",
       0

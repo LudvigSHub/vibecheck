@@ -17,21 +17,25 @@ function ProfilePage() {
   const [error, setError] = useState("");
   const [showEditAccount, setShowEditAccount] = useState(false);
 
+  // Vi använder .then() eftersom lintregeln varnade för den tidigare await-varianten.
+  // Hämtningen är fortfarande asynkron
   async function loadProfile(signal) {
-    try {
-      const data = await getProfile({ signal });
-      setProfile(data);
-      setError("");
-    } catch (err) {
-      if (err.name === "AbortError") {
-        return;
-      }
-      setError("Kunde inte hämta din profil.");
-    } finally {
-      if (!signal || !signal.aborted) {
-        setLoading(false);
-      }
-    }
+    return getProfile({ signal })
+      .then((data) => {
+        setProfile(data);
+        setError("");
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") {
+          return;
+        }
+        setError("Kunde inte hämta din profil.");
+      })
+      .finally(() => {
+        if (!signal || !signal.aborted) {
+          setLoading(false);
+        }
+      });
   }
 
   useEffect(() => {
