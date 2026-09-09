@@ -92,6 +92,7 @@ public class WordStashService
                 .Select(v => (bool?)v.IsPositive)
                 .FirstOrDefault()
             })
+            .AsSplitQuery()
             .ToListAsync();
     }
 
@@ -151,6 +152,7 @@ public class WordStashService
                 .FirstOrDefault()
 
             })
+            .AsSplitQuery()
             .FirstOrDefaultAsync();
     }
 
