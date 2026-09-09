@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchInput from "./ui/SearchInput";
 
 import { useAuth } from "../context/AuthContext";
@@ -45,6 +45,7 @@ function Navbar({ onLoginClick }) {
   const [searchTerm, setSearchTerm] = useState("");
   const { isAuthenticated, authLoading, user, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const homePath = isAuthenticated ? "/home" : "/";
 
   function closeMenu() {
@@ -94,6 +95,14 @@ function Navbar({ onLoginClick }) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen]);
+
+  // Tömmer sökfältet vid varje sidbyte. Annars ligger söktermen kvar i
+  // navbaren långt efter att man lämnat träfflistan, som om den fortfarande
+  // gällde. Beroendena täcker både byte av sida och ny sökning på samma
+  // sida – trycker du Enter från /wordstash ändras bara query-strängen.
+  useEffect(() => {
+    setSearchTerm("");
+  }, [location.pathname, location.search]);
 
   return (
     <header className="navbar">

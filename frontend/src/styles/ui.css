@@ -97,6 +97,15 @@
   font-size: 15px;
 }
 
+/* Chrome, Edge och Safari ritar ett eget kryss i type="search" som varken
+   går att placera eller färgsätta, och Firefox ritar inget alls – fältet
+   ser alltså olika ut i olika webbläsare. Vi tar bort det och låter
+   navigering rensa fältet i stället. */
+.search-input__field::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .search-input__field::placeholder {
   color: var(--color-text-muted);
 }

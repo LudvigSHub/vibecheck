@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
-import { getWordOfTheDay } from "../api/words";
+import { getWordOfTheDay, getWordById } from "../api/words";
 import { InfoIcon } from "./Icons";
+import Modal from "./ui/Modal";
+import WordDetails from "./wordstash/WordDetails";
 
 function SlangOfDayCard() {
   const [word, setWord] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Ordet som visas i popupen. null = ingen popup öppen.
+  const [selectedWord, setSelectedWord] = useState(null);
+  const [detailsLoading, setDetailsLoading] = useState(false);
+  const [detailsError, setDetailsError] = useState("");
 
   useEffect(() => {
     // Avbryter anropet om komponenten försvinner innan svaret kommit.
@@ -40,6 +46,31 @@ function SlangOfDayCard() {
     // Tom lista = kör en gång vid montering. Utan den: oändlig loop.
   }, []);
 
+  // Hämtningen ligger i en händelsehanterare och inte i en useEffect,
+  // eftersom den ska ske för att någon klickade – inte för att kortet
+  // renderades.
+  async function handleShowDetails() {
+    if (detailsLoading) {
+      return;
+    }
+
+    setDetailsLoading(true);
+    setDetailsError("");
+
+    try {
+      const data = await getWordById(word.wordId);
+
+      setSelectedWord(data);
+    } catch (err) {
+      console.error(err);
+      // Egen felvariabel, inte error – annars byts hela kortets innehåll
+      // ut mot ett felmeddelande och dagens ord försvinner.
+      setDetailsError("Kunde inte hämta ordets detaljer.");
+    } finally {
+      setDetailsLoading(false);
+    }
+  }
+
   return (
     <aside className="slang-card" aria-label="Dagens slang">
       <p className="slang-card__label">Dagens slang</p>
@@ -71,11 +102,28 @@ function SlangOfDayCard() {
             </>
           )}
 
-          <Link to={`/wordstash/${word.wordId}`} className="slang-card__link">
+          <button
+            type="button"
+            className="slang-card__link"
+            onClick={handleShowDetails}
+            disabled={detailsLoading}
+          >
             <InfoIcon width={15} height={15} />
-            Mer detaljer
-          </Link>
+            {detailsLoading ? "Hämtar…" : "Mer detaljer"}
+          </button>
+
+          {detailsError && (
+            <p className="slang-card__status" role="alert">
+              {detailsError}
+            </p>
+          )}
         </>
+      )}
+
+      {selectedWord && (
+        <Modal onClose={() => setSelectedWord(null)}>
+          <WordDetails word={selectedWord} onVoteUpdate={setSelectedWord} />
+        </Modal>
       )}
     </aside>
   );
