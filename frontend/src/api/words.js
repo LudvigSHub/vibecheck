@@ -21,11 +21,16 @@ export function getQuizDemoQuestions(count = 10, options = {}) {
 
 // Wordstash
 
-export function getWords({ search = "", tag = "" } = {}) {
+export function getWords({ search = "", tags = [] } = {}) {
   const params = new URLSearchParams();
 
   if (search) params.set("search", search);
-  if (tag) params.set("tag", tag);
+
+  // append och inte set: set skriver över, append lägger till.
+  // Resultatet blir ?tags=beröm&tags=kritik
+  for (const tag of tags) {
+    params.append("tags", tag);
+  }
 
   const query = params.toString();
 

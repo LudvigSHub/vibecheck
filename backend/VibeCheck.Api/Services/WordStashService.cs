@@ -15,7 +15,7 @@ public class WordStashService
 
     public async Task<List<WordStashDTO>> GetWordsAsync(
         string? search,
-        string? tag,
+        string[]? tags,
         int? userId)
     {
         var query = _context.Words
@@ -33,13 +33,26 @@ public class WordStashService
                     e.ExampleText.ToLower().Contains(normalizedSearch)));
         }
 
-        if (!string.IsNullOrWhiteSpace(tag))
+        if (tags is { Length: > 0 })
         {
-            var normalizedTag = tag.Trim().ToLower();
+            var normalizedTags = tags
+                .Where(t => !string.IsNullOrWhiteSpace(t))
+                .Select(t => t.Trim().ToLower())
+                .Distinct()
+                .ToList();
 
-            query = query.Where(w =>
-                w.WordTags.Any(wt =>
-                    wt.Tag.TagName.ToLower() == normalizedTag));
+            // AND-logik: ett eget Where per tagg. Varje varv snävar av
+            // urvalet ytterligare, så bara ord som har SAMTLIGA taggar
+            // överlever alla varven.
+            //
+            // Frestelsen är att skriva det som ett enda Where med All(),
+            // men det går inte att översätta till SQL – EF måste kunna
+            // bygga ett EXISTS per tagg, och det är precis vad loopen ger.
+            foreach (var normalizedTag in normalizedTags)
+            {
+                query = query.Where(w =>
+                    w.WordTags.Any(wt => wt.Tag.TagName.ToLower() == normalizedTag));
+            }
         }
 
         return await query
