@@ -57,5 +57,45 @@ namespace VibeCheck.Api.Services
                 QuizHistory = quizHistory
             };
         }
+
+        public async Task<IdentityResult> UpdateUserNameAsync(int userId, string newUserName)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return IdentityResult.Failed(
+                    new IdentityError { Description = "Användaren hittades inte." });
+            }
+
+            if (string.IsNullOrWhiteSpace(newUserName))
+            {
+                return IdentityResult.Failed(
+                    new IdentityError { Description = "Användarnamnet kan inte vara tomt." });
+            }
+
+            var existingUser = await _userManager.FindByNameAsync(newUserName);
+
+            if (existingUser != null && existingUser.Id != user.Id)
+            {
+                return IdentityResult.Failed(
+                    new IdentityError { Description = "Användarnamnet är redan taget." });
+            }
+
+            return await _userManager.SetUserNameAsync(user, newUserName);
+
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(int userId, string currentPassword, string newPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null) 
+            {
+                return IdentityResult.Failed(
+                    new IdentityError { Description = "Användaren hittades inte." });
+            }
+
+            return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        }
     }
 }
