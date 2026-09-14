@@ -19,28 +19,28 @@ const FEATURES = [
     icon: <BookIcon width={26} height={26} />,
     title: "WordStash",
     description: "Hitta betydelser och exempel på 100+ slangord.",
-    linkLabel: "Utforska",
+    linkLabel: "Utforska ord",
   },
   {
     to: "/quiz",
     icon: <TargetIcon width={26} height={26} />,
     title: "Quiz",
     description: "Testa dina kunskaper och lär dig lingot.",
-    linkLabel: "Starta quiz",
+    linkLabel: "Logga in för att spela",
   },
   {
     to: "/topplistor",
     icon: <ChartIcon width={26} height={26} />,
     title: "Topplistor",
-    description: "Se vilka ord som trendar mest bland kidsen.",
+    description: "Se populära ord och jämför resultaten i veckans quiz.",
     linkLabel: "Visa topplistor",
   },
   {
     to: "/min-profil",
     icon: <UserIcon width={26} height={26} />,
-    title: "Min profil",
+    title: "Skapa konto",
     description: "Spara favoriter och följ dina framsteg.",
-    linkLabel: "Till min profil",
+    linkLabel: "Skapa konto",
   },
 ];
 
@@ -67,7 +67,7 @@ function LandingPage({ onOpenRegister }) {
 
             <Button variant="ghost" onClick={() => setShowQuiz(true)}>
               <TargetIcon width={20} height={20} />
-              Testa quiz
+              Prova ett demoquiz
             </Button>
           </div>
         </div>
@@ -93,7 +93,11 @@ function LandingPage({ onOpenRegister }) {
 
       <section className="landing__features" aria-label="Vad du kan göra">
         {FEATURES.map((feature) => (
-          <FeatureCard key={feature.to} {...feature} />
+          <FeatureCard
+            key={feature.to}
+            {...feature}
+            onClick={feature.to === "/min-profil" ? onOpenRegister : undefined}
+          />
         ))}
       </section>
       {showQuiz && (

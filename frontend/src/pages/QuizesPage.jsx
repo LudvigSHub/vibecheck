@@ -89,9 +89,12 @@ function QuizesPage() {
         <p className="quizzes__eyebrow">Quiz</p>
         <h1 className="quizzes__title">Testa dina kunskaper</h1>
         <p className="quizzes__intro">
-          Tre nivåer. Klara en nivå med minst 80% för att låsa upp nästa – ditt
-          bästa resultat räknas, så ett sämre försök kan aldrig ta ifrån dig
-          något.
+          Tre nivåer att spela om och om igen. Varje omgång slumpas upp till
+          10 frågor – så du kan få olika frågor även när du spelar samma nivå.
+        </p>
+        <p className="quizzes__intro">
+          Klara en nivå med minst 80% rätt för att låsa upp nästa. Ditt bästa
+          resultat räknas, och upplåsta nivåer förblir öppna.
         </p>
       </header>
 

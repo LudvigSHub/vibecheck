@@ -99,7 +99,10 @@ function App() {
 
   return (
     <>
-      <Navbar onLoginClick={() => setAuthView("login")} />
+      <Navbar
+        onLoginClick={() => handleAuthSwitch("login")}
+        onRegisterClick={() => handleAuthSwitch("register")}
+      />
 
       <Routes>
         <Route
