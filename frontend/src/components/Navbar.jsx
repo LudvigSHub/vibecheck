@@ -39,8 +39,8 @@ function UserIcon() {
   );
 }
 
-// onLoginClick öppnar inloggningsrutan, den ligger i App
-function Navbar({ onLoginClick }) {
+// App hanterar inloggnings- och registreringsrutorna.
+function Navbar({ onLoginClick, onRegisterClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { isAuthenticated, authLoading, user, isAdmin, logout } = useAuth();
@@ -62,6 +62,11 @@ function Navbar({ onLoginClick }) {
   function handleLogin() {
     closeMenu();
     onLoginClick();
+  }
+
+  function handleRegister() {
+    closeMenu();
+    onRegisterClick();
   }
 
   function handleSearch(event) {
@@ -204,9 +209,16 @@ function Navbar({ onLoginClick }) {
               authLoading gör att knappen inte hinner blinka förbi vid omladdning. */}
           {authLoading ? null : isAuthenticated ? (
             <div className="navbar__user">
-              <span className="navbar__avatar" aria-hidden="true">
-                {user.userName.charAt(0).toUpperCase()}
-              </span>
+              <Link
+                to="/min-profil"
+                className="navbar__login"
+                onClick={closeMenu}
+              >
+                <span className="navbar__avatar" aria-hidden="true">
+                  {user.userName.charAt(0).toUpperCase()}
+                </span>
+                <span>Min profil</span>
+              </Link>
               <button
                 type="button"
                 className="navbar__login"
@@ -217,14 +229,23 @@ function Navbar({ onLoginClick }) {
               </button>
             </div>
           ) : (
-            <button
-              type="button"
-              className="navbar__login"
-              onClick={handleLogin}
-            >
-              <UserIcon />
-              <span>Logga in</span>
-            </button>
+            <div className="navbar__user">
+              <button
+                type="button"
+                className="navbar__login"
+                onClick={handleRegister}
+              >
+                <UserIcon />
+                <span>Skapa konto</span>
+              </button>
+              <button
+                type="button"
+                className="navbar__login"
+                onClick={handleLogin}
+              >
+                <span>Logga in</span>
+              </button>
+            </div>
           )}
         </div>
       </nav>

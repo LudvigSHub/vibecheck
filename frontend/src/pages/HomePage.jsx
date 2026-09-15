@@ -17,20 +17,20 @@ const QUICK_LINKS = [
     icon: <BookIcon width={28} height={28} />,
     title: "WordStash",
     description: "Hitta betydelser och exempel på 100+ slangord.",
-    linkLabel: "Utforska",
+    linkLabel: "Utforska ord",
   },
   {
     to: "/quiz",
     icon: <TargetIcon width={28} height={28} />,
     title: "Quiz",
     description: "Testa dina kunskaper och lär dig lingot.",
-    linkLabel: "Starta quiz",
+    linkLabel: "Till quizen",
   },
   {
     to: "/topplistor",
     icon: <ChartIcon width={28} height={28} />,
     title: "Topplistor",
-    description: "Se vilka ord som trendar mest bland kidsen.",
+    description: "Se populära ord och jämför resultaten i veckans quiz.",
     linkLabel: "Visa topplistor",
   },
   {
@@ -38,7 +38,7 @@ const QUICK_LINKS = [
     icon: <UserIcon width={28} height={28} />,
     title: "Min profil",
     description: "Spara favoriter och följ dina framsteg.",
-    linkLabel: "Till min profil",
+    linkLabel: "Min profil",
   },
 ];
 
