@@ -1,6 +1,13 @@
 import WordCard from "./WordCard";
 
-export default function WordList({ words, onWordClick, onVoteUpdate }) {
+export default function WordList({
+  words,
+  onWordClick,
+  onVoteUpdate,
+  sortOrder,
+}) {
+  const showLetterGroups = sortOrder === "alphabetical";
+
   return (
     <div className="word-list">
       {words.map((word, index) => {
@@ -9,7 +16,8 @@ export default function WordList({ words, onWordClick, onVoteUpdate }) {
         const previousLetter =
           index > 0 ? words[index - 1].word.charAt(0).toUpperCase() : "";
 
-        const isFirstWordOfLetter = currentLetter !== previousLetter;
+        const isFirstWordOfLetter =
+          showLetterGroups && currentLetter !== previousLetter;
 
         return (
           <div

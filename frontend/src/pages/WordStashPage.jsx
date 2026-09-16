@@ -23,6 +23,7 @@ export default function WordStashPage() {
   const [selectedLetter, setSelectedLetter] = useState("");
   const [selectedWord, setSelectedWord] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [sortOrder, setSortOrder] = useState("alphabetical");
 
   useEffect(() => {
     async function loadWords() {
@@ -101,6 +102,26 @@ export default function WordStashPage() {
     }
   }
 
+  function sortWords(wordsToSort) {
+    return [...wordsToSort].sort((a, b) => {
+      if (sortOrder === "votes-desc") {
+        const aScore = a.upvotes - a.downvotes;
+        const bScore = b.upvotes - b.downvotes;
+
+        return bScore - aScore;
+      }
+
+      if (sortOrder === "votes-asc") {
+        const aScore = a.upvotes - a.downvotes;
+        const bScore = b.upvotes - b.downvotes;
+
+        return aScore - bScore;
+      }
+
+      return a.word.localeCompare(b.word, "sv");
+    });
+  }
+
   function handleLetterClick(letter) {
     setSelectedLetter(selectedLetter === letter ? "" : letter);
   }
@@ -136,6 +157,7 @@ export default function WordStashPage() {
     setSearchTerm("");
     setSelectedTags([]);
     setSelectedLetter("");
+    setSortOrder("alphabetical");
 
     getWords()
       .then(setWords)
@@ -161,11 +183,13 @@ export default function WordStashPage() {
     ...new Set(words.map((word) => word.word.charAt(0).toUpperCase())),
   ];
 
-  const displayedWords = selectedLetter
+  const filteredWords = selectedLetter
     ? words.filter(
         (word) => word.word.charAt(0).toUpperCase() === selectedLetter,
       )
     : words;
+
+  const displayedWords = sortWords(filteredWords);
 
   return (
     <main className="word-stash-page">
@@ -210,6 +234,16 @@ export default function WordStashPage() {
               showFilters ? " word-stash-page__filters--visible" : ""
             }`}
           >
+            <select
+              className="word-stash-page__sort"
+              value={sortOrder}
+              onChange={(event) => setSortOrder(event.target.value)}
+            >
+              <option value="alphabetical">A–Ö</option>
+              <option value="votes-desc">Hissa & Dissa – flest</option>
+              <option value="votes-asc">Hissa & Dissa – minst</option>
+            </select>
+
             {tags.map((tag) => (
               <FilterPill
                 key={tag.tagId}
@@ -240,6 +274,7 @@ export default function WordStashPage() {
           words={displayedWords}
           onWordClick={handleWordClick}
           onVoteUpdate={handleVoteUpdate}
+          sortOrder={sortOrder}
         />
       )}
 
