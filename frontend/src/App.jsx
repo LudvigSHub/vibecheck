@@ -9,6 +9,7 @@ import {
 import "./App.css";
 
 import LandingPage from "./pages/LandingPage";
+import AboutPage from "./pages/AboutPage";
 import WordStashPage from "./pages/WordStashPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
@@ -119,6 +120,7 @@ function App() {
         />
         <Route path="/test" element={<TestPage />} />
         <Route path="/styleguide" element={<StyleguidePage />} />
+        <Route path="/om-oss" element={<AboutPage />} />
 
         <Route path="/wordstash" element={<WordStashPage />} />
 
