@@ -55,9 +55,16 @@ builder.Services.AddScoped<RankedQuizService>();
 // Tillåter frontendes adress och anrop
 const string CorsPolicy = "frontend";
 
+// Tillåter frontendens adress och anrop.
+// Origins kommer från konfiguration, eftersom adressen skiljer sig mellan
+// lokalt och Azure. Faller tillbaka på Vites standardport när inget är satt.
+var allowedOrigins = builder.Configuration
+    .GetSection("Cors:Origins")
+    .Get<string[]>() ?? ["http://localhost:5173"];
+
 builder.Services.AddCors(options =>
     options.AddPolicy(CorsPolicy, policy => policy
-        .WithOrigins("http://localhost:5173")
+        .WithOrigins(allowedOrigins)
         .AllowAnyHeader()
         .AllowAnyMethod()));
 
@@ -127,7 +134,17 @@ using (var scope = app.Services.CreateScope())
     // Make sure the database is up to date
     await context.Database.MigrateAsync();
 
-    await DbInitializer.InitializeAsync(context, userManager, roleManager);
+    var adminOptions = new AdminSeedOptions(
+        app.Configuration["Admin:Username"],
+        app.Configuration["Admin:Email"],
+        app.Configuration["Admin:Password"]);
+
+    await DbInitializer.InitializeAsync(
+        context,
+        userManager,
+        roleManager,
+        adminOptions,
+        seedDemoData: app.Environment.IsDevelopment());
 }
 
 // Configure the HTTP request pipeline.
