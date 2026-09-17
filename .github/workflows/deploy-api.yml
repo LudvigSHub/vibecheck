@@ -1,14 +1,15 @@
-name: Deploy API till Azure
+name: Deploy VibeCheck till Azure
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:          # gör att du kan köra den manuellt från Actions-fliken
+  workflow_dispatch:
 
 env:
   AZURE_WEBAPP_NAME: vibecheck-api
   API_PROJECT: backend/VibeCheck.Api/VibeCheck.Api.csproj
   DOTNET_VERSION: '10.x'
+  NODE_VERSION: '22'
 
 jobs:
   build:
@@ -16,27 +17,49 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # --- Frontend ----------------------------------------------------
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Installera frontend-beroenden
+        working-directory: frontend
+        run: npm ci
+
+      # Tom sträng = relativa anrop, eftersom frontend och API delar adress.
+      # Måste sättas här; värdet bakas in i de byggda filerna vid byggtid.
+      - name: Bygg frontend
+        working-directory: frontend
+        env:
+          VITE_API_URL: ''
+        run: npm run build
+
+      # --- Backend -----------------------------------------------------
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      # Sökvägen pekas ut explicit. Repot har ingen .sln i roten, så dotnet
-      # vet annars inte vilket projekt som ska byggas.
-      - name: Publish
+      - name: Publish API
         run: dotnet publish ${{ env.API_PROJECT }} -c Release -o ./publish
+
+      # --- Slå ihop ----------------------------------------------------
+      - name: Lägg frontend i wwwroot
+        run: |
+          mkdir -p ./publish/wwwroot
+          cp -r frontend/dist/. ./publish/wwwroot/
 
       - uses: actions/upload-artifact@v4
         with:
-          name: api
+          name: app
           path: ./publish
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build                # deploy startar först när build blivit grön
+    needs: build
     steps:
       - uses: actions/download-artifact@v4
         with:
-          name: api
+          name: app
           path: ./publish
 
       - name: Deploy to Azure Web App
