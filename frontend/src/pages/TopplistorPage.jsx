@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 
 import PageHeader from "../components/ui/PageHeader";
 import Card from "../components/ui/Card";
-import FilterPill from "../components/ui/FilterPill";
 import Button from "../components/ui/Button";
 import LeaderboardRow from "../components/leaderboard/LeaderboardRow";
 import { getLeaderboard } from "../api/leaderboard";
 import { useAuth } from "../context/AuthContext";
+import WordRankRow from "../components/leaderboard/WordRankRow";
+import { getWords } from "../api/words";
 
 import "../styles/TopplistorPage.css";
 
@@ -23,6 +24,8 @@ function TopplistorPage({ onOpenRegister }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+    const [words, setWords] = useState([]);
+
 
   useEffect(() => {
     const controller = new AbortController();
@@ -52,6 +55,20 @@ function TopplistorPage({ onOpenRegister }) {
     return () => controller.abort();
   }, [week]);
 
+    useEffect(() => {
+    getWords()
+      .then(setWords)
+      .catch(() => setWords([]));
+  }, []);
+
+  const topUpvoted = [...words]
+    .sort((a, b) => b.upvotes - a.upvotes)
+    .slice(0, 5);
+
+  const topDownvoted = [...words]
+    .sort((a, b) => b.downvotes - a.downvotes)
+    .slice(0, 5);
+
   return (
     <main className="topplistor-page">
       <PageHeader eyebrow="TOPPLISTOR" title="Se vem som kan mest slang">
@@ -70,20 +87,14 @@ function TopplistorPage({ onOpenRegister }) {
             </p>
           </div>
 
-          <div className="topplistor-page__week-toggle">
-            <FilterPill
-              active={week === "current"}
-              onClick={() => setWeek("current")}
-            >
-              Denna vecka
-            </FilterPill>
-            <FilterPill
-              active={week === "previous"}
-              onClick={() => setWeek("previous")}
-            >
-              Förra veckan
-            </FilterPill>
-          </div>
+          <select
+            className="topplistor-page__week-select"
+            value={week}
+            onChange={(event) => setWeek(event.target.value)}
+          >
+            <option value="current">Denna vecka</option>
+            <option value="previous">Förra veckan</option>
+          </select>
         </div>
 
         {error && (
@@ -104,7 +115,8 @@ function TopplistorPage({ onOpenRegister }) {
               />
             ))}
 
-            {data.currentUserRow && (
+            {data.currentUserRow && 
+              !data.rows.some((row) => row.rank === data.currentUserRow.rank) && (
               <LeaderboardRow
                 key="current-user"
                 rank={data.currentUserRow.rank}
@@ -118,8 +130,44 @@ function TopplistorPage({ onOpenRegister }) {
         )}
       </Card>
 
-      {/* Ordtopplistorna ("Topp 5 — Hissade/Dissade ord") väntar tills
-          backend har en endpoint för toppord. */}
+      <div className="topplistor-page__word-lists">
+        <Card className="topplistor-page__word-list">
+          <h2>Topp 5 — Hissade ord</h2>
+          <p className="topplistor-page__leaderboard-subtitle">
+            Ord som communityn tycker bäst om.
+          </p>
+          <div className="topplistor-page__rows">
+            {topUpvoted.map((word, index) => (
+              <WordRankRow
+                key={word.wordId}
+                rank={index + 1}
+                word={word.word}
+                votes={word.upvotes}
+                direction="up"
+              />
+            ))}
+          </div>
+        </Card>
+
+        <Card className="topplistor-page__word-list">
+          <h2>Topp 5 — Dissade ord</h2>
+          <p className="topplistor-page__leaderboard-subtitle">
+            Ord som communityn tycker sämst om.
+          </p>
+          <div className="topplistor-page__rows">
+            {topDownvoted.map((word, index) => (
+              <WordRankRow
+                key={word.wordId}
+                rank={index + 1}
+                word={word.word}
+                votes={word.downvotes}
+                direction="down"
+              />
+            ))}
+          </div>
+        </Card>
+      </div>
+
 
       {!isAuthenticated && (
         <Card className="topplistor-page__cta">
