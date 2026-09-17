@@ -13,6 +13,8 @@ import AboutPage from "./pages/AboutPage";
 import WordStashPage from "./pages/WordStashPage";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
+import TopplistorPage from "./pages/TopplistorPage";
+
 import StyleguidePage from "./pages/StyleguidePage";
 import TestPage from "./pages/TestPage";
 import QuizesPage from "./pages/QuizesPage";
@@ -121,8 +123,12 @@ function App() {
         <Route path="/test" element={<TestPage />} />
         <Route path="/styleguide" element={<StyleguidePage />} />
         <Route path="/om-oss" element={<AboutPage />} />
-
         <Route path="/wordstash" element={<WordStashPage />} />
+        <Route
+          path="/topplistor"
+          element={<TopplistorPage onOpenRegister={() => handleAuthSwitch("register")} />}
+        />
+
 
         <Route
           path="/home"
