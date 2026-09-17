@@ -72,3 +72,93 @@ Authorization: Bearer {{token}}
 
 GET {{VibeCheck.Api_HostAddress}}/api/words
 Accept: application/json
+
+
+
+###
+
+# Topplistan är publik. Ska fungera UTAN Authorization-header.
+GET {{VibeCheck.Api_HostAddress}}/api/leaderboard
+Accept: application/json
+
+###
+
+# Ogiltigt veckovärde ska ge 400, inte tyst falla tillbaka på "current".
+GET {{VibeCheck.Api_HostAddress}}/api/leaderboard?week=forra
+Accept: application/json
+
+###
+
+# Utan token ska rankat quiz ge 401.
+POST {{VibeCheck.Api_HostAddress}}/api/ranked/attempts
+
+###
+
+# Logga in och kopiera token ur svaret.
+POST {{VibeCheck.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "userName": "user",
+  "password": "User123!"
+}
+
+###
+
+@rankedToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidXNlciIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6InVzZXIiLCJleHAiOjE3ODk1OTg4OTd9.VS1Ao4IEGMd-u0QHmsVcBuXLAdx8XvW6NIIW4-99Oes
+
+# Starta en omgång. Kolla i svaret: secondsRemaining 60, maxWrongAnswers 3,
+# och 90 frågor i slumpad ordning. Kopiera rankedAttemptId nedan.
+POST {{VibeCheck.Api_HostAddress}}/api/ranked/attempts
+Authorization: Bearer {{rankedToken}}
+
+###
+
+@rankedAttemptId = 5
+
+# Avsluta DIREKT, utan att ha svarat och utan att tiden gått ut.
+# Ska ge 400 "Omgången pågår fortfarande." – det är serverns tidskontroll.
+POST {{VibeCheck.Api_HostAddress}}/api/ranked/attempts/{{rankedAttemptId}}/complete
+Authorization: Bearer {{rankedToken}}
+
+###
+
+# Svara på en fråga. Ta questionId och alternativeId ur startsvaret.
+POST {{VibeCheck.Api_HostAddress}}/api/ranked/attempts/{{rankedAttemptId}}/answers
+Authorization: Bearer {{rankedToken}}
+Content-Type: application/json
+
+{
+  "questionId": 1,
+  "alternativeId": 1
+}
+
+###
+
+# Samma fråga igen ska ge 400 "Frågan är redan besvarad."
+POST {{VibeCheck.Api_HostAddress}}/api/ranked/attempts/{{rankedAttemptId}}/answers
+Authorization: Bearer {{rankedToken}}
+Content-Type: application/json
+
+{
+  "questionId": 1,
+  "alternativeId": 1
+}
+
+###
+
+# Vänta tills 60 sekunder gått sedan starten, avsluta sedan.
+# Nu ska det gå igenom med endReason "TimeUp".
+POST {{VibeCheck.Api_HostAddress}}/api/ranked/attempts/{{rankedAttemptId}}/complete
+Authorization: Bearer {{rankedToken}}
+
+###
+
+# Topplistan ska nu ha en rad. Med token får du även currentUserRow.
+GET {{VibeCheck.Api_HostAddress}}/api/leaderboard
+Authorization: Bearer {{rankedToken}}
+
+###
+
+# Föregående vecka ska vara tom.
+GET {{VibeCheck.Api_HostAddress}}/api/leaderboard?week=previous
