@@ -15,7 +15,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<VibeCheckDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        // Azure SQL i serverless-läge pausar vid inaktivitet och svarar 40613
+        // medan den vaknar. Utan retry blir det ett hårt fel mot användaren.
+        // LocalDB gör aldrig så, därför behövdes det här inte förrän nu.
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 10,
+            maxRetryDelay: TimeSpan.FromSeconds(15),
+            errorNumbersToAdd: null)));
 builder.Services
     .AddIdentityCore<User>(options =>
     {
