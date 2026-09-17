@@ -22,7 +22,7 @@ public class PingController : ControllerBase //Service bara för att testa att f
 
         return Ok(new
         {
-            message = "Backend svarar!",
+            message = "Backend svarar även med Azure!",
             wordFromDb = word
         });
     }
