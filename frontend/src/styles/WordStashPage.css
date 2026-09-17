@@ -288,7 +288,7 @@
    ========================================================= */
 
 .word-stash-page__sort {
-  width: 100%;
+  width: auto;
   box-sizing: border-box;
 
   padding: 12px 16px;
@@ -557,11 +557,10 @@
   /* =======================================================
      SEARCH + FILTERS
      ======================================================= */
-
   .word-stash-page__controls {
     display: grid;
 
-    grid-template-columns: 30% 1fr;
+    grid-template-columns: minmax(280px, 360px) 1fr;
 
     gap: 16px 24px;
 
@@ -570,13 +569,8 @@
     margin-bottom: 16px;
   }
 
-  /* Search field stays in column 1 */
   .word-stash-page__controls > .search-input {
     grid-column: 1;
-  }
-
-  .word-stash-page__controls > .word-stash-page__sort {
-    grid-column: 2;
   }
 
   /* Filter actions are only for mobile */
@@ -584,7 +578,7 @@
     display: none;
   }
 
-  /* Filters are always visible on desktop */
+  /* Sortering + taggar på samma rad */
   .word-stash-page__filters {
     grid-column: 2;
 
