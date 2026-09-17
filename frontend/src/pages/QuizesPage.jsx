@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 
 import QuizCard from "../components/QuizCard";
 import QuizRunner from "../components/QuizRunner";
+import RankedQuizRunner from "../components/RankedQuizRunner";
+import Card from "../components/ui/Card";
+import Button from "../components/ui/Button";
+import { TargetIcon } from "../components/Icons";
 import { getQuizzes, startQuizAttempt } from "../api/quiz";
+import { startRankedAttempt } from "../api/ranked";
 
 import "../styles/QuizesPage.css";
 
@@ -14,9 +19,13 @@ function QuizesPage() {
   // Det pågående försöket (StartQuizAttemptDTO). null = ingen popup öppen.
   const [attempt, setAttempt] = useState(null);
 
+  // Motsvarande för det rankade quizet (StartRankedAttemptDTO).
+  const [rankedAttempt, setRankedAttempt] = useState(null);
+
   // Vilket quiz som håller på att startas. Används för att visa "Startar…"
   // på rätt knapp och för att hindra dubbelklick.
   const [startingId, setStartingId] = useState(null);
+  const [startingRanked, setStartingRanked] = useState(false);
 
   async function refreshQuizzes() {
     try {
@@ -74,6 +83,25 @@ function QuizesPage() {
     }
   }
 
+  async function handleStartRanked() {
+    if (startingRanked) {
+      return;
+    }
+
+    setStartingRanked(true);
+    setError("");
+
+    try {
+      const data = await startRankedAttempt();
+
+      setRankedAttempt(data);
+    } catch (err) {
+      setError(err.message ?? "Kunde inte starta det rankade quizet.");
+    } finally {
+      setStartingRanked(false);
+    }
+  }
+
   function handleCloseRunner() {
     setAttempt(null);
 
@@ -89,8 +117,8 @@ function QuizesPage() {
         <p className="quizzes__eyebrow">Quiz</p>
         <h1 className="quizzes__title">Testa dina kunskaper</h1>
         <p className="quizzes__intro">
-          Tre nivåer att spela om och om igen. Varje omgång slumpas upp till
-          10 frågor – så du kan få olika frågor även när du spelar samma nivå.
+          Tre nivåer att spela om och om igen. Varje omgång slumpas upp till 10
+          frågor – så du kan få olika frågor även när du spelar samma nivå.
         </p>
         <p className="quizzes__intro">
           Klara en nivå med minst 80% rätt för att låsa upp nästa. Ditt bästa
@@ -119,7 +147,35 @@ function QuizesPage() {
         </section>
       )}
 
+      <Card className="quizzes__ranked">
+        <div className="quizzes__ranked-text">
+          <p className="quizzes__ranked-label">Rankat quiz</p>
+          <h2 className="quizzes__ranked-title">En minut. Tre fel.</h2>
+          <p className="quizzes__ranked-intro">
+            Frågor från alla nivåer, ett poäng per rätt svar. Omgången tar slut
+            när minuten är ute eller vid tredje felet. Ditt bästa resultat
+            hamnar på veckans topplista.
+          </p>
+        </div>
+
+        <Button
+          className="quizzes__ranked-action"
+          onClick={handleStartRanked}
+          disabled={startingRanked}
+        >
+          <TargetIcon width={19} height={19} />
+          {startingRanked ? "Startar…" : "Spela rankat"}
+        </Button>
+      </Card>
+
       {attempt && <QuizRunner attempt={attempt} onClose={handleCloseRunner} />}
+
+      {rankedAttempt && (
+        <RankedQuizRunner
+          attempt={rankedAttempt}
+          onClose={() => setRankedAttempt(null)}
+        />
+      )}
     </main>
   );
 }

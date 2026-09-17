@@ -11,6 +11,10 @@
   --navbar-accent-hover: var(--color-accent-hover);
   --navbar-accent-text: var(--color-on-accent);
 
+  /* Gemensam höjd för alla kontroller i navbaren (knappar + sökfält).
+     Ändra här så följer allt med. */
+  --navbar-control-height: 36px;
+
   background: var(--navbar-bg);
   color: var(--navbar-text);
   text-align: left;
@@ -70,6 +74,16 @@
   flex-shrink: 0;
 }
 
+/* Sökfältet ärver .card (1px ram) och .search-input (padding 12px 18px) från
+   ui.css, vilket ger 52px. Vi styr höjden explicit i stället.
+   border-box krävs eftersom projektet saknar global box-sizing-reset –
+   annars ligger .card:s ram utanför de 36px. */
+.navbar__search .search-input {
+  height: var(--navbar-control-height);
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+
 .navbar__link {
   display: inline-block;
   padding: 6px 2px;
@@ -100,7 +114,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 18px;
+  /* Höjden styrs av height, inte av padding – annars blir "Min profil"
+     högre än de andra eftersom avataren trycker isär knappen. */
+  height: var(--navbar-control-height);
+  padding: 0 18px;
+  box-sizing: border-box;
   border: 0;
   border-radius: 999px;
   font-family: inherit;
@@ -137,18 +155,19 @@
   gap: 12px;
 }
 
-/* Första bokstaven i användarnamnet, tills vi har riktiga profilbilder */
+/* Första bokstaven i användarnamnet, tills vi har riktiga profilbilder.
+   26px så den får plats innanför knappens 36px. */
 .navbar__avatar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   border-radius: 999px;
   background: var(--navbar-accent);
   color: var(--navbar-accent-text);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1;
 }
@@ -225,6 +244,11 @@
 /* --- Mobil ---------------------------------------------------------------- */
 
 @media (max-width: 768px) {
+  .navbar {
+    /* Större träffyta på touch – knapp och sökfält följer med automatiskt. */
+    --navbar-control-height: 44px;
+  }
+
   .navbar__inner {
     padding: 0 16px;
     gap: 12px;
@@ -274,8 +298,8 @@
   }
 
   .navbar__search {
-  width: 100%;
-}
+    width: 100%;
+  }
 
   .navbar__link {
     display: block;
@@ -290,7 +314,6 @@
   .navbar__login {
     justify-content: center;
     margin-top: 10px;
-    padding: 12px 18px;
   }
 
   .navbar__user {

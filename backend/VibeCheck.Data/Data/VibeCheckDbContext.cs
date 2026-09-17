@@ -35,6 +35,11 @@ public class VibeCheckDbContext
     public DbSet<QuizAttemptQuestion> QuizAttemptQuestions => Set<QuizAttemptQuestion>();
     public DbSet<QuizAttemptAnswer> QuizAttemptAnswers => Set<QuizAttemptAnswer>();
 
+    // Rankat quiz
+    public DbSet<RankedAttempt> RankedAttempts => Set<RankedAttempt>();
+    public DbSet<RankedAttemptAnswer> RankedAttemptAnswers => Set<RankedAttemptAnswer>();
+    public DbSet<LeaderboardEntry> LeaderboardEntries => Set<LeaderboardEntry>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -305,6 +310,75 @@ public class VibeCheckDbContext
         modelBuilder.Entity<QuizAttemptAnswer>()
             .HasIndex(aaa => new { aaa.QuizAttemptID, aaa.QuestionID })
             .IsUnique();
+
+        // ============================================================
+        // RANKAT QUIZ
+        // ============================================================
+
+        modelBuilder.Entity<RankedAttempt>()
+            .HasOne(a => a.User)
+            .WithMany(u => u.RankedAttempts)
+            .HasForeignKey(a => a.UserID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<RankedAttemptAnswer>()
+            .HasOne(a => a.RankedAttempt)
+            .WithMany(r => r.RankedAttemptAnswers)
+            .HasForeignKey(a => a.RankedAttemptID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<RankedAttemptAnswer>()
+            .HasOne(a => a.Question)
+            .WithMany()
+            .HasForeignKey(a => a.QuestionID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // Samma sammansatta nyckel som QuizAttemptAnswer redan använder:
+        // garanterar att det valda alternativet hör till frågan man svarar på.
+        // WithMany() utan navigering – Question och QuestionAlternative
+        // behöver inte veta något om det rankade quizet.
+        modelBuilder.Entity<RankedAttemptAnswer>()
+            .HasOne(a => a.SelectedAlternative)
+            .WithMany()
+            .HasForeignKey(a => new
+            {
+                a.QuestionID,
+                a.SelectedAlternativeID
+            })
+            .HasPrincipalKey(qa => new
+            {
+                qa.QuestionID,
+                qa.AlternativeID
+            })
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // En fråga får besvaras högst en gång per omgång. Regeln ligger i
+        // databasen och inte bara i servicen – då kan den inte kringgås.
+        modelBuilder.Entity<RankedAttemptAnswer>()
+            .HasIndex(a => new { a.RankedAttemptID, a.QuestionID })
+            .IsUnique();
+
+        modelBuilder.Entity<LeaderboardEntry>()
+            .HasOne(e => e.User)
+            .WithMany(u => u.LeaderboardEntries)
+            .HasForeignKey(e => e.UserID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<LeaderboardEntry>()
+            .HasOne(e => e.RankedAttempt)
+            .WithMany()
+            .HasForeignKey(e => e.RankedAttemptID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // En rad per användare och vecka.
+        modelBuilder.Entity<LeaderboardEntry>()
+            .HasIndex(e => new { e.UserID, e.WeekStart })
+            .IsUnique();
+
+        // Täcker topplistans fråga: filtrera på vecka, sortera på poäng
+        // och tid. Utan det blir topp 100 en tabellskanning.
+        modelBuilder.Entity<LeaderboardEntry>()
+            .HasIndex(e => new { e.WeekStart, e.Score, e.AchievedAt });
 
 
         // ============================================================

@@ -8,4 +8,10 @@ public class User : IdentityUser<int>
 
     public ICollection<QuizAttempt> QuizAttempts { get; set; } = new List<QuizAttempt>();
     public ICollection<WordVote> WordVotes { get; set; } = new List<WordVote>();
+
+    //För rankat
+    public ICollection<RankedAttempt> RankedAttempts { get; set; }
+    = new List<RankedAttempt>();
+    public ICollection<LeaderboardEntry> LeaderboardEntries { get; set; }
+        = new List<LeaderboardEntry>();
 }
