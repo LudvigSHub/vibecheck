@@ -6,17 +6,23 @@ using VibeCheck.Data.Seed;
 
 namespace VibeCheck.Data.Data;
 
+// Värdena kommer från konfiguration (user-secrets lokalt, app settings i Azure).
+// Är Password null skapas ingen admin alls.
+public record AdminSeedOptions(string? UserName, string? Email, string? Password);
+
 public static class DbInitializer
 {
     public static async Task InitializeAsync(
-        VibeCheckDbContext context,
-        UserManager<User> userManager,
-        RoleManager<IdentityRole<int>> roleManager)
+    VibeCheckDbContext context,
+    UserManager<User> userManager,
+    RoleManager<IdentityRole<int>> roleManager,
+    AdminSeedOptions adminOptions,
+    bool seedDemoData)
     {
-
-        // Seed data
+        // --- Körs alltid: roller, admin och allt ordinnehåll -----------------
         await SeedRolesAsync(roleManager);
-        await SeedUsersAsync(userManager);
+        await SeedAdminAsync(userManager, adminOptions);
+
         await SeedMeaningsAsync(context);
         await SeedWordsAsync(context);
         await SeedInflectionTypesAsync(context);
@@ -24,13 +30,21 @@ public static class DbInitializer
         await SeedWordExamplesAsync(context);
         await SeedTagsAsync(context);
         await SeedWordTagsAsync(context);
-        await SeedWordVotesAsync(context);
         await SeedQuestionTypesAsync(context);
         await SeedDifficultiesAsync(context);
         await SeedQuestionsAsync(context);
         await SeedQuestionAlternativesAsync(context);
         await SeedQuizzesAsync(context);
         await SeedQuizQuestionsAsync(context);
+
+        // --- Bara lokalt: demoanvändare och deras påhittade aktivitet --------
+        // WordVotes och QuizAttempts slår upp användarna "admin" och "user",
+        // så de tre nedan hänger ihop och måste hoppas över tillsammans.
+        if (!seedDemoData)
+            return;
+
+        await SeedDemoUsersAsync(userManager);
+        await SeedWordVotesAsync(context);
         await SeedQuizAttemptsAsync(context, userManager);
         await SeedQuizAttemptAnswersAsync(context);
     }
@@ -51,18 +65,32 @@ public static class DbInitializer
         }
     }
 
-    private static async Task SeedUsersAsync(UserManager<User> userManager)
+    // Skapas i alla miljöer, men bara om ett lösenord är konfigurerat.
+    private static async Task SeedAdminAsync(
+        UserManager<User> userManager,
+        AdminSeedOptions options)
     {
-        // Admin user
-        var admin = await userManager.FindByNameAsync("admin");
+        if (string.IsNullOrWhiteSpace(options.UserName) ||
+            string.IsNullOrWhiteSpace(options.Password))
+        {
+            // Ingen admin konfigurerad. Tyst return i stället för undantag:
+            // appen ska kunna starta i en miljö där ingen admin ska finnas.
+            return;
+        }
+
+        var admin = await userManager.FindByNameAsync(options.UserName);
+
         if (admin == null)
         {
             admin = new User
             {
-                UserName = "admin",
-                Email = "admin@vibecheck.local"
+                UserName = options.UserName,
+                Email = options.Email ?? $"{options.UserName}@vibecheck.local"
             };
-            var result = await userManager.CreateAsync(admin, "Admin123!");
+
+            // CreateAsync hashar lösenordet åt oss. Klartexten når aldrig databasen.
+            var result = await userManager.CreateAsync(admin, options.Password);
+
             if (!result.Succeeded)
             {
                 throw new Exception(
@@ -70,13 +98,18 @@ public static class DbInitializer
                     string.Join(", ", result.Errors.Select(e => e.Description)));
             }
         }
+
         if (!await userManager.IsInRoleAsync(admin, "admin"))
         {
             await userManager.AddToRoleAsync(admin, "admin");
         }
+    }
 
-        // Normal user
+    // Bara i Development. Hårdkodat lösenord är OK här, aldrig i skarp miljö.
+    private static async Task SeedDemoUsersAsync(UserManager<User> userManager)
+    {
         var user = await userManager.FindByNameAsync("user");
+
         if (user == null)
         {
             user = new User
@@ -84,7 +117,9 @@ public static class DbInitializer
                 UserName = "user",
                 Email = "user@vibecheck.local",
             };
+
             var result = await userManager.CreateAsync(user, "User123!");
+
             if (!result.Succeeded)
             {
                 throw new Exception(
@@ -92,6 +127,7 @@ public static class DbInitializer
                     string.Join(", ", result.Errors.Select(e => e.Description)));
             }
         }
+
         if (!await userManager.IsInRoleAsync(user, "user"))
         {
             await userManager.AddToRoleAsync(user, "user");
