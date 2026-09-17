@@ -162,6 +162,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Serverar den byggda React-appen från wwwroot. UseDefaultFiles måste ligga
+// före UseStaticFiles — den skriver om "/" till "/index.html", och
+// UseStaticFiles är den som faktiskt levererar filen.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseCors(CorsPolicy);
 
 // Ordningen spelar roll. UseAuthentication svarar på "vem är du" och fyller i
@@ -176,5 +182,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// React Router sköter routingen på klientsidan. Utan den här raden letar
+// servern efter en fil som heter "quiz" när någon laddar om på /quiz,
+// hittar ingen, och svarar 404. Nu får de index.html och React tar över.
+app.MapFallbackToFile("index.html");
 
 app.Run();
