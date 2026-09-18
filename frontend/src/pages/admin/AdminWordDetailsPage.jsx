@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
+  getAdminInflectionTypes,
   getAdminTags,
   getAdminWord,
   updateAdminWord,
@@ -28,9 +29,11 @@ function AdminWordDetailsPage() {
     meaning: "",
     examples: [],
     tagIds: [],
+    inflections: [],
   });
 
   const [availableTags, setAvailableTags] = useState([]);
+  const [availableInflectionTypes, setAvailableInflectionTypes] = useState([]);
 
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
@@ -74,11 +77,14 @@ function AdminWordDetailsPage() {
     try {
       setSaveError("");
 
-      // Hämta alla befintliga taggar från databasen.
-      // Admin får endast välja bland dessa.
-      const tags = await getAdminTags();
+      // Admin får endast välja bland befintliga taggar och böjningstyper.
+      const [tags, inflectionTypes] = await Promise.all([
+        getAdminTags(),
+        getAdminInflectionTypes(),
+      ]);
 
       setAvailableTags(tags);
+      setAvailableInflectionTypes(inflectionTypes);
 
       // Fyll formuläret med ordets nuvarande värden.
       setFormData({
@@ -86,11 +92,15 @@ function AdminWordDetailsPage() {
         meaning: word.meaning,
         examples: [...word.examples],
         tagIds: word.tags.map((tag) => tag.tagId),
+        inflections: word.inflections.map((inflection) => ({
+          inflectionTypeId: inflection.inflectionTypeId,
+          inflectedText: inflection.inflectedText,
+        })),
       });
 
       setIsEditing(true);
     } catch {
-      setSaveError("Kunde inte hämta taggarna.");
+      setSaveError("Kunde inte hämta taggar eller böjningstyper.");
     }
   }
 
@@ -108,6 +118,10 @@ function AdminWordDetailsPage() {
       meaning: word.meaning,
       examples: [...word.examples],
       tagIds: word.tags.map((tag) => tag.tagId),
+      inflections: word.inflections.map((inflection) => ({
+        inflectionTypeId: inflection.inflectionTypeId,
+        inflectedText: inflection.inflectedText,
+      })),
     });
   }
 
@@ -162,6 +176,38 @@ function AdminWordDetailsPage() {
   }
 
   // --------------------------------------------------------------------------
+  // Hantera böjningar
+  // --------------------------------------------------------------------------
+
+  function handleInflectionChange(index, field, value) {
+    setFormData((current) => ({
+      ...current,
+      inflections: current.inflections.map((inflection, rowIndex) =>
+        rowIndex === index ? { ...inflection, [field]: value } : inflection,
+      ),
+    }));
+  }
+
+  function handleAddInflection() {
+    setFormData((current) => ({
+      ...current,
+      inflections: [
+        ...current.inflections,
+        { inflectionTypeId: "", inflectedText: "" },
+      ],
+    }));
+  }
+
+  function handleRemoveInflection(index) {
+    setFormData((current) => ({
+      ...current,
+      inflections: current.inflections.filter(
+        (_, rowIndex) => rowIndex !== index,
+      ),
+    }));
+  }
+
+  // --------------------------------------------------------------------------
   // Välj / avmarkera tagg
   // --------------------------------------------------------------------------
 
@@ -184,6 +230,15 @@ function AdminWordDetailsPage() {
 
   async function handleSave(event) {
     event.preventDefault();
+
+    if (formData.inflections.some((inflection) =>
+      !inflection.inflectionTypeId || !inflection.inflectedText.trim(),
+    )) {
+      setSaveError(
+        "Välj böjningstyp och skriv en böjning på varje rad, eller ta bort raden.",
+      );
+      return;
+    }
 
     try {
       setSaving(true);
@@ -412,6 +467,93 @@ function AdminWordDetailsPage() {
                 </button>
               </section>
 
+              {/* Böjningar */}
+              <section className="admin-word-details__section">
+                <p className="admin-word-details__label">
+                  Böjningar (frivilligt)
+                </p>
+                <p className="admin-word-details__inflection-help">
+                  Lägg till böjningar om det passar ordet.
+                </p>
+
+                <div className="admin-word-details__edit-examples">
+                  {formData.inflections.map((inflection, index) => (
+                    <div
+                      className="admin-word-details__edit-inflection"
+                      key={index}
+                    >
+                      <label>
+                        <span className="admin-word-details__label">
+                          Böjningstyp
+                        </span>
+                        <select
+                          className="admin-word-details__input"
+                          value={inflection.inflectionTypeId}
+                          required
+                          onChange={(event) =>
+                            handleInflectionChange(
+                              index,
+                              "inflectionTypeId",
+                              event.target.value === ""
+                                ? ""
+                                : Number(event.target.value),
+                            )
+                          }
+                        >
+                          <option value="">Välj typ</option>
+                          {availableInflectionTypes.map((type) => (
+                            <option
+                              key={type.inflectionTypeId}
+                              value={type.inflectionTypeId}
+                            >
+                              {type.typeName}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+
+                      <label>
+                        <span className="admin-word-details__label">
+                          Böjning
+                        </span>
+                        <input
+                          className="admin-word-details__input"
+                          type="text"
+                          value={inflection.inflectedText}
+                          required
+                          placeholder="Exempel: softade"
+                          onChange={(event) =>
+                            handleInflectionChange(
+                              index,
+                              "inflectedText",
+                              event.target.value,
+                            )
+                          }
+                        />
+                      </label>
+
+                      <button
+                        className="btn btn--ghost"
+                        type="button"
+                        aria-label={`Ta bort böjning ${index + 1}`}
+                        onClick={() => handleRemoveInflection(index)}
+                      >
+                        Ta bort
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  className="btn btn--ghost admin-word-details__add-example"
+                  type="button"
+                  onClick={handleAddInflection}
+                  disabled={availableInflectionTypes.length === 0}
+                >
+                  + Lägg till böjning
+                </button>
+              </section>
+
               {/* Taggar */}
               <section className="admin-word-details__section">
                 <p className="admin-word-details__label">
@@ -518,6 +660,31 @@ function AdminWordDetailsPage() {
                     </div>
                   ))}
                 </div>
+              </section>
+
+              {/* Böjningar */}
+              <section className="admin-word-details__section">
+                <p className="admin-word-details__label">
+                  Böjningar
+                </p>
+
+                {word.inflections.length > 0 ? (
+                  <div className="admin-word-details__examples">
+                    {word.inflections.map((inflection, index) => (
+                      <div
+                        className="admin-word-details__example"
+                        key={`${inflection.inflectionTypeId}-${inflection.inflectedText}-${index}`}
+                      >
+                        <span>{inflection.typeName}</span>
+                        <p>{inflection.inflectedText}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="admin-word-details__status">
+                    Inga böjningar tillagda.
+                  </p>
+                )}
               </section>
 
               {/* Taggar */}

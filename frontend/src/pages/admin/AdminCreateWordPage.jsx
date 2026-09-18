@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   createAdminWord,
   getAdminTags,
+  getAdminInflectionTypes,
 } from "../../api/admin";
 
 import Card from "../../components/ui/Card";
@@ -18,9 +19,13 @@ function AdminCreateWordPage() {
     meaning: "",
     examples: [""],
     tagIds: [],
+    inflections: [],
   });
 
   const [availableTags, setAvailableTags] = useState([]);
+  const [availableInflectionTypes, setAvailableInflectionTypes] = useState([]);
+  const [loadingInflectionTypes, setLoadingInflectionTypes] = useState(true);
+  const [inflectionTypesError, setInflectionTypesError] = useState("");
 
   const [loadingTags, setLoadingTags] = useState(true);
   const [error, setError] = useState("");
@@ -60,8 +65,52 @@ function AdminCreateWordPage() {
   }, []);
 
   // --------------------------------------------------------------------------
-  // Ändra ord / betydelse
+  // Hämta böjningstyper och hantera böjningsrader
   // --------------------------------------------------------------------------
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadInflectionTypes() {
+      try {
+        const types = await getAdminInflectionTypes({ signal: controller.signal });
+        setAvailableInflectionTypes(types);
+        setInflectionTypesError("");
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setInflectionTypesError("Kunde inte hämta böjningstyperna. Du kan fortfarande skapa ord utan böjningar.");
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoadingInflectionTypes(false);
+      }
+    }
+
+    loadInflectionTypes();
+    return () => controller.abort();
+  }, []);
+
+  function handleInflectionChange(index, field, value) {
+    setFormData((current) => ({
+      ...current,
+      inflections: current.inflections.map((inflection, rowIndex) =>
+        rowIndex === index ? { ...inflection, [field]: value } : inflection,
+      ),
+    }));
+  }
+
+  function handleAddInflection() {
+    setFormData((current) => ({
+      ...current,
+      inflections: [...current.inflections, { inflectionTypeId: "", inflectedText: "" }],
+    }));
+  }
+
+  function handleRemoveInflection(index) {
+    setFormData((current) => ({
+      ...current,
+      inflections: current.inflections.filter((_, rowIndex) => rowIndex !== index),
+    }));
+  }
 
   function handleFieldChange(event) {
     const { name, value } = event.target;
@@ -124,6 +173,13 @@ function AdminCreateWordPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (formData.inflections.some((inflection) =>
+      !inflection.inflectionTypeId || !inflection.inflectedText.trim(),
+    )) {
+      setError("Välj böjningstyp och skriv en böjning på varje rad, eller ta bort raden.");
+      return;
+    }
 
     try {
       setSaving(true);
@@ -261,6 +317,74 @@ function AdminCreateWordPage() {
                 onClick={handleAddExample}
               >
                 + Lägg till exempel
+              </button>
+            </section>
+
+            <section className="admin-word-details__section">
+              <p className="admin-word-details__label">Böjningar (frivilligt)</p>
+              <p className="admin-word-details__inflection-help">
+                Lägg till böjningar om det passar ordet.
+              </p>
+
+              {loadingInflectionTypes && (
+                <p className="admin-word-details__status">Hämtar böjningstyper…</p>
+              )}
+              {inflectionTypesError && (
+                <p className="admin-word-details__save-error" role="alert">{inflectionTypesError}</p>
+              )}
+              {!loadingInflectionTypes && !inflectionTypesError && availableInflectionTypes.length === 0 && (
+                <p className="admin-word-details__status">Det finns inga böjningstyper att välja.</p>
+              )}
+
+              <div className="admin-word-details__edit-examples">
+                {formData.inflections.map((inflection, index) => (
+                  <div className="admin-word-details__edit-inflection" key={index}>
+                    <label>
+                      <span className="admin-word-details__label">Böjningstyp</span>
+                      <select
+                        className="admin-word-details__input"
+                        value={inflection.inflectionTypeId}
+                        required
+                        onChange={(event) => handleInflectionChange(index, "inflectionTypeId", event.target.value === "" ? "" : Number(event.target.value))}
+                      >
+                        <option value="">Välj typ</option>
+                        {availableInflectionTypes.map((type) => (
+                          <option key={type.inflectionTypeId} value={type.inflectionTypeId}>
+                            {type.typeName}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label>
+                      <span className="admin-word-details__label">Böjning</span>
+                      <input
+                        className="admin-word-details__input"
+                        type="text"
+                        value={inflection.inflectedText}
+                        required
+                        placeholder="Exempel: softade"
+                        onChange={(event) => handleInflectionChange(index, "inflectedText", event.target.value)}
+                      />
+                    </label>
+                    <button
+                      className="btn btn--ghost"
+                      type="button"
+                      aria-label={`Ta bort böjning ${index + 1}`}
+                      onClick={() => handleRemoveInflection(index)}
+                    >
+                      Ta bort
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="btn btn--ghost admin-word-details__add-example"
+                type="button"
+                onClick={handleAddInflection}
+                disabled={loadingInflectionTypes || availableInflectionTypes.length === 0}
+              >
+                + Lägg till böjning
               </button>
             </section>
 

@@ -9,4 +9,6 @@ public class AdminCreateWordDTO
     public List<string> Examples { get; set; } = [];
 
     public List<int> TagIds { get; set; } = [];
+
+    public List<AdminWordInflectionDTO>? Inflections { get; set; }
 }

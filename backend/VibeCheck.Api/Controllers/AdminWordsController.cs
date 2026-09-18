@@ -25,6 +25,14 @@ public class AdminWordsController : ControllerBase
         return Ok(words);
     }
 
+    [HttpGet("inflection-types")]
+    public async Task<ActionResult<List<AdminInflectionTypeDTO>>> GetInflectionTypes()
+    {
+        var types = await _adminWordService.GetInflectionTypesAsync();
+
+        return Ok(types);
+    }
+
     [HttpPost]
     public async Task<ActionResult<AdminWordListItemDTO>> Create(
     AdminCreateWordDTO request)

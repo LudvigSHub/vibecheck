@@ -396,6 +396,35 @@
    Responsive
    -------------------------------------------------------------------------- */
 
+.admin-word-details__inflection-help {
+  color: var(--color-text-muted);
+  margin-bottom: 14px;
+}
+
+.admin-word-details__edit-inflection {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 10px;
+}
+
+.admin-word-details__edit-inflection > label {
+  min-width: 0;
+}
+
+.admin-word-details__edit-inflection > button {
+  min-height: 46px;
+}
+
+.admin-word-details__edit-inflection select {
+  color-scheme: dark;
+}
+
+.admin-word-details__edit-inflection select option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
 @media (max-width: 800px) {
   .admin-word-details__grid {
     grid-template-columns: 1fr;
@@ -403,6 +432,14 @@
 }
 
 @media (max-width: 640px) {
+  .admin-word-details__edit-inflection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-word-details__edit-inflection > button {
+    justify-self: start;
+  }
+
   .admin-word-details {
     padding: 28px 16px 56px;
   }

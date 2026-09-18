@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VibeCheck.Api.DTOs;
 using VibeCheck.Data.Data;
 using VibeCheck.Data.Models;
@@ -12,6 +12,20 @@ public class AdminWordService
     public AdminWordService(VibeCheckDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<List<AdminInflectionTypeDTO>> GetInflectionTypesAsync()
+    {
+        return await _context.InflectionTypes
+            .AsNoTracking()
+            .OrderBy(type => type.SortOrder)
+            .ThenBy(type => type.InflectionTypeID)
+            .Select(type => new AdminInflectionTypeDTO
+            {
+                InflectionTypeId = type.InflectionTypeID,
+                TypeName = type.DisplayName
+            })
+            .ToListAsync();
     }
 
     public async Task<List<AdminWordListItemDTO>> GetAllAsync()
@@ -118,6 +132,8 @@ public class AdminWordService
                 "En eller flera av de valda taggarna finns inte.");
         }
 
+        var inflections = await PrepareInflectionsAsync(request.Inflections);
+
         // Återanvänd betydelsen om exakt samma betydelse redan finns.
         var meaning = await _context.Meanings
             .FirstOrDefaultAsync(m => m.MeaningText == meaningText);
@@ -137,7 +153,8 @@ public class AdminWordService
         var word = new Word
         {
             WordDesc = wordText,
-            Meaning = meaning
+            Meaning = meaning,
+            WordInflections = inflections
         };
 
         // Lägg till meningsexempel
@@ -171,6 +188,7 @@ public class AdminWordService
         // - skapa eventuell ny Meaning
         // - skapa WordExamples
         // - skapa WordTags
+        // - skapa eventuella WordInflections
         // - sätta rätt foreign keys
         _context.Words.Add(word);
 
@@ -209,6 +227,17 @@ public class AdminWordService
                 WordId = word.WordID,
                 Word = word.WordDesc,
                 Meaning = word.Meaning.MeaningText,
+
+                Inflections = word.WordInflections
+                    .OrderBy(inflection => inflection.InflectionType.SortOrder)
+                    .ThenBy(inflection => inflection.WordInflectionID)
+                    .Select(inflection => new AdminWordInflectionDetailsDTO
+                    {
+                        InflectionTypeId = inflection.InflectionTypeID,
+                        InflectedText = inflection.InflectedText,
+                        TypeName = inflection.InflectionType.DisplayName
+                    })
+                    .ToList(),
 
                 Examples = word.WordExamples
                     .OrderBy(example => example.ExampleID)
@@ -285,6 +314,7 @@ public class AdminWordService
         var word = await _context.Words
             .Include(word => word.WordExamples)
             .Include(word => word.WordTags)
+            .Include(word => word.WordInflections)
             .FirstOrDefaultAsync(word => word.WordID == wordId);
 
         if (word is null)
@@ -327,6 +357,14 @@ public class AdminWordService
                 "En eller flera av de valda taggarna finns inte.");
         }
 
+
+        // -----------------------------------------
+        // Kontrollera böjningarna innan några befintliga värden ändras.
+        // Null betyder att ordets böjningar ska behållas.
+        // -----------------------------------------
+        var inflections = request.Inflections is null
+            ? null
+            : await PrepareInflectionsAsync(request.Inflections);
 
         // -----------------------------------------
         // Hitta eller skapa Meaning
@@ -396,6 +434,20 @@ public class AdminWordService
 
 
         // -----------------------------------------
+        // Ersätt böjningarna endast om en lista skickades in.
+        // -----------------------------------------
+        if (inflections is not null)
+        {
+            _context.WordInflections.RemoveRange(word.WordInflections);
+            word.WordInflections.Clear();
+
+            foreach (var inflection in inflections)
+            {
+                word.WordInflections.Add(inflection);
+            }
+        }
+
+        // -----------------------------------------
         // Spara ändringarna
         // -----------------------------------------
 
@@ -406,28 +458,50 @@ public class AdminWordService
         // Returnera den uppdaterade detaljvyn
         // -----------------------------------------
 
-        return new AdminWordDetailsDTO
+        return await GetByIdAsync(wordId);
+    }
+
+    private async Task<List<WordInflection>> PrepareInflectionsAsync(
+        List<AdminWordInflectionDTO>? requestedInflections)
+    {
+        // Böjningar är frivilliga, men varje inskickad rad måste vara komplett.
+        requestedInflections ??= [];
+
+        if (requestedInflections.Any(inflection =>
+            inflection is null || string.IsNullOrWhiteSpace(inflection.InflectedText)))
         {
-            WordId = word.WordID,
-            Word = word.WordDesc,
-            Meaning = meaning.MeaningText,
+            throw new InvalidOperationException("Varje böjning måste ha en böjningstext.");
+        }
 
-            Examples = word.WordExamples
-                .OrderBy(example => example.ExampleID)
-                .Select(example => example.ExampleText)
-                .ToList(),
+        var inflections = requestedInflections
+            .Select(inflection => new WordInflection
+            {
+                InflectionTypeID = inflection.InflectionTypeId,
+                InflectedText = inflection.InflectedText.Trim()
+            })
+            .DistinctBy(inflection => (
+                inflection.InflectionTypeID,
+                inflection.InflectedText.ToUpperInvariant()))
+            .ToList();
 
-            Tags = tags
-                .Select(tag => new AdminTagListItemDTO
-                {
-                    TagId = tag.TagID,
-                    TagName = tag.TagName
-                })
-                .ToList(),
+        if (inflections.Count > 0)
+        {
+            var typeIds = inflections
+                .Select(inflection => inflection.InflectionTypeID)
+                .Distinct()
+                .ToList();
 
-            IsUsedInQuiz = await _context.Questions
-                .AnyAsync(question => question.WordID == word.WordID)
-        };
+            var validTypeCount = await _context.InflectionTypes
+                .CountAsync(type => typeIds.Contains(type.InflectionTypeID));
+
+            if (validTypeCount != typeIds.Count)
+            {
+                throw new InvalidOperationException(
+                    "Välj en befintlig böjningstyp för varje böjning.");
+            }
+        }
+
+        return inflections;
     }
 
     public async Task<bool> DeleteAsync(int wordId)
