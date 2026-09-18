@@ -9,4 +9,7 @@ public class AdminUpdateWordDTO
     public List<string> Examples { get; set; } = [];
 
     public List<int> TagIds { get; set; } = [];
+
+    // Null behåller befintliga böjningar. En tom lista tar bort alla.
+    public List<AdminWordInflectionDTO>? Inflections { get; set; }
 }

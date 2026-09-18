@@ -14,6 +14,13 @@ export function getAdminTags(options = {}) {
   });
 }
 
+export function getAdminInflectionTypes(options = {}) {
+  return apiFetch("/api/admin/words/inflection-types", {
+    method: "GET",
+    ...options,
+  });
+}
+
 export function getAdminWord(id, options = {}) {
   return apiFetch(`/api/admin/words/${id}`, {
     method: "GET",

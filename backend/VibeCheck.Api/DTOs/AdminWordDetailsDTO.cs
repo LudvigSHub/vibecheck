@@ -12,5 +12,7 @@ public class AdminWordDetailsDTO
 
     public List<AdminTagListItemDTO> Tags { get; set; } = [];
 
+    public List<AdminWordInflectionDetailsDTO> Inflections { get; set; } = [];
+
     public bool IsUsedInQuiz { get; set; }
 }
